@@ -1,0 +1,12 @@
+version: '3'
+services:
+  pictionary:
+    restart: always
+    image: mysql:8.0
+    ports: 
+      - 13306:3306
+    volumes:
+      - ./data/pictionary:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ThisisCS50
+      MYSQL_DATABASE: pictionary
