@@ -1,6 +1,7 @@
 import React from 'react';
 import Word from '../interfaces/Word.interface';
-import WordsDataService from '../api/WordsDataService'
+import WordsDataService from '../api/WordsDataService';
+import { Link } from 'react-router-dom';
 
 class Words extends React.Component{
 
@@ -63,6 +64,7 @@ class WordRowCreator extends React.Component<Word>{
           <td>{word.ownLangExSentence}</td>
           <td>{word.targetLangExSentence}</td>
           <td>{word.createdDate}</td>
+          <td><Link to={'words/' + String(word.id)}>Edit</Link></td>  
         </tr>
     )
   }
