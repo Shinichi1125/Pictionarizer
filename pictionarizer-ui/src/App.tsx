@@ -6,6 +6,7 @@ import Words from './components/Words';
 import Users from './components/Users';
 import UpdateUser from './components/UpdateUser';
 import CreateUser from './components/CreateUser';
+import DeleteUser from './components/DeleteUser';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route exact path="/words" component={Words}/>
         <Route exact path="/users" component={Users}/>
         <Route exact path="/users/create" component={CreateUser}/>
+        <Route exact path="/users/delete/:id" component={DeleteUser}/>
         <Route exact path="/users/:id" component={UpdateUser}/>
         
         

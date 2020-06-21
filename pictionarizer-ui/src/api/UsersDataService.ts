@@ -18,6 +18,10 @@ class UsersDataService {
   updateUser(id: number, user: User){
     return axios.put(`${API_URL}/users/${id}`, user);
   }
+
+  deleteUser(id: number){
+    return axios.delete(`${API_URL}/users/${id}`);
+  }
 }
 
 export default new UsersDataService()

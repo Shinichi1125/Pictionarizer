@@ -4,11 +4,12 @@ import UsersDataService from '../api/UsersDataService';
 import { Link } from 'react-router-dom';
 
 class Users extends React.Component{
+
   state = {
     usersData:new Array<User>()
   }
 
-  componentWillMount(){
+  componentDidMount(){
     UsersDataService.retrieveAllUsers()
     .then(response => {
       const info = response.data;
@@ -16,6 +17,10 @@ class Users extends React.Component{
         usersData:[...this.state.usersData, ...info]
       })
     })
+  }
+
+  deleteUserClicked(id: number){
+    UsersDataService.deleteUser(id)
   }
 
   render(){
@@ -67,7 +72,8 @@ class UserRowCreator extends React.Component<User>{
           <td>{user.targetLanguage}</td>
           <td>{user.country}</td>
           <td>{user.description}</td>
-          <td><Link to={'users/' + String(user.id)}>Edit</Link></td>     
+          <td><Link to={'users/' + String(user.id)}>Edit</Link></td>  
+          <td><Link to={'users/delete/' + String(user.id)}>Delete</Link></td>   
         </tr>
     )
   }
