@@ -1,7 +1,4 @@
 import React from 'react';
-import axios from 'axios'
-import Word from '../interfaces/Word.interface';
-import User from '../interfaces/User.interface';
 import Words from './Words';
 import Users from './Users';
 

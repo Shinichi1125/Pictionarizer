@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios'
 import Word from '../interfaces/Word.interface';
 import WordsDataService from '../api/WordsDataService'
 

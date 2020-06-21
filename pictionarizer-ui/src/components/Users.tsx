@@ -1,7 +1,7 @@
 import React from 'react';
-import axios from 'axios'
 import User from '../interfaces/User.interface';
-import UsersDataService from '../api/UsersDataService'
+import UsersDataService from '../api/UsersDataService';
+import { Link } from 'react-router-dom';
 
 class Users extends React.Component{
   state = {
@@ -22,6 +22,8 @@ class Users extends React.Component{
   render(){
     return(
       <div>
+        <button>+User</button>
+        <br></br>
         <h2>Users:</h2>
         <table>
           <thead>
@@ -55,6 +57,7 @@ class Users extends React.Component{
 }
 
 class UserRowCreator extends React.Component<User>{
+
   render(){
     let user = this.props;
     return(
@@ -65,8 +68,7 @@ class UserRowCreator extends React.Component<User>{
           <td>{user.targetLanguage}</td>
           <td>{user.country}</td>
           <td>{user.description}</td>
-          <td><button>Edit</button></td>
-          
+          <td><Link to={'users/' + String(user.id)}>Edit</Link></td>     
         </tr>
     )
   }
