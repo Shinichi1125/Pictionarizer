@@ -11,6 +11,10 @@ class UsersDataService {
     return axios.get(`${API_URL}/users/${id}`);
   }  
 
+  createUser(user: User){
+    return axios.post(`${API_URL}/users`, user);
+  }
+
   updateUser(id: number, user: User){
     return axios.put(`${API_URL}/users/${id}`, user);
   }

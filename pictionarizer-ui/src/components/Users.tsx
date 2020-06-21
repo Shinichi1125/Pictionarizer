@@ -9,7 +9,6 @@ class Users extends React.Component{
   }
 
   componentWillMount(){
-    //axios.get('http://localhost:8080/pictionarizerservices/api/users')
     UsersDataService.retrieveAllUsers()
     .then(response => {
       const info = response.data;
@@ -22,7 +21,7 @@ class Users extends React.Component{
   render(){
     return(
       <div>
-        <button>+User</button>
+        <Link to={'users/create'}>+User</Link>
         <br></br>
         <h2>Users:</h2>
         <table>
