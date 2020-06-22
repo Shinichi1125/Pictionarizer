@@ -27,7 +27,6 @@ class Users extends React.Component{
     return(
       <div>
         <Link to={'users/create'}>+User</Link>
-        <br></br>
         <h2>Users:</h2>
         <table>
           <thead>

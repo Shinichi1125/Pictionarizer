@@ -28,7 +28,7 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
     this.onSubmit = this.onSubmit.bind(this)
   }
 
-  componentDidMount(){
+  componentWillMount(){
     // directly mutating the state. to be refined later 
     this.state.userData.id = null; 
   }

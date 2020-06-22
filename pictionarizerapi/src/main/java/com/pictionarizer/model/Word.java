@@ -27,7 +27,7 @@ public class Word {
 	private byte[] image;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="user_id", nullable = false)
+	@JoinColumn(name="user_id", nullable = true) // nullable should be false in production environment
 	private User user; 
 	
 	public Word() {

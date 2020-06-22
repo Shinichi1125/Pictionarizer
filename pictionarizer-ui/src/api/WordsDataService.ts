@@ -12,6 +12,8 @@ class WordsDataService {
   }  
 
   createWord(word: Word){
+    console.log("The content of the parameter: ");
+    console.log(word);
     return axios.post(`${API_URL}/words`, word);
   }
 

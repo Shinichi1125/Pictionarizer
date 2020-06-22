@@ -8,6 +8,7 @@ import UpdateUser from './components/UpdateUser';
 import CreateUser from './components/CreateUser';
 import DeleteUser from './components/DeleteUser';
 import UpdateWord from './components/UpdateWord';
+import CreateWord from './components/CreateWord';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route exact path="/users/create" component={CreateUser}/>
         <Route exact path="/users/delete/:id" component={DeleteUser}/>
         <Route exact path="/users/:id" component={UpdateUser}/>
+        <Route exact path="/words/create" component={CreateWord}/>
         <Route exact path="/words/:id" component={UpdateWord}/>
              
       </Switch>

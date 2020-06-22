@@ -26,7 +26,7 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
     this.onSubmit = this.onSubmit.bind(this)
   }
 
-  componentDidMount(){
+  componentWillMount(){
     // directly mutating the state. to be refined later 
     this.state.wordData.id = null; 
   }
