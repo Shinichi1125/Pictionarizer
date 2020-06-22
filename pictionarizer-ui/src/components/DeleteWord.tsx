@@ -48,11 +48,11 @@ class DeleteWord extends React.Component<IWordProps, IWordState>{
   
   render(){
     let id = Number(this.state.wordId);
-    let wordName = this.state.wordData.ownLangWordName;
+    let wordName = this.state.wordData.targetLangWordName;
 
     return(
       <div>
-        <h2>Are you sure you want to delete {wordName}?</h2>
+        <h2>Are you sure you want to delete "{wordName}"?</h2>
         <button onClick={() => this.confirmDelete(id)}>Yes</button>&nbsp;
         <button onClick={() => this.cancelDelete()}>No</button>
       </div>

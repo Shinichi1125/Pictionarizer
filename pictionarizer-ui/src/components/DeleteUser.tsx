@@ -54,7 +54,7 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
 
     return(
       <div>
-        <h2>Are you sure you want to delete {userName}?</h2>
+        <h2>Are you sure you want to delete "{userName}"?</h2>
         <button onClick={() => this.confirmDelete(id)}>Yes</button>&nbsp;
         <button onClick={() => this.cancelDelete()}>No</button>
       </div>

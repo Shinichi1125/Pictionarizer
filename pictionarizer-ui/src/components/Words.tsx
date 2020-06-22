@@ -29,10 +29,10 @@ class Words extends React.Component{
           <thead>
             <tr>
               <th>ID</th>
-              <th>Word (OL)</th>
               <th>Word (TL)</th>
-              <th>Sentence (OL)</th>
+              <th>Word (OL)</th>
               <th>Sentence (TL)</th>
+              <th>Sentence (OL)</th>
               <th>Created Date</th>
             </tr>
           </thead>
@@ -60,12 +60,13 @@ class WordRowCreator extends React.Component<Word>{
     return(
         <tr>
           <td>{word.id}</td>
-          <td>{word.ownLangWordName}</td>
           <td>{word.targetLangWordName}</td>
-          <td>{word.ownLangExSentence}</td>
+          <td>{word.ownLangWordName}</td>
           <td>{word.targetLangExSentence}</td>
+          <td>{word.ownLangExSentence}</td>        
           <td>{word.createdDate}</td>
           <td><Link to={'words/' + String(word.id)}>Edit</Link></td>  
+          <td><Link to={'words/delete/' + String(word.id)}>Delete</Link></td>   
         </tr>
     )
   }
