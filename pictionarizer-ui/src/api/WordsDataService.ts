@@ -20,6 +20,10 @@ class WordsDataService {
   updateWord(id: number, word: Word){
     return axios.put(`${API_URL}/words/${id}`, word);
   }
+
+  deleteWord(id: number){
+    return axios.delete(`${API_URL}/words/${id}`);
+  }
 }
 
 export default new WordsDataService()
