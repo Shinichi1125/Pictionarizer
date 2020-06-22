@@ -4,7 +4,7 @@ import WordsDataService from '../api/WordsDataService';
 import { Formik, Form, Field, ErrorMessage } from 'formik'; 
 import IWordProps from '../interfaces/IWordProps.interface';
 import IWordState from '../interfaces/IWordState.interface';
-import moment from 'moment';
+//import moment from 'moment';
 
 class UpdateWord extends React.Component<IWordProps, IWordState>{
   

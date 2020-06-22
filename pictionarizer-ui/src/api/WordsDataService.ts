@@ -11,8 +11,12 @@ class WordsDataService {
     return axios.get(`${API_URL}/words/${id}`);
   }  
 
+  createWord(word: Word){
+    return axios.post(`${API_URL}/words`, word);
+  }
+
   updateWord(id: number, word: Word){
-    return axios.put(`${API_URL}/users/${id}`, word);
+    return axios.put(`${API_URL}/words/${id}`, word);
   }
 }
 
