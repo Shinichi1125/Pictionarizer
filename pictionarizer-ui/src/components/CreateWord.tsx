@@ -86,6 +86,7 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
             }      
           </Formik>
         </div>
+
       </div>
     )
   }
