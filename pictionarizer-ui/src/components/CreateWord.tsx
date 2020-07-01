@@ -24,12 +24,30 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
     }
 
     this.onSubmit = this.onSubmit.bind(this)
+    this.onChange = this.onChange.bind(this)
+    this.awaitSetState = this.awaitSetState.bind(this)
   }
 
   componentWillMount(){
     // directly mutating the state. to be refined later 
     this.state.wordData.id = null; 
   }
+
+  async awaitSetState(stateUpdate: Word){
+    await this.setState({wordData : stateUpdate})
+  }
+
+  onChange(e: { currentTarget: HTMLInputElement; }){
+    const chosenFile = e.currentTarget.files[0];
+    console.log("The value of chosenFile:");
+    console.log(chosenFile);
+
+    let tempWordData = this.state.wordData;
+    tempWordData.image = chosenFile;  
+    this.awaitSetState(tempWordData);
+    console.log("The value of this.state.wordData: ");
+    console.log(this.state.wordData);
+  }  
 
   onSubmit(values: Word){
     let word = values;
@@ -79,6 +97,10 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
                   <fieldset>
                     <label>Date</label>&nbsp;
                     <Field type="text" name="createdDate"/>
+                  </fieldset>
+                  <fieldset>
+                    <label>Image</label>&nbsp;
+                    <input id="image" type="file" name="image" onChange={this.onChange}/>
                   </fieldset>
                   <button type="submit">Save</button>
                 </Form>

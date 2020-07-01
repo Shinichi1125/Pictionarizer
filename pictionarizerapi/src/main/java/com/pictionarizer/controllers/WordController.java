@@ -117,6 +117,15 @@ public class WordController {
 				   createdDate,
 				   image);
 		
+		LOGGER.info("Inside the saveWord method");
+		LOGGER.info("word id " + word.getId());
+		LOGGER.info("word id " + word.getOwnLangWordName());
+		LOGGER.info("word id " + word.getTargetLangWordName());
+		LOGGER.info("word id " + word.getOwnLangExSentence());
+		LOGGER.info("word id " + word.getTargetLangExSentence());
+		LOGGER.info("word id " + word.getCreatedDate());
+		LOGGER.info("word id " + word.getImage());
+		
 		return repository.save(word);
 	}
 	

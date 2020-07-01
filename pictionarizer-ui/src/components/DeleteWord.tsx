@@ -3,6 +3,7 @@ import Word from '../interfaces/Word.interface';
 import WordsDataService from '../api/WordsDataService';
 import IWordProps from '../interfaces/IWordProps.interface';
 import IWordState from '../interfaces/IWordState.interface';
+import { API_URL } from '../Constants'
 
 class DeleteWord extends React.Component<IWordProps, IWordState>{
 
@@ -53,7 +54,13 @@ class DeleteWord extends React.Component<IWordProps, IWordState>{
     return(
       <div>
         <h2>Are you sure you want to delete "{wordName}"?</h2>
-        <button onClick={() => this.confirmDelete(id)}>Yes</button>&nbsp;
+        <img src={`${API_URL}/words/uploaded-image/${id}`} 
+               alt="fetched img" 
+               width="300"
+               height="300"
+          />
+        <br></br>
+        <button onClick={() => this.confirmDelete(id)}>Yes</button>&nbsp;&nbsp;
         <button onClick={() => this.cancelDelete()}>No</button>
       </div>
     )

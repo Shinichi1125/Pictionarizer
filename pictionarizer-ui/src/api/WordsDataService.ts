@@ -25,9 +25,10 @@ class WordsDataService {
   }
 
   createWord(word: Word){
-    console.log("The content of the parameter: ");
+    console.log("The content of the word object: ");
     console.log(word);
-    return axios.post(`${API_URL}/words`, word);
+    const formData = this.makeFormData(word);
+    return axios.post(`${API_URL}/words`, formData, CONFIG);
   }
 
   updateWord(id: number, word: Word){

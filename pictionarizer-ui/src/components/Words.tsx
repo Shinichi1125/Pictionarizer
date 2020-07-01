@@ -34,6 +34,7 @@ class Words extends React.Component{
               <th>Sentence (TL)</th>
               <th>Sentence (OL)</th>
               <th>Created Date</th>
+              <th>Image</th>
             </tr>
           </thead>
           <tbody>
@@ -46,6 +47,7 @@ class Words extends React.Component{
               ownLangExSentence={word.ownLangExSentence}
               targetLangExSentence={word.targetLangExSentence}
               createdDate={word.createdDate}
+              image={word.image}
             />)}
           </tbody>
         </table>
