@@ -4,6 +4,6 @@ export default interface Word {
   targetLangWordName: string;
   ownLangExSentence: string;
   targetLangExSentence: string;
-  createdDate?: Date;
-  imageUrl?: string;
+  createdDate: Date;
+  image: File;
 }

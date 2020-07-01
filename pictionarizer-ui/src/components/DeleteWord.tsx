@@ -18,7 +18,7 @@ class DeleteWord extends React.Component<IWordProps, IWordState>{
         ownLangExSentence: '',
         targetLangExSentence: '',
         createdDate: new Date,
-        imageUrl: ''
+        image: new File(["foo"], "foo.txt")
       }
     }
 

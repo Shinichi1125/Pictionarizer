@@ -19,7 +19,7 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
         ownLangExSentence: '',
         targetLangExSentence: '',
         createdDate: new Date,
-        imageUrl: ''
+        image: new File(["foo"], "foo.txt")
       }
     }
 
@@ -42,7 +42,7 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
     let { id, ownLangWordName, 
       targetLangWordName, ownLangExSentence, 
       targetLangExSentence, createdDate, 
-      imageUrl} 
+      image} 
       = this.state.wordData; 
 
     return(
@@ -53,7 +53,7 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
             initialValues={{ id, ownLangWordName, 
               targetLangWordName, ownLangExSentence, 
               targetLangExSentence, createdDate, 
-              imageUrl}}
+              image}}
             onSubmit={this.onSubmit}
             enableReinitialize={true}
           >

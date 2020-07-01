@@ -4,7 +4,6 @@ import WordsDataService from '../api/WordsDataService';
 import { Formik, Form, Field, ErrorMessage } from 'formik'; 
 import IWordProps from '../interfaces/IWordProps.interface';
 import IWordState from '../interfaces/IWordState.interface';
-//import moment from 'moment';
 
 class UpdateWord extends React.Component<IWordProps, IWordState>{
   
@@ -20,11 +19,13 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
         ownLangExSentence: '',
         targetLangExSentence: '',
         createdDate: new Date,
-        imageUrl: ''
+        image: new File(["foo"], "foo.txt")
       }
     }
 
     this.onSubmit = this.onSubmit.bind(this)
+    this.onChange = this.onChange.bind(this)
+    this.awaitSetState = this.awaitSetState.bind(this)
   }
 
   componentDidMount(){
@@ -38,7 +39,24 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
     }) 
   }
 
+  async awaitSetState(stateUpdate: Word){
+    await this.setState({wordData : stateUpdate})
+  }
+
+  onChange(e: { currentTarget: HTMLInputElement; }){
+    const chosenFile = e.currentTarget.files[0];
+    console.log("The value of chosenFile:");
+    console.log(chosenFile);
+
+    let tempWordData = this.state.wordData;
+    tempWordData.image = chosenFile;  
+    this.awaitSetState(tempWordData);
+    console.log("The value of this.state.wordData: ");
+    console.log(this.state.wordData);
+  }  
+
   onSubmit(values: Word){
+    values.createdDate = new Date(values.createdDate);
     let word = values;
     let id = word.id;
 
@@ -50,7 +68,7 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
     let { id, ownLangWordName, 
       targetLangWordName, ownLangExSentence, 
       targetLangExSentence, createdDate, 
-      imageUrl} 
+      image} 
       = this.state.wordData; 
 
     return(
@@ -61,7 +79,7 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
             initialValues={{ id, ownLangWordName, 
               targetLangWordName, ownLangExSentence, 
               targetLangExSentence, createdDate, 
-              imageUrl}}
+              image}}
             onSubmit={this.onSubmit}
             enableReinitialize={true}
           >
@@ -87,6 +105,10 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
                   <fieldset>
                     <label>Date</label>&nbsp;
                     <Field type="text" name="createdDate"/>
+                  </fieldset>
+                  <fieldset>
+                    <label>Image</label>&nbsp;
+                    <input id="image" type="file" name="image" onChange={this.onChange}/>
                   </fieldset>
                   <button type="submit">Save</button>
                 </Form>

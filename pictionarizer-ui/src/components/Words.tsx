@@ -2,6 +2,7 @@ import React from 'react';
 import Word from '../interfaces/Word.interface';
 import WordsDataService from '../api/WordsDataService';
 import { Link } from 'react-router-dom';
+import { API_URL } from '../Constants'
 
 class Words extends React.Component{
 
@@ -10,7 +11,6 @@ class Words extends React.Component{
   }
 
   componentWillMount(){
-    //axios.get('http://localhost:8080/pictionarizerservices/api/words')
     WordsDataService.retrieveAllWords()
     .then(res => {
       const data = res.data;
@@ -65,6 +65,13 @@ class WordRowCreator extends React.Component<Word>{
           <td>{word.targetLangExSentence}</td>
           <td>{word.ownLangExSentence}</td>        
           <td>{word.createdDate}</td>
+          <td>
+          <img src={`${API_URL}/words/uploaded-image/${word.id}`} 
+               alt="fetched img" 
+               width="75"
+               height="75"
+          />
+          </td>
           <td><Link to={'words/' + String(word.id)}>Edit</Link></td>  
           <td><Link to={'words/delete/' + String(word.id)}>Delete</Link></td>   
         </tr>
