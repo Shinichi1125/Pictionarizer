@@ -28,7 +28,7 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
     this.awaitSetState = this.awaitSetState.bind(this)
   }
 
-  componentWillMount(){
+  componentDidMount(){
     // directly mutating the state. to be refined later 
     this.state.wordData.id = null; 
   }
@@ -44,6 +44,7 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
 
     let tempWordData = this.state.wordData;
     tempWordData.image = chosenFile;  
+
     this.awaitSetState(tempWordData);
     console.log("The value of this.state.wordData: ");
     console.log(this.state.wordData);
@@ -108,7 +109,6 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
             }      
           </Formik>
         </div>
-
       </div>
     )
   }
