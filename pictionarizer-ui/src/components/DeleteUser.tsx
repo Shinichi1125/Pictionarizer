@@ -3,6 +3,7 @@ import User from '../interfaces/User.interface';
 import UsersDataService from '../api/UsersDataService';
 import IUserProps from '../interfaces/IUserProps.interface';
 import IUserState from '../interfaces/IUserState.interface';
+import { API_URL } from '../Constants';
 
 class DeleteUser extends React.Component<IUserProps, IUserState>{
 
@@ -12,7 +13,7 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
     this.state = {
       userId: this.props.match.params.id,
       userData: {
-        id: 0,
+        id: null,
         name: '',
         ownLanguage: '',
         targetLanguage: '',
@@ -55,7 +56,13 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
     return(
       <div>
         <h2>Are you sure you want to delete "{userName}"?</h2>
-        <button onClick={() => this.confirmDelete(id)}>Yes</button>&nbsp;
+        <img src={`${API_URL}/users/uploaded-image/${id}`} 
+               alt="fetched img" 
+               width="300"
+               height="300"
+          />
+        <br></br>
+        <button onClick={() => this.confirmDelete(id)}>Yes</button>&nbsp;&nbsp;
         <button onClick={() => this.cancelDelete()}>No</button>
       </div>
     )

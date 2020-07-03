@@ -3,7 +3,7 @@ import Word from '../interfaces/Word.interface';
 import WordsDataService from '../api/WordsDataService';
 import IWordProps from '../interfaces/IWordProps.interface';
 import IWordState from '../interfaces/IWordState.interface';
-import { API_URL } from '../Constants'
+import { API_URL } from '../Constants';
 
 class DeleteWord extends React.Component<IWordProps, IWordState>{
 
@@ -13,7 +13,7 @@ class DeleteWord extends React.Component<IWordProps, IWordState>{
     this.state = {
       wordId: this.props.match.params.id,
       wordData: {
-        id: 0,
+        id: null,
         ownLangWordName: '',
         targetLangWordName: '',
         ownLangExSentence: '',
