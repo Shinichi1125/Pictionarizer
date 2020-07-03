@@ -25,7 +25,6 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
 
     this.onSubmit = this.onSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
-    this.awaitSetState = this.awaitSetState.bind(this)
   }
 
   componentDidMount(){
@@ -39,10 +38,6 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
     }) 
   }
 
-  async awaitSetState(stateUpdate: Word){
-    await this.setState({wordData : stateUpdate})
-  }
-
   onChange(e: { currentTarget: HTMLInputElement; }){
     const chosenFile = e.currentTarget.files[0];
     console.log("The value of chosenFile:");
@@ -50,17 +45,21 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
 
     let tempWordData = this.state.wordData;
     tempWordData.image = chosenFile;  
-    this.awaitSetState(tempWordData);
+
+    this.setState({wordData:tempWordData});
     console.log("The value of this.state.wordData: ");
     console.log(this.state.wordData);
   }  
 
-  onSubmit(values: Word){
+  async onSubmit(values: Word){
     values.createdDate = new Date(values.createdDate);
-    let word = values;
+    let word = {
+      ...values,
+      image: this.state.wordData.image
+    };
     let id = word.id;
 
-    WordsDataService.updateWord(id, word)
+    await WordsDataService.updateWord(id, word)
     .then(() => this.props.history.push('/'))       
   }
 

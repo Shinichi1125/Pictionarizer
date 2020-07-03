@@ -27,7 +27,6 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
 
     this.onSubmit = this.onSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
-    this.awaitSetState = this.awaitSetState.bind(this)
   }
 
   componentDidMount(){
@@ -41,10 +40,6 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
     }) 
   }
 
-  async awaitSetState(stateUpdate: User){
-    await this.setState({userData : stateUpdate})
-  }
-
   onChange(e: { currentTarget: HTMLInputElement; }){
     const chosenFile = e.currentTarget.files[0];
     console.log("The value of chosenFile:");
@@ -52,13 +47,17 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
 
     let tempUserData = this.state.userData;
     tempUserData.image = chosenFile;  
-    this.awaitSetState(tempUserData);
+
+    this.setState({userData:tempUserData});
     console.log("The value of this.state.wordData: ");
     console.log(this.state.userData);
   }  
 
   onSubmit(values: User){
-    let user = values;
+    let user = {
+      ...values,
+      image:this.state.userData.image
+    };
     let id = user.id;
 
     UsersDataService.updateUser(id, user)
