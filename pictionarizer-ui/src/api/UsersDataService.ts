@@ -27,9 +27,8 @@ class UsersDataService {
   }
 
   createUser(user: User){
-    console.log("The content of the parameter: ");
-    console.log(user);
-    return axios.post(`${API_URL}/users`, user);
+    const formData = this.makeFormData(user);
+    return axios.post(`${API_URL}/users`, formData, CONFIG);
   }
 
   updateUser(id: number, user: User){

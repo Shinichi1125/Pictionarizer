@@ -13,7 +13,7 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
     this.state = {
       userId: this.props.match.params.id,
       userData: {
-        id: 0,
+        id: null,
         name: '',
         ownLanguage: '',
         targetLanguage: '',
@@ -26,17 +26,30 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
     }
 
     this.onSubmit = this.onSubmit.bind(this)
+    this.onChange = this.onChange.bind(this)
   }
 
-  componentWillMount(){
-    // directly mutating the state. to be refined later 
-    this.state.userData.id = null; 
-  }
+  onChange(e: { currentTarget: HTMLInputElement; }){
+    const chosenFile = e.currentTarget.files[0];
+    console.log("The value of chosenFile:");
+    console.log(chosenFile);
 
-  onSubmit(values: User){
-    let user = values;
+    let tempUserData = this.state.userData;
+    tempUserData.image = chosenFile;  
 
-    UsersDataService.createUser(user)
+    this.setState({userData:tempUserData});
+    console.log("The value of this.state.wordData: ");
+    console.log(this.state.userData);
+  }  
+
+  async onSubmit(values: User){
+    let user = {
+      ...values, 
+      image: this.state.userData.image, 
+      id: this.state.userData.id
+    };
+
+    await UsersDataService.createUser(user)
     .then(() => this.props.history.push('/'))       
   }
   
@@ -78,6 +91,10 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
                   <fieldset>
                     <label>Description</label>&nbsp;
                     <Field type="text" size="75" name="description"/>
+                  </fieldset>
+                  <fieldset>
+                    <label>Image</label>&nbsp;
+                    <input id="image" type="file" name="image" onChange={this.onChange}/>
                   </fieldset>
                   <button type="submit">Save</button>
                 </Form>
