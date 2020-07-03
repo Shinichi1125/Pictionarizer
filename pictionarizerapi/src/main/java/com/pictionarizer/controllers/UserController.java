@@ -101,20 +101,33 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/users/{id}", method = RequestMethod.PUT)
-	public User updateUser(@RequestBody User newUser, @PathVariable int id) {
+	public User updateUser(
+			@RequestParam("name") String name,
+			@RequestParam("ownLanguage") String ownLanguage,
+			@RequestParam("targetLanguage") String targetLanguage,
+			@RequestParam("country") String country,
+			@RequestParam("email") String email,
+			@RequestParam("password") String password,
+			@RequestParam("image") MultipartFile image,
+			@RequestParam("description") String description,
+			@PathVariable("id") int id) {
 		User user = null;
 		Optional<User> optUser = Optional.ofNullable(user);
 		optUser = repository.findById(id);
 		user = optUser.get();
 		
-		user.setName(newUser.getName());
-		user.setOwnLanguage(newUser.getOwnLanguage());
-		user.setTargetLanguage(newUser.getTargetLanguage());
-		user.setCountry(newUser.getCountry());
-		user.setEmail(newUser.getEmail());
-		user.setPassword(newUser.getPassword());
-		user.setImage(newUser.getImage());
-		user.setDescription(newUser.getDescription());
+		user = convertUser(
+				name,
+				ownLanguage,
+				targetLanguage,
+				country,
+				email,
+				password,
+				image,
+				description);
+		
+		int userId = optUser.get().getId();
+		user.setId(userId);
 		
 		return repository.save(user);
 	}

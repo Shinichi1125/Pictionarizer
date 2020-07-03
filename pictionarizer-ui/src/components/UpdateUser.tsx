@@ -51,16 +51,18 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
     this.setState({userData:tempUserData});
     console.log("The value of this.state.wordData: ");
     console.log(this.state.userData);
+    console.log("The value of userId: ");
+    console.log(this.state.userId);
   }  
 
-  onSubmit(values: User){
+  async onSubmit(values: User){
     let user = {
       ...values,
       image:this.state.userData.image
     };
-    let id = user.id;
+    let id = Number(this.state.userId);
 
-    UsersDataService.updateUser(id, user)
+    await UsersDataService.updateUser(id, user)
     .then(() => this.props.history.push('/'))       
   }
 

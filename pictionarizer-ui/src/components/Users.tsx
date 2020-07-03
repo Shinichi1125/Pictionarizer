@@ -2,6 +2,7 @@ import React from 'react';
 import User from '../interfaces/User.interface';
 import UsersDataService from '../api/UsersDataService';
 import { Link } from 'react-router-dom';
+import { API_URL } from '../Constants';
 
 class Users extends React.Component{
 
@@ -37,6 +38,7 @@ class Users extends React.Component{
               <th>Target Lang</th>
               <th>Country</th>
               <th>Description</th>
+              <th>Avatar</th>
             </tr>
           </thead>
           <tbody>
@@ -71,6 +73,13 @@ class UserRowCreator extends React.Component<User>{
           <td>{user.targetLanguage}</td>
           <td>{user.country}</td>
           <td>{user.description}</td>
+          <td>
+            <img src={`${API_URL}/users/uploaded-image/${user.id}`} 
+                alt="fetched img" 
+                width="75"
+                height="75"
+            />
+          </td>
           <td><Link to={'users/' + String(user.id)}>Edit</Link></td>  
           <td><Link to={'users/delete/' + String(user.id)}>Delete</Link></td>   
         </tr>
