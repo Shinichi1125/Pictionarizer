@@ -13,19 +13,21 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
     this.state = {
       userId: this.props.match.params.id,
       userData: {
-        id: 0,
+        id: null,
         name: '',
         ownLanguage: '',
         targetLanguage: '',
         country: '',
         email: '',
         password: '',
-        imageUrl: '',
+        image: new File(["foo"], "foo.txt"),
         description: '' 
       }
     }
 
     this.onSubmit = this.onSubmit.bind(this)
+    this.onChange = this.onChange.bind(this)
+    this.awaitSetState = this.awaitSetState.bind(this)
   }
 
   componentDidMount(){
@@ -39,6 +41,22 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
     }) 
   }
 
+  async awaitSetState(stateUpdate: User){
+    await this.setState({userData : stateUpdate})
+  }
+
+  onChange(e: { currentTarget: HTMLInputElement; }){
+    const chosenFile = e.currentTarget.files[0];
+    console.log("The value of chosenFile:");
+    console.log(chosenFile);
+
+    let tempUserData = this.state.userData;
+    tempUserData.image = chosenFile;  
+    this.awaitSetState(tempUserData);
+    console.log("The value of this.state.wordData: ");
+    console.log(this.state.userData);
+  }  
+
   onSubmit(values: User){
     let user = values;
     let id = user.id;
@@ -50,7 +68,7 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
   render(){
     let { id, name, ownLanguage, 
       targetLanguage, country, email, 
-      password, imageUrl, description} 
+      password, image, description} 
       = this.state.userData; 
 
     return(
@@ -59,7 +77,7 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
         <div>
           <Formik
             initialValues={{ id, name, ownLanguage, targetLanguage, 
-              country, email, password, imageUrl, description}}
+              country, email, password, image, description}}
             onSubmit={this.onSubmit}
             enableReinitialize={true}
           >
@@ -85,6 +103,10 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
                   <fieldset>
                     <label>Description</label>&nbsp;
                     <Field type="text" size="75" name="description"/>
+                  </fieldset>
+                  <fieldset>
+                    <label>Image</label>&nbsp;
+                    <input id="image" type="file" name="image" onChange={this.onChange}/>
                   </fieldset>
                   <button type="submit">Save</button>
                 </Form>

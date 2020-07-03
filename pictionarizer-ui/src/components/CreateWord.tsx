@@ -13,7 +13,7 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
     this.state = {
       wordId: this.props.match.params.id,
       wordData: {
-        id: 0,
+        id: null,
         ownLangWordName: '',
         targetLangWordName: '',
         ownLangExSentence: '',
@@ -25,16 +25,6 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
 
     this.onSubmit = this.onSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
-    this.awaitSetState = this.awaitSetState.bind(this)
-  }
-
-  componentDidMount(){
-    // directly mutating the state. to be refined later 
-    this.state.wordData.id = null; 
-  }
-
-  async awaitSetState(stateUpdate: Word){
-    await this.setState({wordData : stateUpdate})
   }
 
   onChange(e: { currentTarget: HTMLInputElement; }){
@@ -45,15 +35,19 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
     let tempWordData = this.state.wordData;
     tempWordData.image = chosenFile;  
 
-    this.awaitSetState(tempWordData);
+    this.setState({wordData:tempWordData});
     console.log("The value of this.state.wordData: ");
     console.log(this.state.wordData);
   }  
 
-  onSubmit(values: Word){
-    let word = values;
+  async onSubmit(values: Word){
+    let word = {
+      ...values, 
+      image: this.state.wordData.image, 
+      id: this.state.wordData.id
+    };
 
-    WordsDataService.createWord(word)
+    await WordsDataService.createWord(word)
     .then(() => this.props.history.push('/'))       
   }
   

@@ -6,6 +6,6 @@ export default interface User {
   country: string;
   email: string;
   password: string;
-  imageUrl?: string;
+  image?: File;
   description?: string; 
 }

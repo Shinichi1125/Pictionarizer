@@ -19,7 +19,7 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
         country: '',
         email: '',
         password: '',
-        imageUrl: '',
+        image: new File(["foo"], "foo.txt"),
         description: '' 
       }
     }

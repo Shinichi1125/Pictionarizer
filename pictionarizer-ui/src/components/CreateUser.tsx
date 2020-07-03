@@ -20,7 +20,7 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
         country: '',
         email: '',
         password: '',
-        imageUrl: '',
+        image: new File(["foo"], "foo.txt"),
         description: '' 
       }
     }
@@ -43,7 +43,7 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
   render(){
     let { id, name, ownLanguage, 
       targetLanguage, country, email, 
-      password, imageUrl, description} 
+      password, image, description} 
       = this.state.userData; 
 
     return(
@@ -52,7 +52,7 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
         <div>
           <Formik
             initialValues={{ id, name, ownLanguage, targetLanguage, 
-              country, email, password, imageUrl, description}}
+              country, email, password, image, description}}
             onSubmit={this.onSubmit}
             enableReinitialize={true}
           >
