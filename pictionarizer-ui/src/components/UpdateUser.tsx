@@ -4,6 +4,7 @@ import UsersDataService from '../api/UsersDataService';
 import { Formik, Form, Field, ErrorMessage } from 'formik'; 
 import IUserProps from '../interfaces/IUserProps.interface';
 import IUserState from '../interfaces/IUserState.interface';
+import { API_URL } from '../Constants';
 
 class UpdateUser extends React.Component<IUserProps, IUserState>{
   
@@ -88,6 +89,12 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
     return(
       <div>
         <h2>Update User</h2>
+        <img src={`${API_URL}/users/uploaded-image/${this.state.userId}`} 
+               alt="fetched img" 
+               width="150"
+               height="150"
+          />
+        <br></br>
         <div>
           <Formik
             initialValues={{ id, name, ownLanguage, targetLanguage, 

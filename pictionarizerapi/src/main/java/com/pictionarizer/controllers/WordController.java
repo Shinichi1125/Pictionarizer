@@ -74,12 +74,13 @@ public class WordController {
 	
 	// converts File's data type so it will be compatible on back-end side
 	// front-end (MultipartFile) -> back-end (byte[ ]) -> database (LongBlob)
-	Word convertWord(String ownLangWordName,
-							 String targetLangWordName,
-							 String ownLangExSentence,
-							 String targetLangExSentence,
-							 String createdDate,
-							 MultipartFile image) {	
+	Word convertWord(
+			String ownLangWordName,
+			String targetLangWordName,
+			String ownLangExSentence,
+			String targetLangExSentence,
+			String createdDate,
+			MultipartFile image) {	
 		
 		Word word = new Word(); 	
 		word.setOwnLangWordName(ownLangWordName);
@@ -121,38 +122,41 @@ public class WordController {
 				   createdDate,
 				   image);
 		
-		LOGGER.info("Inside the saveWord method");
-		LOGGER.info("word id " + word.getId());
-		LOGGER.info("word.ownLangWordName " + word.getOwnLangWordName());
-		LOGGER.info("word.targetLangWordName " + word.getTargetLangWordName());
-		LOGGER.info("word.ownLangExSentence " + word.getOwnLangExSentence());
-		LOGGER.info("word.targetLangExSentence " + word.getTargetLangExSentence());
-		LOGGER.info("word.createdDate " + word.getCreatedDate());
-		LOGGER.info("word.image " + word.getImage());
+//		LOGGER.info("Inside the saveWord method");
+//		LOGGER.info("word id " + word.getId());
+//		LOGGER.info("word.ownLangWordName " + word.getOwnLangWordName());
+//		LOGGER.info("word.targetLangWordName " + word.getTargetLangWordName());
+//		LOGGER.info("word.ownLangExSentence " + word.getOwnLangExSentence());
+//		LOGGER.info("word.targetLangExSentence " + word.getTargetLangExSentence());
+//		LOGGER.info("word.createdDate " + word.getCreatedDate());
+//		LOGGER.info("word.image " + word.getImage());
 		
 		return repository.save(word);
 	}
 	
 	@RequestMapping(value = "/words/{id}", method = RequestMethod.PUT)
-	public Word updateWord(@RequestParam("ownLangWordName") String ownLangWordName,
-			  						 @RequestParam("targetLangWordName") String targetLangWordName,
-			  						 @RequestParam("ownLangExSentence") String ownLangExSentence,
-			  						 @RequestParam("targetLangExSentence") String targetLangExSentence,
-			  						 @RequestParam("createdDate") String createdDate,
-			  						 @RequestParam(value = "image", required = false) MultipartFile image,
-			  						 @PathVariable("id") int id) {
+	public Word updateWord(
+			@RequestParam("ownLangWordName") String ownLangWordName,
+			@RequestParam("targetLangWordName") String targetLangWordName,
+			@RequestParam("ownLangExSentence") String ownLangExSentence,
+			@RequestParam("targetLangExSentence") String targetLangExSentence,
+			@RequestParam("createdDate") String createdDate,
+			@RequestParam(value = "image", required = false) MultipartFile image,
+			@PathVariable("id") int id) {
+		
 		LOGGER.info("updateWord method called ");
 		Word word = null;
 		Optional<Word> optWord = Optional.ofNullable(word);
 		optWord = repository.findById(id);
 		word = optWord.get();
 		
-		word = convertWord(ownLangWordName, 
-								   targetLangWordName,
-								   ownLangExSentence,
-								   targetLangExSentence,
-								   createdDate,
-								   image);
+		word = convertWord(
+				ownLangWordName, 
+				targetLangWordName,
+				ownLangExSentence,
+				targetLangExSentence,
+				createdDate,
+				image);
 		
 		Optional<MultipartFile> imageOpt = Optional.ofNullable(image);
 		

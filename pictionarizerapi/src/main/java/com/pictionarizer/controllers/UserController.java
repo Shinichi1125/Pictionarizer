@@ -65,7 +65,9 @@ public class UserController {
 		user.setPassword(password);
 		user.setDescription(description);
 		
-		if(!image.isEmpty()) {
+		Optional<MultipartFile> imageOpt = Optional.ofNullable(image);
+		
+		if(imageOpt.isPresent()) {
 			try {
 				user.setImage(image.getBytes());
 			} catch (IOException e) {
@@ -113,6 +115,7 @@ public class UserController {
 			@RequestParam(value = "image", required = false) MultipartFile image,
 			@RequestParam("description") String description,
 			@PathVariable("id") int id) {
+		
 		User user = null;
 		Optional<User> optUser = Optional.ofNullable(user);
 		optUser = repository.findById(id);
@@ -128,15 +131,16 @@ public class UserController {
 				image,
 				description);
 		
-		if(image.isEmpty()) {
+		Optional<MultipartFile> imageOpt = Optional.ofNullable(image);
+		
+		if(!imageOpt.isPresent()) {
 			byte[] userImage = optUser.get().getImage();
 			user.setImage(userImage);
 		}
 		
 		int userId = optUser.get().getId();
 		user.setId(userId);
-		
-		
+			
 		return repository.save(user);
 	}
 	
