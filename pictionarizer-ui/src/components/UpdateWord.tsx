@@ -4,6 +4,7 @@ import WordsDataService from '../api/WordsDataService';
 import { Formik, Form, Field, ErrorMessage } from 'formik'; 
 import IWordProps from '../interfaces/IWordProps.interface';
 import IWordState from '../interfaces/IWordState.interface';
+import { API_URL } from '../Constants';
 
 class UpdateWord extends React.Component<IWordProps, IWordState>{
   
@@ -36,6 +37,7 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
       data = res.data;
       this.setState({wordData:data});
     }) 
+
   }
 
   onChange(e: { currentTarget: HTMLInputElement; }){
@@ -73,6 +75,12 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
     return(
       <div>
         <h2>Update Word</h2>
+        <img src={`${API_URL}/words/uploaded-image/${this.state.wordId}`} 
+               alt="fetched img" 
+               width="150"
+               height="150"
+          />
+        <br></br>
         <div>
           <Formik
             initialValues={{ id, ownLangWordName, 
@@ -103,7 +111,7 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
                   </fieldset>
                   <fieldset>
                     <label>Date</label>&nbsp;
-                    <Field type="text" name="createdDate"/>
+                    <Field type="text" name="createdDate"/> 
                   </fieldset>
                   <fieldset>
                     <label>Image</label>&nbsp;

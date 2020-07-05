@@ -27,6 +27,7 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
 
     this.onSubmit = this.onSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
+    this.validate = this.validate.bind(this)
   }
 
   componentDidMount(){
@@ -38,6 +39,18 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
       data = res.data;
       this.setState({userData:data});
     }) 
+  }
+
+  validate(values: User){
+    let errors: User; 
+    if(values.password === ''){
+      errors.password = 'Enter a password'
+    } else if(values.password.length < 8){
+      errors.password = 'Enter at least 8 characters for your password'
+    }
+    //console.log("The length of errors.password: " + values.password.length);
+
+    return errors;
   }
 
   onChange(e: { currentTarget: HTMLInputElement; }){
@@ -80,6 +93,7 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
             initialValues={{ id, name, ownLanguage, targetLanguage, 
               country, email, password, image, description}}
             onSubmit={this.onSubmit}
+            validate={this.validate}
             enableReinitialize={true}
           >
             {
@@ -102,6 +116,15 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
                     <Field type="text" name="country"/>
                   </fieldset>
                   <fieldset>
+                    <label>Email</label>&nbsp;
+                    <Field type="text" name="email"/>
+                  </fieldset>
+                  <ErrorMessage name="password" component="div"/>
+                  <fieldset>
+                    <label>Password</label>&nbsp;
+                    <Field type="password" name="password"/>
+                  </fieldset>
+                  <fieldset>
                     <label>Description</label>&nbsp;
                     <Field type="text" size="75" name="description"/>
                   </fieldset>
@@ -109,7 +132,7 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
                     <label>Image</label>&nbsp;
                     <input id="image" type="file" name="image" onChange={this.onChange}/>
                   </fieldset>
-                  <button type="submit">Save</button>
+                  <button type="submit">Save</button>              
                 </Form>
               )
             }      

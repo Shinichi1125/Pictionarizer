@@ -65,10 +65,12 @@ public class UserController {
 		user.setPassword(password);
 		user.setDescription(description);
 		
-		try {
-			user.setImage(image.getBytes());
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(!image.isEmpty()) {
+			try {
+				user.setImage(image.getBytes());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return user;
@@ -108,7 +110,7 @@ public class UserController {
 			@RequestParam("country") String country,
 			@RequestParam("email") String email,
 			@RequestParam("password") String password,
-			@RequestParam("image") MultipartFile image,
+			@RequestParam(value = "image", required = false) MultipartFile image,
 			@RequestParam("description") String description,
 			@PathVariable("id") int id) {
 		User user = null;
@@ -126,8 +128,14 @@ public class UserController {
 				image,
 				description);
 		
+		if(image.isEmpty()) {
+			byte[] userImage = optUser.get().getImage();
+			user.setImage(userImage);
+		}
+		
 		int userId = optUser.get().getId();
 		user.setId(userId);
+		
 		
 		return repository.save(user);
 	}

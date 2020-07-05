@@ -90,12 +90,16 @@ public class WordController {
 		
 		word.setCreatedDate(convertedDate);
 		
-		try {
-			word.setImage(image.getBytes());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Optional<MultipartFile> imageOpt = Optional.ofNullable(image);
 		
+		if(imageOpt.isPresent()) {
+			try {
+				word.setImage(image.getBytes());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+			
 		return word;
 	}
 	
@@ -135,7 +139,7 @@ public class WordController {
 			  						 @RequestParam("ownLangExSentence") String ownLangExSentence,
 			  						 @RequestParam("targetLangExSentence") String targetLangExSentence,
 			  						 @RequestParam("createdDate") String createdDate,
-			  						 @RequestParam("image") MultipartFile image,
+			  						 @RequestParam(value = "image", required = false) MultipartFile image,
 			  						 @PathVariable("id") int id) {
 		LOGGER.info("updateWord method called ");
 		Word word = null;
@@ -149,6 +153,13 @@ public class WordController {
 								   targetLangExSentence,
 								   createdDate,
 								   image);
+		
+		Optional<MultipartFile> imageOpt = Optional.ofNullable(image);
+		
+		if(!imageOpt.isPresent()) {
+			byte[] wordImage = optWord.get().getImage();
+			word.setImage(wordImage);
+		}
 		
 		int wordId = optWord.get().getId();
 		word.setId(wordId);

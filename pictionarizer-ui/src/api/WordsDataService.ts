@@ -9,9 +9,10 @@ class WordsDataService {
 
   retrieveWord(id: number){
     return axios.get(`${API_URL}/words/${id}`);
-  }  
+  } 
 
   makeFormData(word: Word){
+
     const formData = new FormData();
     formData.append('id', String(word.id));
     formData.append('ownLangWordName', word.ownLangWordName);
@@ -32,6 +33,8 @@ class WordsDataService {
   }
 
   updateWord(id: number, word: Word){
+    console.log("The content of the word object: ");
+    console.log(word);
     const formData = this.makeFormData(word);
     return axios.put(`${API_URL}/words/${id}`, formData, CONFIG);
   }
