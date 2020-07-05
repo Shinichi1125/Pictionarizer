@@ -65,8 +65,11 @@ public class UserController {
 		user.setPassword(password);
 		user.setDescription(description);
 		
+		// needs to be Optional in case the value of the image is null
+		// -> prevents NullPointerException in the if clause right below 
 		Optional<MultipartFile> imageOpt = Optional.ofNullable(image);
 		
+		// if the user input includes MultipartFile, assign it in the word object, otherwise do nothing
 		if(imageOpt.isPresent()) {
 			try {
 				user.setImage(image.getBytes());
@@ -133,6 +136,8 @@ public class UserController {
 		
 		Optional<MultipartFile> imageOpt = Optional.ofNullable(image);
 		
+		// if the user input doesn't include a MultipartFile, assign the existing image data
+		// that has been fetched by repository.findById(id) in the beginning of this method
 		if(!imageOpt.isPresent()) {
 			byte[] userImage = optUser.get().getImage();
 			user.setImage(userImage);
@@ -149,6 +154,7 @@ public class UserController {
 		repository.deleteById(id);
 	}
 	
+	// displays an image on the front-end side that is specified by the path <img src={` `}>
 	@GetMapping("/users/uploaded-image/{userId}")
 	ResponseEntity<byte[]> userImage(@PathVariable int userId){	
 		Optional<User> user = repository.findById(userId);

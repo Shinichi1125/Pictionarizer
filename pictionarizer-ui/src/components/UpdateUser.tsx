@@ -54,6 +54,7 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
     return errors;
   }
 
+  // gets invoked when "choose file" button is clicked and a file is chosen
   onChange(e: { currentTarget: HTMLInputElement; }){
     const chosenFile = e.currentTarget.files[0];
     console.log("The value of chosenFile:");
@@ -69,6 +70,10 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
     console.log(this.state.userId);
   }  
 
+  // An image file is fetched from the state, 
+  // whereas the rest come from the Formik form.
+  // The state and the form get merged and sent 
+  // as an axios request in the UsersDataService
   async onSubmit(values: User){
     let user = {
       ...values,

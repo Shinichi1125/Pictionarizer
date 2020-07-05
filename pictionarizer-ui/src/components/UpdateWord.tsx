@@ -37,9 +37,9 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
       data = res.data;
       this.setState({wordData:data});
     }) 
-
   }
 
+  // gets invoked when "choose file" button is clicked and a file is chosen
   onChange(e: { currentTarget: HTMLInputElement; }){
     const chosenFile = e.currentTarget.files[0];
     console.log("The value of chosenFile:");
@@ -53,6 +53,10 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
     console.log(this.state.wordData);
   }  
 
+  // An image file is fetched from the state, 
+  // whereas the rest come from the Formik form.
+  // The state and the form get merged and sent 
+  // as an axios request in the WordsDataService
   async onSubmit(values: Word){
     values.createdDate = new Date(values.createdDate);
     let word = {

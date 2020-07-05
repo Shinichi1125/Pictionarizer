@@ -43,7 +43,7 @@ public class WordController {
 	private static String UPLOAD_FOLDER = "C://springimage//";
 	
 	// logger for a debugging purpose
-	private static final Logger LOGGER = LoggerFactory.getLogger(WordController.class);
+	//private static final Logger LOGGER = LoggerFactory.getLogger(WordController.class);
 	
 	private WordRepository repository; 
 	
@@ -62,7 +62,7 @@ public class WordController {
 		return repository.findById(id).get();
 	}
 	
-	// converts Date's data type so it will be compatible on back-end side
+	// converts Date's data type so that it will be compatible on back-end side
 	// front-end (ISO String) -> back-end (LocalDateTime) 
 	LocalDateTime convertToLDT(String createdDate) {	
 		ZonedDateTime zonedDateTime = ZonedDateTime.parse(createdDate); 
@@ -91,8 +91,11 @@ public class WordController {
 		
 		word.setCreatedDate(convertedDate);
 		
+		// needs to be Optional in case the value of the image is null
+		// -> prevents NullPointerException in the if clause right below 
 		Optional<MultipartFile> imageOpt = Optional.ofNullable(image);
 		
+		// if the user input includes MultipartFile, assign it in the word object, otherwise do nothing
 		if(imageOpt.isPresent()) {
 			try {
 				word.setImage(image.getBytes());
@@ -122,15 +125,6 @@ public class WordController {
 				   createdDate,
 				   image);
 		
-//		LOGGER.info("Inside the saveWord method");
-//		LOGGER.info("word id " + word.getId());
-//		LOGGER.info("word.ownLangWordName " + word.getOwnLangWordName());
-//		LOGGER.info("word.targetLangWordName " + word.getTargetLangWordName());
-//		LOGGER.info("word.ownLangExSentence " + word.getOwnLangExSentence());
-//		LOGGER.info("word.targetLangExSentence " + word.getTargetLangExSentence());
-//		LOGGER.info("word.createdDate " + word.getCreatedDate());
-//		LOGGER.info("word.image " + word.getImage());
-		
 		return repository.save(word);
 	}
 	
@@ -144,7 +138,6 @@ public class WordController {
 			@RequestParam(value = "image", required = false) MultipartFile image,
 			@PathVariable("id") int id) {
 		
-		LOGGER.info("updateWord method called ");
 		Word word = null;
 		Optional<Word> optWord = Optional.ofNullable(word);
 		optWord = repository.findById(id);
@@ -160,6 +153,8 @@ public class WordController {
 		
 		Optional<MultipartFile> imageOpt = Optional.ofNullable(image);
 		
+		// if the user input doesn't include a MultipartFile, assign the existing image data
+		// that has been fetched by repository.findById(id) in the beginning of this method
 		if(!imageOpt.isPresent()) {
 			byte[] wordImage = optWord.get().getImage();
 			word.setImage(wordImage);
@@ -176,6 +171,7 @@ public class WordController {
 		repository.deleteById(id);
 	}
 	
+	// displays an image on the front-end side that is specified by the path <img src={` `}>
 	@GetMapping("/words/uploaded-image/{wordId}")
 	ResponseEntity<byte[]> wordImage(@PathVariable int wordId){	
 		Optional<Word> word = repository.findById(wordId);
