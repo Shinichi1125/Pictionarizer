@@ -66,7 +66,8 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
     let id = word.id;
 
     await WordsDataService.updateWord(id, word)
-    .then(() => this.props.history.push('/'))       
+    .then(() => this.props.history.push('/'))   
+    .then(() => window.location.reload(true))      
   }
 
   render(){

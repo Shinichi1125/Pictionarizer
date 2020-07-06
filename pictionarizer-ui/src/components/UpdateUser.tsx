@@ -82,7 +82,8 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
     let id = Number(this.state.userId);
 
     await UsersDataService.updateUser(id, user)
-    .then(() => this.props.history.push('/'))       
+    .then(() => this.props.history.push('/'))
+    .then(() => window.location.reload(true))       
   }
 
   render(){
