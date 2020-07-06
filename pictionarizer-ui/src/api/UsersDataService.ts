@@ -1,6 +1,10 @@
 import axios from 'axios'
-import { API_URL, CONFIG } from '../Constants'
+import { API_URL, CONFIG, TOAST_MILISEC } from '../Constants'
 import User from '../interfaces/User.interface';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+
+toast.configure();
 
 class UsersDataService {
   retrieveAllUsers(){
@@ -34,6 +38,13 @@ class UsersDataService {
   updateUser(id: number, user: User){
     const formData = this.makeFormData(user);
     return axios.put(`${API_URL}/users/${id}`, formData, CONFIG);
+  }
+
+  updateToast(object: String){
+    toast(object + " updated successfully!", 
+      {autoClose:TOAST_MILISEC, 
+        position:toast.POSITION.BOTTOM_CENTER
+      })
   }
 
   deleteUser(id: number){

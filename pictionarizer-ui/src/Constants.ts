@@ -4,3 +4,4 @@ export const CONFIG = {
       'content-type': 'multipart/form-data'
   }
 };
+export const TOAST_MILISEC = 3000;

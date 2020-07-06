@@ -5,6 +5,10 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import IUserProps from '../interfaces/IUserProps.interface';
 import IUserState from '../interfaces/IUserState.interface';
 import { API_URL } from '../Constants';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+
+toast.configure();
 
 class UpdateUser extends React.Component<IUserProps, IUserState>{
   
@@ -82,8 +86,9 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
     let id = Number(this.state.userId);
 
     await UsersDataService.updateUser(id, user)
+    .then(() => UsersDataService.updateToast("User"))    
     .then(() => this.props.history.push('/'))
-    .then(() => window.location.reload(true))       
+    .then(() => window.location.reload(true))   
   }
 
   render(){

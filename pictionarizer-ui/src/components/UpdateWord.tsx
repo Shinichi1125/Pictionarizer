@@ -5,6 +5,10 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import IWordProps from '../interfaces/IWordProps.interface';
 import IWordState from '../interfaces/IWordState.interface';
 import { API_URL } from '../Constants';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+
+toast.configure();
 
 class UpdateWord extends React.Component<IWordProps, IWordState>{
   
@@ -66,8 +70,9 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
     let id = word.id;
 
     await WordsDataService.updateWord(id, word)
-    .then(() => this.props.history.push('/'))   
-    .then(() => window.location.reload(true))      
+    .then(() => WordsDataService.updateToast("Word")) 
+    .then(() => this.props.history.push('/'))   // gets back to the home page
+    .then(() => window.location.reload(true))   // refresh the page to reflect the change   
   }
 
   render(){

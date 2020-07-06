@@ -1,6 +1,10 @@
 import axios from 'axios'
-import { API_URL, CONFIG } from '../Constants'
+import { API_URL, CONFIG, TOAST_MILISEC } from '../Constants'
 import Word from '../interfaces/Word.interface';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+
+toast.configure();
 
 class WordsDataService {
   retrieveAllWords(){
@@ -37,6 +41,13 @@ class WordsDataService {
     console.log(word);
     const formData = this.makeFormData(word);
     return axios.put(`${API_URL}/words/${id}`, formData, CONFIG);
+  }
+
+  updateToast(object: String){
+    toast(object + " updated successfully!", 
+      {autoClose:TOAST_MILISEC, 
+        position:toast.POSITION.BOTTOM_CENTER
+      })
   }
 
   deleteWord(id: number){
