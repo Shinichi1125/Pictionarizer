@@ -20,7 +20,7 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
         country: '',
         email: '',
         password: '',
-        image: new File(["foo"], "foo.txt"),
+        image: null,
         description: '' 
       }
     }
@@ -87,6 +87,15 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
                   <fieldset>
                     <label>Country</label>&nbsp;
                     <Field type="text" name="country"/>
+                  </fieldset>
+                  <fieldset>
+                    <label>Email</label>&nbsp;
+                    <Field type="text" name="email"/>
+                  </fieldset>
+                  <ErrorMessage name="password" component="div"/>
+                  <fieldset>
+                    <label>Password</label>&nbsp;
+                    <Field type="password" name="password"/>
                   </fieldset>
                   <fieldset>
                     <label>Description</label>&nbsp;

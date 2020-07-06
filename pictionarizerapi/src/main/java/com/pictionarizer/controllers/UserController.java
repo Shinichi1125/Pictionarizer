@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +31,9 @@ import com.pictionarizer.repos.UserRepository;
 public class UserController {
 	
 	private UserRepository repository;
+	
+	// logger for a debugging purpose
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired
 	UserController(UserRepository repository){
@@ -89,7 +95,7 @@ public class UserController {
 			@RequestParam("country") String country,
 			@RequestParam("email") String email,
 			@RequestParam("password") String password,
-			@RequestParam("image") MultipartFile image,
+			@RequestParam(value = "image", required = false) MultipartFile image,
 			@RequestParam("description") String description) {
 				
 		User user = new User();
@@ -103,6 +109,16 @@ public class UserController {
 					password,
 					image,
 					description);
+		
+		// if the user doesn't provide a profile image, 
+		//assign the default-avatar used for the test user whose id number is 2
+		Optional<MultipartFile> imageOpt = Optional.ofNullable(image);		
+		if(!imageOpt.isPresent()) {
+			Optional<User> optUser = Optional.ofNullable(user);
+			optUser = repository.findById(2);  // Test User's id number is 2
+			byte[] userImage = optUser.get().getImage();
+			user.setImage(userImage);
+		}
 		
 		return repository.save(user);
 	}
