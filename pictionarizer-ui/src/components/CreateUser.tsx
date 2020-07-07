@@ -30,15 +30,9 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
     this.validate = this.validate.bind(this)
   }
 
-  validate(Values: User){
-    let errors: Partial<User> = {};
-    if(Values.password.length < 8){
-      errors.password = 'Enter at least 8 characters for your password'
-    }
-
-    console.log("The length of errors.password: " + Values.password.length);
-
-    return errors;
+  validate(values: User){
+    let errors = UsersDataService.formValidate(values);
+    return errors; 
   }
 
   onChange(e: { currentTarget: HTMLInputElement; }){
@@ -85,14 +79,17 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
             {
               (props) => (
                 <Form>
+                  <ErrorMessage name="name" component="div"/>
                   <fieldset>
                     <label>Name</label>&nbsp;
                     <Field type="text" name="name"/>
                   </fieldset>
+                  <ErrorMessage name="ownLanguage" component="div"/>
                   <fieldset>
                     <label>Own Language</label>&nbsp;
                     <Field type="text" name="ownLanguage"/>
                   </fieldset>
+                  <ErrorMessage name="targetLanguage" component="div"/>
                   <fieldset>
                     <label>Target Language</label>&nbsp;
                     <Field type="text" name="targetLanguage"/>
@@ -101,6 +98,7 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
                     <label>Country</label>&nbsp;
                     <Field type="text" name="country"/>
                   </fieldset>
+                  <ErrorMessage name="email" component="div"/>
                   <fieldset>
                     <label>Email</label>&nbsp;
                     <Field type="text" name="email"/>

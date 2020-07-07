@@ -3,7 +3,7 @@ export default interface User {
   name: string;
   ownLanguage: string;
   targetLanguage: string;
-  country: string;
+  country?: string;
   email: string;
   password: string;
   image?: File;

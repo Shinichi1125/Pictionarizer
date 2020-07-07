@@ -47,29 +47,16 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
   }
 
   validate(values: User){
-    let errors: Partial<User> = {};
-    if(values.password.length < 8){
-      errors.password = 'Enter at least 8 characters for your password'
-    }
-    console.log("The length of errors.password: " + values.password.length);
-
-    return errors;
+    let errors = UsersDataService.formValidate(values);
+    return errors; 
   }
 
   // gets invoked when "choose file" button is clicked and a file is chosen
   onChange(e: { currentTarget: HTMLInputElement; }){
     const chosenFile = e.currentTarget.files[0];
-    console.log("The value of chosenFile:");
-    console.log(chosenFile);
-
     let tempUserData = this.state.userData;
     tempUserData.image = chosenFile;  
-
     this.setState({userData:tempUserData});
-    console.log("The value of this.state.wordData: ");
-    console.log(this.state.userData);
-    console.log("The value of userId: ");
-    console.log(this.state.userId);
   }  
 
   // An image file is fetched from the state, 
@@ -115,14 +102,17 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
             {
               (props) => (
                 <Form>
+                  <ErrorMessage name="name" component="div"/>
                   <fieldset>
                     <label>Name</label>&nbsp;
                     <Field type="text" name="name"/>
                   </fieldset>
+                  <ErrorMessage name="ownLanguage" component="div"/>
                   <fieldset>
                     <label>Own Language</label>&nbsp;
                     <Field type="text" name="ownLanguage"/>
                   </fieldset>
+                  <ErrorMessage name="targetLanguage" component="div"/>
                   <fieldset>
                     <label>Target Language</label>&nbsp;
                     <Field type="text" name="targetLanguage"/>
@@ -131,6 +121,7 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
                     <label>Country</label>&nbsp;
                     <Field type="text" name="country"/>
                   </fieldset>
+                  <ErrorMessage name="email" component="div"/>
                   <fieldset>
                     <label>Email</label>&nbsp;
                     <Field type="text" name="email"/>
