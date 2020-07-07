@@ -23,7 +23,7 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
         targetLangWordName: '',
         ownLangExSentence: '',
         targetLangExSentence: '',
-        createdDate: new Date,
+        createdDate: new Date(),
         image: new File(["foo"], "foo.txt")
       }
     }

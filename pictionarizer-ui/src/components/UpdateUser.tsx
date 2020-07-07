@@ -47,13 +47,11 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
   }
 
   validate(values: User){
-    let errors: User; 
-    if(values.password === ''){
-      errors.password = 'Enter a password'
-    } else if(values.password.length < 8){
+    let errors: Partial<User> = {};
+    if(values.password.length < 8){
       errors.password = 'Enter at least 8 characters for your password'
     }
-    //console.log("The length of errors.password: " + values.password.length);
+    console.log("The length of errors.password: " + values.password.length);
 
     return errors;
   }

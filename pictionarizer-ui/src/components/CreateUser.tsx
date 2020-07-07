@@ -27,6 +27,18 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
 
     this.onSubmit = this.onSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
+    this.validate = this.validate.bind(this)
+  }
+
+  validate(Values: User){
+    let errors: Partial<User> = {};
+    if(Values.password.length < 8){
+      errors.password = 'Enter at least 8 characters for your password'
+    }
+
+    console.log("The length of errors.password: " + Values.password.length);
+
+    return errors;
   }
 
   onChange(e: { currentTarget: HTMLInputElement; }){
@@ -67,6 +79,7 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
             initialValues={{ id, name, ownLanguage, targetLanguage, 
               country, email, password, image, description}}
             onSubmit={this.onSubmit}
+            validate={this.validate}
             enableReinitialize={true}
           >
             {
@@ -91,7 +104,7 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
                   <fieldset>
                     <label>Email</label>&nbsp;
                     <Field type="text" name="email"/>
-                  </fieldset>
+                  </fieldset> 
                   <ErrorMessage name="password" component="div"/>
                   <fieldset>
                     <label>Password</label>&nbsp;
