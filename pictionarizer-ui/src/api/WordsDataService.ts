@@ -43,10 +43,6 @@ class WordsDataService {
     return axios.put(`${API_URL}/words/${id}`, formData, CONFIG);
   }
 
-  formValidate(values: Word){
-    
-  }
-
   updateToast(object: String){
     toast(object + " updated successfully!", 
       {autoClose:TOAST_MILISEC, 
