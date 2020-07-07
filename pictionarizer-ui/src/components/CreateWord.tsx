@@ -25,19 +25,35 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
 
     this.onSubmit = this.onSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
+    this.validate = this.validate.bind(this)
+  }
+
+  validate(values: Word){
+    let errors: Partial<Word> = {};
+    if(values.targetLangWordName === ''){
+      errors.targetLangWordName = "Enter a word in your target language"
+    }
+    if(values.ownLangWordName === ''){
+      errors.ownLangWordName = "Enter a word in your own language"
+    }
+    if(values.targetLangExSentence === ''){
+      errors.targetLangExSentence = "Enter an example sentence in your target language"
+    }
+    if(values.ownLangExSentence === ''){
+      errors.ownLangExSentence = "Enter an example sentence in your own language"
+    }
+    if(this.state.wordData.image.name === 'foo.txt'){
+      errors.targetLangWordName = 'Not only filling the text fields, you must choose an image as well'
+    }
+
+    return errors; 
   }
 
   onChange(e: { currentTarget: HTMLInputElement; }){
     const chosenFile = e.currentTarget.files[0];
-    console.log("The value of chosenFile:");
-    console.log(chosenFile);
-
     let tempWordData = this.state.wordData;
     tempWordData.image = chosenFile;  
-
     this.setState({wordData:tempWordData});
-    console.log("The value of this.state.wordData: ");
-    console.log(this.state.wordData);
   }  
 
   async onSubmit(values: Word){
@@ -68,23 +84,28 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
               targetLangExSentence, createdDate, 
               image}}
             onSubmit={this.onSubmit}
+            validate={this.validate}
             enableReinitialize={true}
           >
             {
               (props) => (
                 <Form>
+                  <ErrorMessage name="targetLangWordName" component="div"/>
                   <fieldset>
                     <label>Word (Target Language)</label>&nbsp;
                     <Field type="text" name="targetLangWordName"/>
                   </fieldset>
+                  <ErrorMessage name="ownLangWordName" component="div"/>
                   <fieldset>
                     <label>Word (Own Language)</label>&nbsp;
                     <Field type="text" name="ownLangWordName"/>
                   </fieldset>
+                  <ErrorMessage name="targetLangExSentence" component="div"/>
                   <fieldset>
                     <label>Sentence (Target Language)</label>&nbsp;
                     <Field type="text" size="75" name="targetLangExSentence"/>
                   </fieldset>
+                  <ErrorMessage name="ownLangExSentence" component="div"/>
                   <fieldset>
                     <label>Sentence (Own Language)</label>&nbsp;
                     <Field type="text" size="75" name="ownLangExSentence"/>
