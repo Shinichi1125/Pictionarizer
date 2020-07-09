@@ -14,6 +14,7 @@ class DeleteWord extends React.Component<IWordProps, IWordState>{
       wordId: this.props.match.params.id,
       wordData: {
         id: null,
+        userId: null,
         ownLangWordName: '',
         targetLangWordName: '',
         ownLangExSentence: '',

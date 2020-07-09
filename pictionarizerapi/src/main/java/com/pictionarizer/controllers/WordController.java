@@ -75,6 +75,7 @@ public class WordController {
 	// converts File's data type so it will be compatible on back-end side
 	// front-end (MultipartFile) -> back-end (byte[ ]) -> database (LongBlob)
 	Word convertWord(
+			int userId,
 			String ownLangWordName,
 			String targetLangWordName,
 			String ownLangExSentence,
@@ -83,6 +84,9 @@ public class WordController {
 			MultipartFile image) {	
 		
 		Word word = new Word(); 	
+		
+		word.setUserId(userId);
+		
 		word.setOwnLangWordName(ownLangWordName);
 		word.setTargetLangWordName(targetLangWordName);
 		word.setOwnLangExSentence(ownLangExSentence);
@@ -108,28 +112,33 @@ public class WordController {
 	}
 	
 	@RequestMapping(value = "/words", method = RequestMethod.POST)
-	public Word saveWord(@RequestParam("ownLangWordName") String ownLangWordName,
-								  @RequestParam("targetLangWordName") String targetLangWordName,
-								  @RequestParam("ownLangExSentence") String ownLangExSentence,
-								  @RequestParam("targetLangExSentence") String targetLangExSentence,
-								  @RequestParam("createdDate") String createdDate,
-								  @RequestParam("image") MultipartFile image) {	
+	public Word saveWord(
+			@RequestParam("userId") int userId,
+			@RequestParam("ownLangWordName") String ownLangWordName,
+			@RequestParam("targetLangWordName") String targetLangWordName,
+			@RequestParam("ownLangExSentence") String ownLangExSentence,
+			@RequestParam("targetLangExSentence") String targetLangExSentence,
+			@RequestParam("createdDate") String createdDate,
+			@RequestParam("image") MultipartFile image) {	
 		Word word = new Word(); 
 		
 		// the date and image are LocalDateTime and byte[ ] types respectively, 
 		// so the word object needs to be converted before saving in the database 
-		word = convertWord(ownLangWordName, 
-				   targetLangWordName,
-				   ownLangExSentence,
-				   targetLangExSentence,
-				   createdDate,
-				   image);
+		word = convertWord(
+				userId,
+				ownLangWordName, 
+				targetLangWordName,
+				ownLangExSentence,
+				targetLangExSentence,
+				createdDate,
+				image);
 		
 		return repository.save(word);
 	}
 	
 	@RequestMapping(value = "/words/{id}", method = RequestMethod.PUT)
 	public Word updateWord(
+			@RequestParam("userId") int userId,
 			@RequestParam("ownLangWordName") String ownLangWordName,
 			@RequestParam("targetLangWordName") String targetLangWordName,
 			@RequestParam("ownLangExSentence") String ownLangExSentence,
@@ -144,6 +153,7 @@ public class WordController {
 		word = optWord.get();
 		
 		word = convertWord(
+				userId,
 				ownLangWordName, 
 				targetLangWordName,
 				ownLangExSentence,

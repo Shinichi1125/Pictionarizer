@@ -30,8 +30,8 @@ public class User {
 	
 	private String description;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="user")
-	private List<Word> words;
+//	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="user")
+//	private List<Word> words;
 	
 	public User() {
 		

@@ -19,6 +19,7 @@ class WordsDataService {
 
     const formData = new FormData();
     formData.append('id', String(word.id));
+    formData.append('userId', String(word.userId));
     formData.append('ownLangWordName', word.ownLangWordName);
     formData.append('targetLangWordName', word.targetLangWordName);
     formData.append('ownLangExSentence', word.ownLangExSentence);

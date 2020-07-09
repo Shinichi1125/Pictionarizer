@@ -21,6 +21,8 @@ public class Word {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id; 
 	
+	private int userId;
+	
 	private String ownLangWordName;
 	private String targetLangWordName; 
 	private String ownLangExSentence; 
@@ -31,9 +33,9 @@ public class Word {
 	@Column
 	private byte[] image;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="user_id", nullable = true) // nullable should be false in production environment
-	private User user; 
+//	@ManyToOne(fetch=FetchType.LAZY)
+//	@JoinColumn(name="user_id", nullable = true) // nullable should be false in production environment
+//	private User user; 
 	
 	public Word() {
 		
@@ -45,6 +47,14 @@ public class Word {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getOwnLangWordName() {

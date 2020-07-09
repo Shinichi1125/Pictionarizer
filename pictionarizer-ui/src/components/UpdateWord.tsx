@@ -19,6 +19,7 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
       wordId: this.props.match.params.id,
       wordData: {
         id: 0,
+        userId: 0,
         ownLangWordName: '',
         targetLangWordName: '',
         ownLangExSentence: '',
@@ -92,7 +93,7 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
   }
 
   render(){
-    let { id, ownLangWordName, 
+    let { id, userId, ownLangWordName, 
       targetLangWordName, ownLangExSentence, 
       targetLangExSentence, createdDate, 
       image} 
@@ -109,7 +110,7 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
         <br></br>
         <div>
           <Formik
-            initialValues={{ id, ownLangWordName, 
+            initialValues={{ id, userId, ownLangWordName, 
               targetLangWordName, ownLangExSentence, 
               targetLangExSentence, createdDate, 
               image}}
@@ -120,6 +121,10 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
             {
               (props) => (
                 <Form>
+                  <fieldset>
+                    <label>User ID</label>&nbsp;
+                    <Field type="text" name="userId"/>
+                  </fieldset>
                   <ErrorMessage name="targetLangWordName" component="div"/>
                   <fieldset>
                     <label>Word (Target Language)</label>&nbsp;

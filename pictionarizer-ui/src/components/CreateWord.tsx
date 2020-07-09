@@ -14,6 +14,7 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
       wordId: this.props.match.params.id,
       wordData: {
         id: null,
+        userId: 0,
         ownLangWordName: '',
         targetLangWordName: '',
         ownLangExSentence: '',
@@ -68,7 +69,7 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
   }
   
   render(){
-    let { id, ownLangWordName, 
+    let { id, userId, ownLangWordName, 
       targetLangWordName, ownLangExSentence, 
       targetLangExSentence, createdDate, 
       image} 
@@ -79,7 +80,7 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
         <h2>Create Word</h2>
         <div>
           <Formik
-            initialValues={{ id, ownLangWordName, 
+            initialValues={{ id, userId, ownLangWordName, 
               targetLangWordName, ownLangExSentence, 
               targetLangExSentence, createdDate, 
               image}}

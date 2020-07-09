@@ -29,6 +29,7 @@ class Words extends React.Component{
           <thead>
             <tr>
               <th>ID</th>
+              <th>User</th>
               <th>Word (TL)</th>
               <th>Word (OL)</th>
               <th>Sentence (TL)</th>
@@ -42,6 +43,7 @@ class Words extends React.Component{
             <WordRowCreator 
               key = {word.id}
               id={word.id}
+              userId={word.userId}
               ownLangWordName={word.ownLangWordName}
               targetLangWordName={word.targetLangWordName}
               ownLangExSentence={word.ownLangExSentence}
@@ -62,6 +64,13 @@ class WordRowCreator extends React.Component<Word>{
     return(
         <tr>
           <td>{word.id}</td>
+          <td>
+            <img src={`${API_URL}/users/uploaded-image/${word.userId}`} 
+                alt="fetched img" 
+                width="50"
+                height="50"
+            />
+          </td>
           <td>{word.targetLangWordName}</td>
           <td>{word.ownLangWordName}</td>
           <td>{word.targetLangExSentence}</td>
