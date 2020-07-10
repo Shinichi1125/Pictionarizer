@@ -72,7 +72,7 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
 
     await UsersDataService.updateUser(id, user)
     .then(() => UsersDataService.updateToast("User"))    
-    .then(() => this.props.history.push('/'))
+    .then(() => this.props.history.push('/users'))
     .then(() => window.location.reload(true))   
   }
 

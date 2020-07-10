@@ -88,7 +88,7 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
 
     await WordsDataService.updateWord(id, word)
     .then(() => WordsDataService.updateToast("Word")) 
-    .then(() => this.props.history.push('/'))   // gets back to the home page
+    .then(() => this.props.history.push('/words'))   // gets back to the home page
     .then(() => window.location.reload(true))   // refresh the page to reflect the change   
   }
 

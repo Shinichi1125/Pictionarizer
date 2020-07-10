@@ -56,7 +56,7 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
     };
 
     await UsersDataService.createUser(user)
-    .then(() => this.props.history.push('/'))       
+    .then(() => this.props.history.push('/users'))       
   }
   
   render(){

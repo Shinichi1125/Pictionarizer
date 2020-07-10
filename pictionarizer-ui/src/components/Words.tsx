@@ -23,6 +23,9 @@ class Words extends React.Component{
   render(){
     return(
       <div>
+        <br/><hr></hr><br/>
+        <Link to={'/users'}>Users</Link>
+        <br/><hr></hr><br/>
         <Link to={'words/create'}>+Word</Link>
         <h2>Words:</h2>
         <table>
