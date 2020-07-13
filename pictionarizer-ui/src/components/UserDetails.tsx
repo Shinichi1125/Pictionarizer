@@ -48,9 +48,9 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
       <div>
         <h2>User Details</h2>
         <img src={`${API_URL}/users/uploaded-image/${id}`} 
-               alt="fetched img" 
-               width="150"
-               height="150"
+            alt="fetched img" 
+            width="150"
+            height="150"
         />
         <br></br>
         <div>Name: {name}</div>
