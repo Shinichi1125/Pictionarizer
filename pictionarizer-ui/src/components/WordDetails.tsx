@@ -47,6 +47,7 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
     return(
       <div>
         <h2>Word Details</h2>
+        <div>Image:  </div>
         <img src={`${API_URL}/words/uploaded-image/${id}`} 
                alt="fetched img" 
                width="150"
@@ -64,6 +65,7 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
                width="50"
                height="50"
         />
+        <div><Link to={'/users/details/' + String(userId)}>User Info</Link></div>
         <div><Link to={'/words/' + String(id)}>Edit</Link></div>  
         <div><Link to={'/words/delete/' + String(id)}>Delete</Link></div>
       </div>
