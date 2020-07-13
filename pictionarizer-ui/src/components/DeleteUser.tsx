@@ -45,8 +45,8 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
     .then(() => this.props.history.push('/'))       
   }
 
-  cancelDelete(){
-    this.props.history.push('/')
+  cancelDelete(id: number){
+    this.props.history.push('/users/details/' + id)
   }
   
   render(){
@@ -63,7 +63,7 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
           />
         <br></br>
         <button onClick={() => this.confirmDelete(id)}>Yes</button>&nbsp;&nbsp;
-        <button onClick={() => this.cancelDelete()}>No</button>
+        <button onClick={() => this.cancelDelete(id)}>No</button>
       </div>
     )
   }

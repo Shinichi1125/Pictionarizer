@@ -20,10 +20,6 @@ class Users extends React.Component{
     })
   }
 
-  deleteUserClicked(id: number){
-    UsersDataService.deleteUser(id)
-  }
-
   render(){
     return(
       <div>

@@ -44,8 +44,8 @@ class DeleteWord extends React.Component<IWordProps, IWordState>{
     .then(() => this.props.history.push('/'))       
   }
 
-  cancelDelete(){
-    this.props.history.push('/')
+  cancelDelete(id: number){
+    this.props.history.push('/words/details/' + id)
   }
   
   render(){
@@ -62,7 +62,7 @@ class DeleteWord extends React.Component<IWordProps, IWordState>{
           />
         <br></br>
         <button onClick={() => this.confirmDelete(id)}>Yes</button>&nbsp;&nbsp;
-        <button onClick={() => this.cancelDelete()}>No</button>
+        <button onClick={() => this.cancelDelete(id)}>No</button>
       </div>
     )
   }

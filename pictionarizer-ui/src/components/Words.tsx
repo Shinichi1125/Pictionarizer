@@ -10,7 +10,7 @@ class Words extends React.Component{
     wordsData:new Array<Word>()
   }
 
-  componentWillMount(){
+  componentDidMount(){
     WordsDataService.retrieveAllWords()
     .then(res => {
       const data = res.data;
