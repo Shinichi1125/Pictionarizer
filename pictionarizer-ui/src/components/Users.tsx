@@ -83,8 +83,7 @@ class UserRowCreator extends React.Component<User>{
                 height="75"
             />
           </td>
-          <td><Link to={'users/' + String(user.id)}>Edit</Link></td>  
-          <td><Link to={'users/delete/' + String(user.id)}>Delete</Link></td>   
+          <td><Link to={'users/details/' + String(user.id)}>Details</Link></td> 
         </tr>
     )
   }
