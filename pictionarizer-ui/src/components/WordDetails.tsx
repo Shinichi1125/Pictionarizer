@@ -51,7 +51,7 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
                alt="fetched img" 
                width="150"
                height="150"
-          />
+        />
         <br></br>
         <div>Word: {targetLangWordName}</div>
         <div>Meaning: {ownLangWordName}</div>
