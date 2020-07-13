@@ -38,28 +38,26 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
     }) 
   }
 
-  render(){
-    let { id, name, ownLanguage, 
-      targetLanguage, country, email, 
-      password, image, description} 
-      = this.state.userData; 
+  render(){    
+    let user: User;
+    user = this.state.userData;
 
     return(
       <div>
         <h2>User Details</h2>
-        <img src={`${API_URL}/users/uploaded-image/${id}`} 
+        <img src={`${API_URL}/users/uploaded-image/${this.state.userId}`} 
             alt="fetched img" 
             width="150"
             height="150"
         />
         <br></br>
-        <div>Name: {name}</div>
-        <div>Target Language: {targetLanguage}</div>
-        <div>Own Language: {ownLanguage}</div>
-        <div>Country: {country}</div>
-        <div>Description: {description}</div>        
-        <div><Link to={'/users/' + String(id)}>Edit</Link></div>  
-        <div><Link to={'/users/delete/' + String(id)}>Delete</Link></div>
+        <div>Name: {user.name}</div>
+        <div>Target Language: {user.targetLanguage}</div>
+        <div>Own Language: {user.ownLanguage}</div>
+        <div>Country: {user.country}</div>
+        <div>Description: {user.description}</div>        
+        <div><Link to={'/users/' + String(user.id)}>Edit</Link></div>  
+        <div><Link to={'/users/delete/' + String(user.id)}>Delete</Link></div>
       </div>
     )
   }
