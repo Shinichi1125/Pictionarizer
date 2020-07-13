@@ -50,6 +50,11 @@ public class UserController {
 		return repository.findById(id).get();
 	}
 	
+//	@RequestMapping(value = "/users/name/{id}", method = RequestMethod.GET)
+//	public String getUserName(@PathVariable("id") int id) {
+//		return repository.findById(id).get().getName();
+//	}
+	
 	// converts File's data type so it will be compatible on back-end side
 	// front-end (MultipartFile) -> back-end (byte[ ]) -> database (LongBlob)
 	User convertUser(

@@ -15,6 +15,10 @@ class UsersDataService {
     return axios.get(`${API_URL}/users/${id}`);
   }  
 
+  getUserName(userId: number){
+    return axios.get(`${API_URL}/users/name/${userId}`)
+  }
+
   makeFormData(user: User){
     const formData = new FormData();
     formData.append('id', String(user.id));

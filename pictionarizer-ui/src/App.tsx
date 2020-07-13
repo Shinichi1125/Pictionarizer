@@ -10,6 +10,7 @@ import DeleteUser from './components/DeleteUser';
 import UpdateWord from './components/UpdateWord';
 import CreateWord from './components/CreateWord';
 import DeleteWord from './components/DeleteWord';
+import WordDetails from './components/WordDetails';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route exact path="/words/create" component={CreateWord}/>
         <Route exact path="/words/:id" component={UpdateWord}/>
         <Route exact path="/words/delete/:id" component={DeleteWord}/>
+        <Route exact path="/words/details/:id" component={WordDetails}/>
              
       </Switch>
     </div>

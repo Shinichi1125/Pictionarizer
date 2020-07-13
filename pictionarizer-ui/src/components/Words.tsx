@@ -79,15 +79,14 @@ class WordRowCreator extends React.Component<Word>{
           <td>{word.targetLangExSentence}</td>
           <td>{word.ownLangExSentence}</td>        
           <td>{word.createdDate}</td>
-          <td>
+          <td>           
             <img src={`${API_URL}/words/uploaded-image/${word.id}`} 
                 alt="fetched img" 
                 width="75"
                 height="75"
-            />
+            />            
           </td>
-          <td><Link to={'words/' + String(word.id)}>Edit</Link></td>  
-          <td><Link to={'words/delete/' + String(word.id)}>Delete</Link></td>   
+          <td><Link to={'words/details/' + String(word.id)}>Details</Link></td>   
         </tr>
     )
   }
