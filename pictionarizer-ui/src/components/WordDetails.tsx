@@ -3,7 +3,7 @@ import Word from '../interfaces/Word.interface';
 import WordsDataService from '../api/WordsDataService'; 
 import IWordProps from '../interfaces/IWordProps.interface';
 import IWordState from '../interfaces/IWordState.interface';
-import { API_URL } from '../Constants';
+import { API_URL, TEST_USER_ID } from '../Constants';
 import { Link } from 'react-router-dom';
 
 class WordDetails extends React.Component<IWordProps, IWordState>{
@@ -59,7 +59,7 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
         <div>Created by:  </div>
         <img src={word.userId > 0 ? 
           `${API_URL}/users/uploaded-image/${word.userId}` : 
-          `${API_URL}/users/uploaded-image/2`} 
+          `${API_URL}/users/uploaded-image/${TEST_USER_ID}`} 
                alt="fetched img" 
                width="50"
                height="50"
