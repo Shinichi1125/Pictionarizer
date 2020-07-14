@@ -27,7 +27,6 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
   }
 
   componentDidMount(){
-    console.log("componentDidMount in WordDetails.tsx got called");
     let id = Number(this.props.match.params.id);
     let data: Word;
 
@@ -58,7 +57,9 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
         <div>Meaning: {word.ownLangExSentence}</div>
         <div>Created Date: {String(word.createdDate)}</div>
         <div>Created by:  </div>
-        <img src={`${API_URL}/users/uploaded-image/${this.state.wordData.userId}`} 
+        <img src={word.userId > 0 ? 
+          `${API_URL}/users/uploaded-image/${word.userId}` : 
+          `${API_URL}/users/uploaded-image/2`} 
                alt="fetched img" 
                width="50"
                height="50"

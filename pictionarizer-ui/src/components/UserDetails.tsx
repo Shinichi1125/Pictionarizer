@@ -55,8 +55,7 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
         <div>Target Language: {user.targetLanguage}</div>
         <div>Own Language: {user.ownLanguage}</div>
         <div>Country: {user.country}</div>
-        <div>Description: {user.description}</div>    
-        <div><Link to={'/words/details/' + String(user.id)}>Back</Link></div>    
+        <div>Description: {user.description}</div>       
         <div><Link to={'/users/' + String(user.id)}>Edit</Link></div>  
         <div><Link to={'/users/delete/' + String(user.id)}>Delete</Link></div>
       </div>
