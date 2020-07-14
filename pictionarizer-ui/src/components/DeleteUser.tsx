@@ -42,7 +42,7 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
 
   confirmDelete(id: number){
     UsersDataService.deleteUser(id)
-    .then(() => this.props.history.push('/'))       
+    .then(() => this.props.history.push('/users'))       
   }
 
   cancelDelete(id: number){

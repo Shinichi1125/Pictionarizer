@@ -27,6 +27,7 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
   }
 
   componentDidMount(){
+    console.log("componentDidMount in WordDetails.tsx got called");
     let id = Number(this.props.match.params.id);
     let data: Word;
 
@@ -62,7 +63,11 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
                width="50"
                height="50"
         />
-        <div><Link to={'/users/details/' + String(word.userId)}>User Info</Link></div>
+        <div>
+          <Link to={'/users/details/' + String(word.userId)}>User Info</Link>
+          &nbsp;
+          <Link to={'/words'}>Back</Link>
+        </div>
         <div><Link to={'/words/' + String(word.id)}>Edit</Link></div>  
         <div><Link to={'/words/delete/' + String(word.id)}>Delete</Link></div>
       </div>

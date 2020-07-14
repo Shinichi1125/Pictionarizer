@@ -41,7 +41,7 @@ class DeleteWord extends React.Component<IWordProps, IWordState>{
 
   confirmDelete(id: number){
     WordsDataService.deleteWord(id)
-    .then(() => this.props.history.push('/'))       
+    .then(() => this.props.history.push('/words'))       
   }
 
   cancelDelete(id: number){

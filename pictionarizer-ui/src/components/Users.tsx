@@ -23,7 +23,6 @@ class Users extends React.Component{
   render(){
     return(
       <div>
-        <br/><hr></hr><br/>
         <Link to={'/words'}>Words</Link>
         <br/><hr></hr><br/>
         <Link to={'users/create'}>+User</Link>

@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+import './bootstrap.css';
+
 import {Route, Switch} from 'react-router-dom';
 import Home from './components/Home';
 import Words from './components/Words';
@@ -12,10 +14,13 @@ import CreateWord from './components/CreateWord';
 import DeleteWord from './components/DeleteWord';
 import WordDetails from './components/WordDetails';
 import UserDetails from './components/UserDetails';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
   return (
     <div className="App">
+      <Header/>
       <Switch>
         <Route exact path="/" component={Home}/>
         <Route exact path="/words" component={Words}/>
@@ -27,9 +32,9 @@ function App() {
         <Route exact path="/words/create" component={CreateWord}/>
         <Route exact path="/words/:id" component={UpdateWord}/>
         <Route exact path="/words/delete/:id" component={DeleteWord}/>
-        <Route exact path="/words/details/:id" component={WordDetails}/>
-             
+        <Route exact path="/words/details/:id" component={WordDetails}/>             
       </Switch>
+      <Footer/>
     </div>
   );
 }
