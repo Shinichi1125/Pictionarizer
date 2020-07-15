@@ -16,6 +16,7 @@ import WordDetails from './components/WordDetails';
 import UserDetails from './components/UserDetails';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Login from './components/Login';
 
 function App() {
   return (
@@ -32,7 +33,8 @@ function App() {
         <Route exact path="/words/create" component={CreateWord}/>
         <Route exact path="/words/:id" component={UpdateWord}/>
         <Route exact path="/words/delete/:id" component={DeleteWord}/>
-        <Route exact path="/words/details/:id" component={WordDetails}/>             
+        <Route exact path="/words/details/:id" component={WordDetails}/>   
+        <Route exact path="/login" component={Login}/>          
       </Switch>
       <Footer/>
     </div>
