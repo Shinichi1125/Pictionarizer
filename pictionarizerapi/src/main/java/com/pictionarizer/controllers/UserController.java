@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.pictionarizer.model.Login;
 import com.pictionarizer.model.User;
 import com.pictionarizer.model.Word;
 import com.pictionarizer.repos.UserRepository;
@@ -54,6 +55,27 @@ public class UserController {
 //	public String getUserName(@PathVariable("id") int id) {
 //		return repository.findById(id).get().getName();
 //	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public int checkIfValidUser(
+			@RequestParam("email") String email,
+			@RequestParam("password") String password) {  
+		int userId = 0;
+		
+		List<User> userList = repository.findAll();
+		
+		for(User user: userList) {
+			String userEmail = user.getEmail();
+			String userPassword = user.getPassword();
+			String inputEmail = email;
+			String inputPassword = password;
+			if(userEmail.equals(inputEmail) && userPassword.equals(inputPassword)) {
+				userId = user.getId();
+			}
+		}	
+		
+		return userId;
+	}
 	
 	// converts File's data type so it will be compatible on back-end side
 	// front-end (MultipartFile) -> back-end (byte[ ]) -> database (LongBlob)

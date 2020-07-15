@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { API_URL, CONFIG, TOAST_MILISEC } from '../Constants'
 import User from '../interfaces/User.interface';
+import LoginInfo from '../interfaces/LoginInfo.interface';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -19,7 +20,7 @@ class UsersDataService {
     return axios.get(`${API_URL}/users/name/${userId}`)
   }
 
-  makeFormData(user: User){
+  makeUserFormData(user: User){
     const formData = new FormData();
     formData.append('id', String(user.id));
     formData.append('name', user.name);
@@ -34,13 +35,35 @@ class UsersDataService {
     return formData; 
   }
 
+  userLogin(loginInfo: LoginInfo){
+    let user: User; 
+    user = {
+      id: 0,
+      name: '',
+      ownLanguage: '',
+      targetLanguage: '',
+      country: '',
+      email: loginInfo.email,
+      password: loginInfo.password,
+      image: new File(["foo"], "foo.txt"),
+      description: '' 
+    }
+
+    return axios.get(`${API_URL}/login`, {
+      params: {
+        email: loginInfo.email,
+        password: loginInfo.password
+      }
+    });
+  }
+
   createUser(user: User){
-    const formData = this.makeFormData(user);
+    const formData = this.makeUserFormData(user);
     return axios.post(`${API_URL}/users`, formData, CONFIG);
   }
 
   updateUser(id: number, user: User){
-    const formData = this.makeFormData(user);
+    const formData = this.makeUserFormData(user);
     return axios.put(`${API_URL}/users/${id}`, formData, CONFIG);
   }
 
