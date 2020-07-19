@@ -5,7 +5,10 @@ class Header extends React.Component{
   render(){
     return(
       <div>
-        <Link to={'/login'}>Login</Link> <hr/>
+        <Link to={'/login'}>Login</Link> 
+        &nbsp;
+        <button>Logout</button>
+        <hr/>
       </div>
     )
   }
