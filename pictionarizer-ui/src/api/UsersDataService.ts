@@ -36,7 +36,7 @@ class UsersDataService {
   }
 
   userLogin(loginInfo: LoginInfo){
-    let user: User; 
+   /* let user: User; 
     user = {
       id: 0,
       name: '',
@@ -47,7 +47,7 @@ class UsersDataService {
       password: loginInfo.password,
       image: new File(["foo"], "foo.txt"),
       description: '' 
-    }
+    } */
 
     return axios.get(`${API_URL}/login`, {
       params: {

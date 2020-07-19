@@ -4,6 +4,7 @@ import UsersDataService from '../api/UsersDataService';
 import { Formik, Form, Field, ErrorMessage } from 'formik'; 
 import ILoginInfoProps from '../interfaces/ILoginInfoProps.interface';
 import ILoginInfoState from '../interfaces/ILoginInfoState.interface';
+import { getLoginId, setLoginId} from '../LoginLocalStorage';
 
 class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
 
@@ -26,6 +27,9 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
     .then(res =>{
       console.log("The fetched user ID is: ");
       console.log(res.data);
+      setLoginId(String(res.data));
+      console.log("The value of getLoginId is: " + getLoginId());
+      window.location.reload(true);
     })
     
   }
