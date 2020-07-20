@@ -25,13 +25,10 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
   async onSubmit(values: LoginInfo){
     await UsersDataService.userLogin(values)
     .then(res =>{
-      console.log("The fetched user ID is: ");
-      console.log(res.data);
       setLoginId(String(res.data));
-      console.log("The value of getLoginId is: " + getLoginId());
-      window.location.reload(true);
     })
-    
+    .then(() => this.props.history.push('/users'))
+    .then(() => window.location.reload(true))  
   }
 
   render(){

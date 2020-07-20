@@ -5,6 +5,9 @@ import IWordProps from '../interfaces/IWordProps.interface';
 import IWordState from '../interfaces/IWordState.interface';
 import { API_URL, TEST_USER_ID } from '../Constants';
 import { Link } from 'react-router-dom';
+import { getLoginId } from '../LoginLocalStorage';
+
+const loginState = Number(getLoginId());
 
 class WordDetails extends React.Component<IWordProps, IWordState>{
   
@@ -69,8 +72,8 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
           &nbsp;
           <Link to={'/words'}>Back</Link>
         </div>
-        <div><Link to={'/words/' + String(word.id)}>Edit</Link></div>  
-        <div><Link to={'/words/delete/' + String(word.id)}>Delete</Link></div>
+        <div>{loginState === word.userId? <Link to={'/words/' + String(word.id)}>Edit</Link> : <p> </p>}</div>  
+        <div>{loginState === word.userId? <Link to={'/words/delete/' + String(word.id)}>Delete</Link>: <p> </p>}</div>
       </div>
     )
   }
