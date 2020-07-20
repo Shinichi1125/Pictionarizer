@@ -5,6 +5,9 @@ import IUserProps from '../interfaces/IUserProps.interface';
 import IUserState from '../interfaces/IUserState.interface';
 import { API_URL } from '../Constants';
 import { Link } from 'react-router-dom';
+import { getLoginId } from '../LoginLocalStorage';
+
+const loginState = Number(getLoginId());
 
 class UserDetails extends React.Component<IUserProps, IUserState>{
   
@@ -56,8 +59,8 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
         <div>Own Language: {user.ownLanguage}</div>
         <div>Country: {user.country}</div>
         <div>Description: {user.description}</div>       
-        <div><Link to={'/users/' + String(user.id)}>Edit</Link></div>  
-        <div><Link to={'/users/delete/' + String(user.id)}>Delete</Link></div>
+        <div>{loginState === user.id? <Link to={'/users/' + String(user.id)}>Edit</Link>: <p> </p>}</div>  
+        <div>{loginState === user.id? <Link to={'/users/delete/' + String(user.id)}>Delete</Link>: <p> </p>}</div>
       </div>
     )
   }
