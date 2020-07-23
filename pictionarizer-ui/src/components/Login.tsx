@@ -4,7 +4,7 @@ import UsersDataService from '../api/UsersDataService';
 import { Formik, Form, Field, ErrorMessage } from 'formik'; 
 import ILoginInfoProps from '../interfaces/ILoginInfoProps.interface';
 import ILoginInfoState from '../interfaces/ILoginInfoState.interface';
-import { getLoginId, setLoginId} from '../LoginLocalStorage';
+import { setLoginId } from '../LoginLocalStorage';
 
 class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
 
@@ -20,6 +20,18 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
     }
 
     this.onSubmit = this.onSubmit.bind(this)
+    this.validate = this.validate.bind(this)
+  }
+
+  validate(values: LoginInfo){
+    let errors: Partial<LoginInfo> = {};
+    if(values.email === ''){
+      errors.email = "Enter your email address"
+    }
+    if(values.password.length < 8){
+      errors.password = 'Enter at least 8 characters for your password'
+    }
+    return errors; 
   }
 
   async onSubmit(values: LoginInfo){
@@ -41,14 +53,18 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
           <Formik
             initialValues = {{ email, password}}
             onSubmit = {this.onSubmit}
+            validate={this.validate}
+            enableReinitialize={true}
           >
             {
               (props) => (
                 <Form>
+                  <ErrorMessage name="email" component="div"/>
                   <fieldset>
                     <label>Email: </label>
                     <Field type="text" name="email"/>
                   </fieldset>
+                  <ErrorMessage name="password" component="div"/>
                   <fieldset>
                     <label>Password: </label>
                     <Field type="text" name="password"/>
@@ -63,5 +79,8 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
     )
   }
 }
+
+/*<ErrorMessage name="email" component="div"/> */
+/* <ErrorMessage name="password" component="div"/>*/
 
 export default Login; 

@@ -36,19 +36,6 @@ class UsersDataService {
   }
 
   userLogin(loginInfo: LoginInfo){
-   /* let user: User; 
-    user = {
-      id: 0,
-      name: '',
-      ownLanguage: '',
-      targetLanguage: '',
-      country: '',
-      email: loginInfo.email,
-      password: loginInfo.password,
-      image: new File(["foo"], "foo.txt"),
-      description: '' 
-    } */
-
     return axios.get(`${API_URL}/login`, {
       params: {
         email: loginInfo.email,
