@@ -37,6 +37,11 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
   async onSubmit(values: LoginInfo){
     await UsersDataService.userLogin(values)
     .then(res =>{
+      console.log("The returned user ID: " + res.data);
+      if(res.data === 0){
+        console.log("The email address and the password dont' match");
+        return; 
+      }
       setLoginId(String(res.data));
     })
     .then(() => this.props.history.push('/users'))
