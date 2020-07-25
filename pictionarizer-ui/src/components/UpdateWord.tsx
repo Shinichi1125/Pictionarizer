@@ -121,10 +121,6 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
             {
               (props) => (
                 <Form>
-                  <fieldset>
-                    <label>User ID</label>&nbsp;
-                    <Field type="text" name="userId"/>
-                  </fieldset>
                   <ErrorMessage name="targetLangWordName" component="div"/>
                   <fieldset>
                     <label>Word (Target Language)</label>&nbsp;
@@ -163,5 +159,10 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
     )
   }
 }
+
+/* <fieldset>
+                    <label>User ID</label>&nbsp;
+                    <Field type="text" name="userId"/>
+                  </fieldset> */
 
 export default UpdateWord; 

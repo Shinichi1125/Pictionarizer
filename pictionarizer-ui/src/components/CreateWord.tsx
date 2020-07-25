@@ -4,6 +4,9 @@ import WordsDataService from '../api/WordsDataService';
 import { Formik, Form, Field, ErrorMessage } from 'formik'; 
 import IWordProps from '../interfaces/IWordProps.interface';
 import IWordState from '../interfaces/IWordState.interface';
+import { getLoginId } from '../LoginLocalStorage';
+
+const loginState = Number(getLoginId());
 
 class CreateWord extends React.Component<IWordProps, IWordState>{
 
@@ -61,7 +64,8 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
     let word = {
       ...values, 
       image: this.state.wordData.image, 
-      id: this.state.wordData.id
+      id: this.state.wordData.id,
+      userId: loginState
     };
 
     await WordsDataService.createWord(word)
