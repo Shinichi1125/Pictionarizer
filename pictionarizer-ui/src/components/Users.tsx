@@ -25,7 +25,6 @@ class Users extends React.Component{
       <div>
         <Link to={'/words'}>Words</Link>
         <br/><hr></hr><br/>
-        <Link to={'users/create'}>+User</Link>
         <h2>Users:</h2>
         <table>
           <thead>

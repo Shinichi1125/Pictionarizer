@@ -35,7 +35,7 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
   }
 
   onSubmit(values: LoginInfo){
-    try {UsersDataService.userLogin(values)
+    UsersDataService.userLogin(values)
     .then(res =>{
       console.log("The entire returned object: ");
       console.log(res);
@@ -47,10 +47,7 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
       setLoginId(String(res.data));
     })
     .then(() => this.props.history.push('/'))
-    .then(() => window.location.reload(true))
-    } catch(error){
-      console.log(error);
-    }  
+    .then(() => window.location.reload(true)) 
   }
 
   render(){

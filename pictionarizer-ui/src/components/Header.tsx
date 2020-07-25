@@ -10,10 +10,12 @@ class Header extends React.Component{
   render(){
     return(
       <div>
-        <Link to={'/login'}>Login</Link> 
-        &nbsp;
+        {loginState === 0?<Link to={'users/create'}>Sign up</Link>: <p> </p>}
+        &nbsp;&nbsp;
+        <Link to={'/login'}>Log in</Link> 
+        &nbsp;&nbsp;
         <button onClick={() => logoutAndRefresh()}>Logout</button>
-        &nbsp;
+        &nbsp;&nbsp;
         <img src={ loginState > 0 ? 
           `${API_URL}/users/uploaded-image/${loginState}` : 
           `${API_URL}/users/uploaded-image/${TEST_USER_ID}`}
