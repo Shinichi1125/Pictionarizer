@@ -85,7 +85,7 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
     return(
       <div>
         <h2>Update User</h2>
-        <img src={`${API_URL}/users/uploaded-image/${this.state.userId}`} 
+        <img src={`${API_URL}/user/uploaded-image/${this.state.userId}`} 
                alt="fetched img" 
                width="150"
                height="150"

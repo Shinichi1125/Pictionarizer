@@ -41,11 +41,11 @@ class DeleteWord extends React.Component<IWordProps, IWordState>{
 
   confirmDelete(id: number){
     WordsDataService.deleteWord(id)
-    .then(() => this.props.history.push('/words'))       
+    .then(() => this.props.history.push('/word'))       
   }
 
   cancelDelete(id: number){
-    this.props.history.push('/words/details/' + id)
+    this.props.history.push('/word/details/' + id)
   }
   
   render(){
@@ -55,7 +55,7 @@ class DeleteWord extends React.Component<IWordProps, IWordState>{
     return(
       <div>
         <h2>Are you sure you want to delete "{wordName}"?</h2>
-        <img src={`${API_URL}/words/uploaded-image/${id}`} 
+        <img src={`${API_URL}/word/uploaded-image/${id}`} 
                alt="fetched img" 
                width="300"
                height="300"

@@ -205,7 +205,7 @@ public class UserController {
 	}
 	
 	// displays an image on the front-end side that is specified by the path <img src={` `}>
-	@GetMapping("/users/uploaded-image/{userId}")
+	@GetMapping("/user/uploaded-image/{userId}")
 	ResponseEntity<byte[]> userImage(@PathVariable int userId){	
 		Optional<User> user = repository.findById(userId);
 		byte[] image = user.get().getImage();

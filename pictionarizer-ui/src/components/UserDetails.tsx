@@ -48,7 +48,7 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
     return(
       <div>
         <h2>User Details</h2>
-        <img src={`${API_URL}/users/uploaded-image/${this.state.userId}`} 
+        <img src={`${API_URL}/user/uploaded-image/${this.state.userId}`} 
             alt="fetched img" 
             width="150"
             height="150"
@@ -59,8 +59,8 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
         <div>Own Language: {user.ownLanguage}</div>
         <div>Country: {user.country}</div>
         <div>Description: {user.description}</div>       
-        <div>{loginState === user.id? <Link to={'/users/' + String(user.id)}>Edit</Link>: <p> </p>}</div>  
-        <div>{loginState === user.id? <Link to={'/users/delete/' + String(user.id)}>Delete</Link>: <p> </p>}</div>
+        <div>{loginState === user.id? <Link to={'/user/' + String(user.id)}>Edit</Link>: <p> </p>}</div>  
+        <div>{loginState === user.id? <Link to={'/user/delete/' + String(user.id)}>Delete</Link>: <p> </p>}</div>
       </div>
     )
   }

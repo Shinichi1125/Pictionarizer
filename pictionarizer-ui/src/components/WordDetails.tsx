@@ -48,7 +48,7 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
       <div>
         <h2>Word Details</h2>
         <div>Image:  </div>
-        <img src={`${API_URL}/words/uploaded-image/${this.state.wordId}`} 
+        <img src={`${API_URL}/word/uploaded-image/${this.state.wordId}`} 
                alt="fetched img" 
                width="150"
                height="150"
@@ -61,19 +61,19 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
         <div>Created Date: {String(word.createdDate)}</div>
         <div>Created by:  </div>
         <img src={word.userId > 0 ? 
-          `${API_URL}/users/uploaded-image/${word.userId}` : 
-          `${API_URL}/users/uploaded-image/${TEST_USER_ID}`} 
+          `${API_URL}/user/uploaded-image/${word.userId}` : 
+          `${API_URL}/user/uploaded-image/${TEST_USER_ID}`} 
                alt="fetched img" 
                width="50"
                height="50"
         />
         <div>
-          <Link to={'/users/details/' + String(word.userId)}>User Info</Link>
+          <Link to={'/user/details/' + String(word.userId)}>User Info</Link>
           &nbsp;
           <Link to={'/words'}>Back</Link>
         </div>
-        <div>{loginState === word.userId? <Link to={'/words/' + String(word.id)}>Edit</Link> : <p> </p>}</div>  
-        <div>{loginState === word.userId? <Link to={'/words/delete/' + String(word.id)}>Delete</Link>: <p> </p>}</div>
+        <div>{loginState === word.userId? <Link to={'/word/' + String(word.id)}>Edit</Link> : <p> </p>}</div>  
+        <div>{loginState === word.userId? <Link to={'/word/delete/' + String(word.id)}>Delete</Link>: <p> </p>}</div>
       </div>
     )
   }

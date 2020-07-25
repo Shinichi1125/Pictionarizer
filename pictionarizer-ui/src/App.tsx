@@ -26,14 +26,14 @@ function App() {
         <Route exact path="/" component={Home}/>
         <Route exact path="/words" component={Words}/>
         <Route exact path="/users" component={Users}/>
-        <Route exact path="/users/create" component={CreateUser}/>
-        <Route exact path="/users/delete/:id" component={DeleteUser}/>
-        <Route exact path="/users/details/:id" component={UserDetails}/>
-        <Route exact path="/users/:id" component={UpdateUser}/>
-        <Route exact path="/words/create" component={CreateWord}/>
-        <Route exact path="/words/:id" component={UpdateWord}/>
-        <Route exact path="/words/delete/:id" component={DeleteWord}/>
-        <Route exact path="/words/details/:id" component={WordDetails}/>   
+        <Route exact path="/user/create" component={CreateUser}/>
+        <Route exact path="/user/delete/:id" component={DeleteUser}/>
+        <Route exact path="/user/details/:id" component={UserDetails}/>
+        <Route exact path="/user/:id" component={UpdateUser}/>
+        <Route exact path="/word/create" component={CreateWord}/>
+        <Route exact path="/word/:id" component={UpdateWord}/>
+        <Route exact path="/word/delete/:id" component={DeleteWord}/>
+        <Route exact path="/word/details/:id" component={WordDetails}/>   
         <Route exact path="/login" component={Login}/>          
       </Switch>
       <Footer/>

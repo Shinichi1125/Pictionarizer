@@ -46,7 +46,7 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
   }
 
   cancelDelete(id: number){
-    this.props.history.push('/users/details/' + id)
+    this.props.history.push('/user/details/' + id)
   }
   
   render(){
@@ -56,7 +56,7 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
     return(
       <div>
         <h2>Are you sure you want to delete "{userName}"?</h2>
-        <img src={`${API_URL}/users/uploaded-image/${id}`} 
+        <img src={`${API_URL}/user/uploaded-image/${id}`} 
                alt="fetched img" 
                width="300"
                height="300"

@@ -28,7 +28,7 @@ class Words extends React.Component{
       <div>
         <Link to={'/users'}>Users</Link>
         <br/><hr></hr><br/>
-        {loginState > 0?<Link to={'words/create'}>+Word</Link>: <p> </p>}
+        {loginState > 0?<Link to={'word/create'}>+Word</Link>: <p> </p>}
         <h2>Words:</h2>
         <table>
           <thead>
@@ -74,13 +74,13 @@ class WordRowCreator extends React.Component<Word>{
           <td>{word.ownLangExSentence}</td>        
           <td>{word.createdDate}</td>
           <td>           
-            <img src={`${API_URL}/words/uploaded-image/${word.id}`} 
+            <img src={`${API_URL}/word/uploaded-image/${word.id}`} 
                 alt="fetched img" 
                 width="75"
                 height="75"
             />            
           </td>
-          <td><Link to={'words/details/' + String(word.id)}>Details</Link></td>   
+          <td><Link to={'word/details/' + String(word.id)}>Details</Link></td>   
         </tr>
     )
   }

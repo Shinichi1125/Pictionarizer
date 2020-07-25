@@ -182,7 +182,7 @@ public class WordController {
 	}
 	
 	// displays an image on the front-end side that is specified by the path <img src={` `}>
-	@GetMapping("/words/uploaded-image/{wordId}")
+	@GetMapping("/word/uploaded-image/{wordId}")
 	ResponseEntity<byte[]> wordImage(@PathVariable int wordId){	
 		Optional<Word> word = repository.findById(wordId);
 		byte[] image = word.get().getImage();

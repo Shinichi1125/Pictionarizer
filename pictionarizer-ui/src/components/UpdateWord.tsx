@@ -102,7 +102,7 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
     return(
       <div>
         <h2>Update Word</h2>
-        <img src={`${API_URL}/words/uploaded-image/${this.state.wordId}`} 
+        <img src={`${API_URL}/word/uploaded-image/${this.state.wordId}`} 
                alt="fetched img" 
                width="150"
                height="150"
