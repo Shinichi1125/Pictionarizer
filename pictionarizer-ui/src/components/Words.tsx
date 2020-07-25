@@ -3,6 +3,9 @@ import Word from '../interfaces/Word.interface';
 import WordsDataService from '../api/WordsDataService';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../Constants';
+import { getLoginId } from '../LoginLocalStorage';
+
+const loginState = Number(getLoginId());
 
 class Words extends React.Component{
 
@@ -25,7 +28,7 @@ class Words extends React.Component{
       <div>
         <Link to={'/users'}>Users</Link>
         <br/><hr></hr><br/>
-        <Link to={'words/create'}>+Word</Link>
+        {loginState > 0?<Link to={'words/create'}>+Word</Link>: <p> </p>}
         <h2>Words:</h2>
         <table>
           <thead>

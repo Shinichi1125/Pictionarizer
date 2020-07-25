@@ -34,9 +34,11 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
     return errors; 
   }
 
-  async onSubmit(values: LoginInfo){
-    await UsersDataService.userLogin(values)
+  onSubmit(values: LoginInfo){
+    try {UsersDataService.userLogin(values)
     .then(res =>{
+      console.log("The entire returned object: ");
+      console.log(res);
       console.log("The returned user ID: " + res.data);
       if(res.data === 0){
         console.log("The email address and the password dont' match");
@@ -44,8 +46,11 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
       }
       setLoginId(String(res.data));
     })
-    .then(() => this.props.history.push('/users'))
-    .then(() => window.location.reload(true))  
+    .then(() => this.props.history.push('/'))
+    .then(() => window.location.reload(true))
+    } catch(error){
+      console.log(error);
+    }  
   }
 
   render(){
