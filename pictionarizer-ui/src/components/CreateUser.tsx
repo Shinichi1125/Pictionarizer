@@ -1,5 +1,6 @@
 import React from 'react';
 import User from '../interfaces/User.interface';
+import Word from '../interfaces/Word.interface';
 import UsersDataService from '../api/UsersDataService';
 import { Formik, Form, Field, ErrorMessage } from 'formik'; 
 import IUserProps from '../interfaces/IUserProps.interface';
@@ -22,7 +23,8 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
         password: '',
         image: null,
         description: '' 
-      }
+      },
+      words: new Array<Word>()
     }
 
     this.onSubmit = this.onSubmit.bind(this)

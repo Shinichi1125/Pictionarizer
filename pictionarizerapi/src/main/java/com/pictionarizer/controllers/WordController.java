@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.pictionarizer.model.User;
 import com.pictionarizer.model.Word;
 import com.pictionarizer.repos.WordRepository;
 
@@ -55,6 +57,20 @@ public class WordController {
 	@RequestMapping(value = "/words", method = RequestMethod.GET)
 	public List<Word> getWords(){
 		return repository.findAll(); 
+	}
+	
+	@RequestMapping(value = "/words/{userId}", method = RequestMethod.GET)
+	public List<Word> getWordsByUser(@PathVariable("userId") int userId){
+		List<Word> allWords = repository.findAll();
+		List<Word> filteredWords = new ArrayList<Word>();
+		
+		for(Word word: allWords) {
+			if(word.getUserId() == userId) {
+				filteredWords.add(word);
+			}
+		}	
+		
+		return filteredWords; 
 	}
 	
 	@RequestMapping(value = "/word/{id}", method = RequestMethod.GET)

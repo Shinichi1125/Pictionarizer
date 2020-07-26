@@ -1,5 +1,6 @@
 import React from 'react';
 import User from '../interfaces/User.interface';
+import Word from '../interfaces/Word.interface';
 import UsersDataService from '../api/UsersDataService';
 import IUserProps from '../interfaces/IUserProps.interface';
 import IUserState from '../interfaces/IUserState.interface';
@@ -22,7 +23,8 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
         password: '',
         image: new File(["foo"], "foo.txt"),
         description: '' 
-      }
+      },
+      words: new Array<Word>()
     }
 
     this.confirmDelete = this.confirmDelete.bind(this)

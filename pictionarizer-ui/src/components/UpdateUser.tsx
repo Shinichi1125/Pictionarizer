@@ -1,5 +1,6 @@
 import React from 'react';
 import User from '../interfaces/User.interface';
+import Word from '../interfaces/Word.interface';
 import UsersDataService from '../api/UsersDataService';
 import { Formik, Form, Field, ErrorMessage } from 'formik'; 
 import IUserProps from '../interfaces/IUserProps.interface';
@@ -27,7 +28,8 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
         password: '',
         image: new File(["foo"], "foo.txt"),
         description: '' 
-      }
+      },
+      words: new Array<Word>()
     }
 
     this.onSubmit = this.onSubmit.bind(this)

@@ -1,6 +1,8 @@
 import React from 'react';
 import User from '../interfaces/User.interface';
+import Word from '../interfaces/Word.interface';
 import UsersDataService from '../api/UsersDataService'; 
+import WordsDataService from '../api/WordsDataService';
 import IUserProps from '../interfaces/IUserProps.interface';
 import IUserState from '../interfaces/IUserState.interface';
 import { API_URL } from '../Constants';
@@ -26,7 +28,8 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
         password: '',
         image: null,
         description: '' 
-      }
+      },
+      words: new Array<Word>()
     }
   }
 
@@ -39,6 +42,14 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
       data = res.data;
       this.setState({userData:data});
     }) 
+
+    WordsDataService.retrieveWordsByUser(id)
+    .then(response => {
+      const info = response.data;
+      this.setState({
+        words:[...this.state.words, ...info]
+      })
+    })
   }
 
   render(){    
@@ -61,7 +72,43 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
         <div>Description: {user.description}</div>       
         <div>{loginState === user.id? <Link to={'/user/' + String(user.id)}>Edit</Link>: <p> </p>}</div>  
         <div>{loginState === user.id? <Link to={'/user/delete/' + String(user.id)}>Delete</Link>: <p> </p>}</div>
+        <div>
+          Words: <br></br>
+          {this.state.words.map((word)=>
+            <WordsList 
+              key = {word.id}
+              id={word.id}
+              userId={word.userId}
+              ownLangWordName={word.ownLangWordName}
+              targetLangWordName={word.targetLangWordName}
+              ownLangExSentence={word.ownLangExSentence}
+              targetLangExSentence={word.targetLangExSentence}
+              createdDate={word.createdDate}
+              image={word.image}
+            />)}
+        </div>
       </div>
+    )
+  }
+}
+
+class WordsList extends React.Component<Word>{
+
+  render(){
+    let word = this.props;
+    
+    return(
+        <div>
+          <span>{word.targetLangWordName}</span> &nbsp;&nbsp;
+          <span>
+            <img src={`${API_URL}/word/uploaded-image/${word.id}`} 
+                alt="fetched img" 
+                width="50"
+                height="50"
+            />  
+          </span>&nbsp;&nbsp;
+          <span><Link to={'/word/details/' + String(word.id)}>Details</Link></span> 
+        </div>
     )
   }
 }
