@@ -12,8 +12,12 @@ class WordsDataService {
   }
 
   retrieveWord(id: number){
-    return axios.get(`${API_URL}/words/${id}`);
+    return axios.get(`${API_URL}/word/${id}`);
   } 
+
+  retrieveWordsByUser(userId: number){
+    return axios.get(`${API_URL}/words/${userId}`);
+  }
 
   makeFormData(word: Word){
 
@@ -34,14 +38,14 @@ class WordsDataService {
     console.log("The content of the word object: ");
     console.log(word);
     const formData = this.makeFormData(word);
-    return axios.post(`${API_URL}/words`, formData, CONFIG);
+    return axios.post(`${API_URL}/word`, formData, CONFIG);
   }
 
   updateWord(id: number, word: Word){
     console.log("The content of the word object: ");
     console.log(word);
     const formData = this.makeFormData(word);
-    return axios.put(`${API_URL}/words/${id}`, formData, CONFIG);
+    return axios.put(`${API_URL}/word/${id}`, formData, CONFIG);
   }
 
   updateToast(object: String){
@@ -52,7 +56,7 @@ class WordsDataService {
   }
 
   deleteWord(id: number){
-    return axios.delete(`${API_URL}/words/${id}`);
+    return axios.delete(`${API_URL}/word/${id}`);
   }
 }
 

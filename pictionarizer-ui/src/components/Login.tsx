@@ -48,6 +48,9 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
     })
     .then(() => this.props.history.push('/'))
     .then(() => window.location.reload(true)) 
+    .catch((error) => {
+      console.log("Error message: " + error);
+   })
   }
 
   render(){

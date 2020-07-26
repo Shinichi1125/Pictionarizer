@@ -13,11 +13,11 @@ class UsersDataService {
   }
 
   retrieveUser(id: number){
-    return axios.get(`${API_URL}/users/${id}`);
+    return axios.get(`${API_URL}/user/${id}`);
   }  
 
   getUserName(userId: number){
-    return axios.get(`${API_URL}/users/name/${userId}`)
+    return axios.get(`${API_URL}/user/name/${userId}`)
   }
 
   makeUserFormData(user: User){
@@ -46,16 +46,16 @@ class UsersDataService {
 
   createUser(user: User){
     const formData = this.makeUserFormData(user);
-    return axios.post(`${API_URL}/users`, formData, CONFIG);
+    return axios.post(`${API_URL}/user`, formData, CONFIG);
   }
 
   updateUser(id: number, user: User){
     const formData = this.makeUserFormData(user);
-    return axios.put(`${API_URL}/users/${id}`, formData, CONFIG);
+    return axios.put(`${API_URL}/user/${id}`, formData, CONFIG);
   }
 
   deleteUser(id: number){
-    return axios.delete(`${API_URL}/users/${id}`);
+    return axios.delete(`${API_URL}/user/${id}`);
   }
 
   formValidate(values: User){

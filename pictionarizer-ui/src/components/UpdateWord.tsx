@@ -160,9 +160,4 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
   }
 }
 
-/* <fieldset>
-                    <label>User ID</label>&nbsp;
-                    <Field type="text" name="userId"/>
-                  </fieldset> */
-
 export default UpdateWord; 

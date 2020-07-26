@@ -48,7 +48,7 @@ public class UserController {
 		return repository.findAll();
 	}
 	
-	@RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
 	public User getUser(@PathVariable("id") int id) {
 		return repository.findById(id).get();
 	}
@@ -121,7 +121,7 @@ public class UserController {
 		return user;
 	}
 	
-	@RequestMapping(value = "/users", method = RequestMethod.POST)
+	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public User saveUser(
 			@RequestParam("name") String name,
 			@RequestParam("ownLanguage") String ownLanguage,
@@ -157,7 +157,7 @@ public class UserController {
 		return repository.save(user);
 	}
 	
-	@RequestMapping(value = "/users/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
 	public User updateUser(
 			@RequestParam("name") String name,
 			@RequestParam("ownLanguage") String ownLanguage,
@@ -199,7 +199,7 @@ public class UserController {
 		return repository.save(user);
 	}
 	
-	@RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
 	public void deleteUser(@PathVariable("id") int id) {
 		repository.deleteById(id);
 	}

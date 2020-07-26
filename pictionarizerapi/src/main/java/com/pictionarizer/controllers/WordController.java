@@ -57,7 +57,7 @@ public class WordController {
 		return repository.findAll(); 
 	}
 	
-	@RequestMapping(value = "/words/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/word/{id}", method = RequestMethod.GET)
 	public Word getWord(@PathVariable("id") int id) {
 		return repository.findById(id).get();
 	}
@@ -111,7 +111,7 @@ public class WordController {
 		return word;
 	}
 	
-	@RequestMapping(value = "/words", method = RequestMethod.POST)
+	@RequestMapping(value = "/word", method = RequestMethod.POST)
 	public Word saveWord(
 			@RequestParam("userId") int userId,
 			@RequestParam("ownLangWordName") String ownLangWordName,
@@ -136,7 +136,7 @@ public class WordController {
 		return repository.save(word);
 	}
 	
-	@RequestMapping(value = "/words/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/word/{id}", method = RequestMethod.PUT)
 	public Word updateWord(
 			@RequestParam("userId") int userId,
 			@RequestParam("ownLangWordName") String ownLangWordName,
@@ -176,7 +176,7 @@ public class WordController {
 		return repository.save(word);
 	}
 	
-	@RequestMapping(value = "/words/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/word/{id}", method = RequestMethod.DELETE)
 	public void deleteWord(@PathVariable("id") int id) {
 		repository.deleteById(id);
 	}

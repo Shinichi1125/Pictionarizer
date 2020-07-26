@@ -23,6 +23,8 @@ class Header extends React.Component{
             width="35"
             height="35"
         />
+        &nbsp;&nbsp;
+        {loginState !== 0?<Link to={'user/details/' + loginState}>Profile</Link>: <p> </p>}
         <hr/>
       </div>
     )

@@ -71,13 +71,13 @@ class UserRowCreator extends React.Component<User>{
           <td>{user.country}</td>
           <td>{user.description}</td>
           <td>
-            <img src={`${API_URL}/users/uploaded-image/${user.id}`} 
+            <img src={`${API_URL}/user/uploaded-image/${user.id}`} 
                 alt="fetched img" 
                 width="75"
                 height="75"
             />
           </td>
-          <td><Link to={'users/details/' + String(user.id)}>Details</Link></td> 
+          <td><Link to={'user/details/' + String(user.id)}>Details</Link></td> 
         </tr>
     )
   }
