@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -57,6 +59,15 @@ public class UserController {
 //	public String getUserName(@PathVariable("id") int id) {
 //		return repository.findById(id).get().getName();
 //	}
+	
+	@Value
+	public class Error {
+		String errorMessage; 
+		
+		public Error(String errorMessage) {
+			this.errorMessage = errorMessage; 
+		}
+	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ResponseEntity<Integer>/*int*/ checkIfValidUser(
