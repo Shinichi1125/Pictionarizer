@@ -54,9 +54,20 @@ public class WordController {
 		this.repository = repository; 
 	}
 	
+	public List<Word> reverseArrayList(List<Word> alist) { 
+        List<Word> revArrayList = new ArrayList<Word>(); 
+        for (int i = alist.size() - 1; i >= 0; i--) { 
+            revArrayList.add(alist.get(i)); 
+        } 
+        return revArrayList; 
+    } 
+	
 	@RequestMapping(value = "/words", method = RequestMethod.GET)
 	public List<Word> getWords(){
-		return repository.findAll(); 
+		List<Word> wordsList = repository.findAll();	
+		// reverse the list so that the newer elements will be displayed on top, older ones bottom
+		wordsList = reverseArrayList(wordsList);
+		return wordsList;
 	}
 	
 	@RequestMapping(value = "/words/{userId}", method = RequestMethod.GET)
@@ -70,6 +81,8 @@ public class WordController {
 			}
 		}	
 		
+		// reverse the list so that the newer elements will be displayed on top, older ones bottom
+		filteredWords = reverseArrayList(filteredWords);		
 		return filteredWords; 
 	}
 	

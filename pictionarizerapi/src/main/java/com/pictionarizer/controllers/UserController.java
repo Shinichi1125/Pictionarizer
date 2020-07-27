@@ -60,12 +60,15 @@ public class UserController {
 //		return repository.findById(id).get().getName();
 //	}
 	
-	@Value
 	public class Error {
-		String errorMessage; 
+		String message; 
 		
-		public Error(String errorMessage) {
-			this.errorMessage = errorMessage; 
+		public Error(String message) {
+			this.message = message; 
+		}
+		
+		public String getMessage() {
+			return message; 
 		}
 	}
 	
@@ -91,7 +94,8 @@ public class UserController {
 			Integer userIdObj = Integer.valueOf(userId);
 			return new ResponseEntity<Integer>(userIdObj, HttpStatus.OK);
 		} else {
-			return new ResponseEntity<Integer>(HttpStatus.NOT_FOUND);
+			//Error error = new Error("The email address and the password don't match");
+			return new ResponseEntity<Integer>(/*error.getMessage(), */ HttpStatus.NOT_FOUND);
 		}
 	}
 	
