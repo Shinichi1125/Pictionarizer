@@ -18,7 +18,7 @@
     "react-scripts": "3.4.1",
     "react-toastify": "^6.0.8",
     "websocket-extensions": "^0.1.4",
-    "yup": "^0.29.1"
+    "yup": "^0.29.2"
   },
   "scripts": {
     "start": "react-scripts start",
