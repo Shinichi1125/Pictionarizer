@@ -73,7 +73,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ResponseEntity<Integer>/*int*/ checkIfValidUser(
+	public ResponseEntity<?>/*int*/ checkIfValidUser(
 			@RequestParam("email") String email,
 			@RequestParam("password") String password) {  
 		int userId = 0;
@@ -92,10 +92,12 @@ public class UserController {
 		
 		if(userId > 0) {
 			Integer userIdObj = Integer.valueOf(userId);
-			return new ResponseEntity<Integer>(userIdObj, HttpStatus.OK);
+			return new ResponseEntity<>(userIdObj, HttpStatus.OK);
 		} else {
-			//Error error = new Error("The email address and the password don't match");
-			return new ResponseEntity<Integer>(/*error.getMessage(), */ HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(
+					new Error("The email address and the password don't match"),  
+					HttpStatus.NOT_FOUND
+			);
 		}
 	}
 	

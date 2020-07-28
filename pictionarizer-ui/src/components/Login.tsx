@@ -37,19 +37,12 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
   onSubmit(values: LoginInfo){
     UsersDataService.userLogin(values)
     .then(res =>{
-      console.log("The entire returned object: ");
-      console.log(res);
-      console.log("The returned user ID: " + res.data);
-      if(res.data === 0){
-        console.log("The email address and the password dont' match");
-        return; 
-      }
       setLoginId(String(res.data));
     })
     .then(() => this.props.history.push('/'))
     .then(() => window.location.reload(true)) 
     .catch((error) => {
-      console.log("Error message: " + error);
+      console.log(error);
    })
   }
 

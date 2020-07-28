@@ -10,21 +10,21 @@ class Header extends React.Component{
   render(){
     return(
       <div>
-        {loginState === 0?<Link to={'user/create'}>Sign up</Link>: <span></span>}
-        &nbsp;&nbsp;
-        {loginState === 0?<Link to={'/login'}>Log in</Link>: <span></span>}
-        &nbsp;&nbsp;
-        {loginState !== 0?<button onClick={() => logoutAndRefresh()}>Logout</button>: <span></span>}
-        &nbsp;&nbsp;
-        <img src={ loginState > 0 ? 
-          `${API_URL}/user/uploaded-image/${loginState}` : 
-          `${API_URL}/user/uploaded-image/${TEST_USER_ID}`}
-            alt="fetched img" 
-            width="35"
-            height="35"
-        />
-        &nbsp;&nbsp;
-        {loginState !== 0?<Link to={'user/details/' + loginState}>Profile</Link>: <p> </p>}
+        <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+          <ul className="navbar-nav">
+            <li className="nav-link">{loginState === 0?<Link to={'user/create'}>Sign up</Link>: <span></span>}</li>
+            <li className="nav-link">{loginState === 0?<Link to={'/login'}>Log in</Link>: <span></span>}</li>
+            <li>{loginState !== 0?<button onClick={() => logoutAndRefresh()}>Log out</button>: <span></span>}</li>
+            <li><img src={ loginState > 0 ? 
+              `${API_URL}/user/uploaded-image/${loginState}` : 
+              `${API_URL}/user/uploaded-image/${TEST_USER_ID}`}
+                alt="fetched img" 
+                width="35"
+                height="35"
+            /></li>
+            <li className="nav-link">{loginState !== 0?<Link to={'user/details/' + loginState}>My page</Link>: <p> </p>}</li>
+          </ul>
+        </nav>
         <hr/>
       </div>
     )
