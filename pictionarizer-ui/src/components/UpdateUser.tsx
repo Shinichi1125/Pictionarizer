@@ -74,7 +74,7 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
 
     await UsersDataService.updateUser(id, user)
     .then(() => UsersDataService.updateToast("User"))    
-    .then(() => this.props.history.push('/users'))
+    .then(() => this.props.history.push('/user/details/' + String(id)))
     .then(() => window.location.reload(true))   
   }
 
@@ -89,9 +89,9 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
         <h2>Update User</h2>
         <img src={`${API_URL}/user/uploaded-image/${this.state.userId}`} 
                alt="fetched img" 
-               width="150"
-               height="150"
+               className="large round-border"
           />
+        <br></br>
         <br></br>
         <div>
           <Formik

@@ -26,6 +26,7 @@ class Header extends React.Component{
             <li className="nav-link">{loginState === 0?<Link to={'user/create'}>Sign up</Link>: <span></span>}</li>
             <li className="nav-link">{loginState === 0?<Link to={'/login'}>Log in</Link>: <span></span>}</li>
             <li>{loginState !== 0?<button onClick={() => logoutAndRefresh()}>Log out</button>: <span></span>}</li>
+            &nbsp;
             <li>
               <img src={ loginState > 0 ? 
               `${API_URL}/user/uploaded-image/${loginState}` : 
@@ -35,6 +36,7 @@ class Header extends React.Component{
                 height="35"
               />
             </li>
+            &nbsp;
             <li className="nav-link">{loginState !== 0?<Link to={'user/details/' + loginState}>My page</Link>: <p> </p>}</li>
           </ul>
         </nav>

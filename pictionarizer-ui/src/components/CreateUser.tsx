@@ -39,15 +39,9 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
 
   onChange(e: { currentTarget: HTMLInputElement; }){
     const chosenFile = e.currentTarget.files[0];
-    console.log("The value of chosenFile:");
-    console.log(chosenFile);
-
     let tempUserData = this.state.userData;
     tempUserData.image = chosenFile;  
-
     this.setState({userData:tempUserData});
-    console.log("The value of this.state.wordData: ");
-    console.log(this.state.userData);
   }  
 
   async onSubmit(values: User){

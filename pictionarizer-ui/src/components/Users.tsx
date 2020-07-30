@@ -73,8 +73,7 @@ class UserRowCreator extends React.Component<User>{
           <td>
             <img src={`${API_URL}/user/uploaded-image/${user.id}`} 
                 alt="fetched img" 
-                width="75"
-                height="75"
+                className="normal-size round-border"
             />
           </td>
           <td><Link to={'user/details/' + String(user.id)}>Details</Link></td> 

@@ -44,7 +44,7 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
 
   confirmDelete(id: number){
     UsersDataService.deleteUser(id)
-    .then(() => this.props.history.push('/users'))       
+    .then(() => this.props.history.push('/'))       
   }
 
   cancelDelete(id: number){
@@ -60,9 +60,9 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
         <h2>Are you sure you want to delete "{userName}"?</h2>
         <img src={`${API_URL}/user/uploaded-image/${id}`} 
                alt="fetched img" 
-               width="300"
-               height="300"
+               className="extra-large round-border"
           />
+        <br></br>
         <br></br>
         <button onClick={() => this.confirmDelete(id)}>Yes</button>&nbsp;&nbsp;
         <button onClick={() => this.cancelDelete(id)}>No</button>

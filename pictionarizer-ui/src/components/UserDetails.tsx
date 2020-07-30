@@ -5,7 +5,7 @@ import UsersDataService from '../api/UsersDataService';
 import WordsDataService from '../api/WordsDataService';
 import IUserProps from '../interfaces/IUserProps.interface';
 import IUserState from '../interfaces/IUserState.interface';
-import { API_URL } from '../Constants';
+import { API_URL, TEST_USER_ID } from '../Constants';
 import { Link } from 'react-router-dom';
 import { getLoginId } from '../LoginLocalStorage';
 
@@ -61,8 +61,7 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
         <h2>User Details</h2>
         <img src={`${API_URL}/user/uploaded-image/${this.state.userId}`} 
             alt="fetched img" 
-            width="150"
-            height="150"
+            className="large round-border"
         />
         <br></br>
         <div>Name: {user.name}</div>
@@ -71,7 +70,11 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
         <div>Country: {user.country}</div>
         <div>Description: {user.description}</div>       
         <div>{loginState === user.id? <Link to={'/user/' + String(user.id)}>Edit</Link>: <p> </p>}</div>  
-        <div>{loginState === user.id? <Link to={'/user/delete/' + String(user.id)}>Delete</Link>: <p> </p>}</div>
+        <div>
+          {loginState === user.id && loginState !== TEST_USER_ID?
+          <Link to={'/user/delete/' + String(user.id)}>Delete</Link>:
+          <p> </p>}
+        </div>
         <div>
           Words: <br></br>
           {this.state.words.map((word)=>
