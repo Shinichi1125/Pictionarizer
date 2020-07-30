@@ -57,9 +57,9 @@ class DeleteWord extends React.Component<IWordProps, IWordState>{
         <h2>Are you sure you want to delete "{wordName}"?</h2>
         <img src={`${API_URL}/word/uploaded-image/${id}`} 
                alt="fetched img" 
-               width="300"
-               height="300"
+               className="extra-large"
           />
+        <br></br>
         <br></br>
         <button onClick={() => this.confirmDelete(id)}>Yes</button>&nbsp;&nbsp;
         <button onClick={() => this.cancelDelete(id)}>No</button>

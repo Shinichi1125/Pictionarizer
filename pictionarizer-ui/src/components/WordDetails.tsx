@@ -50,8 +50,7 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
         <div>Image:  </div>
         <img src={`${API_URL}/word/uploaded-image/${this.state.wordId}`} 
                alt="fetched img" 
-               width="150"
-               height="150"
+               className="large"
         />
         <br></br>
         <div>Word: {word.targetLangWordName}</div>
@@ -64,13 +63,10 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
           `${API_URL}/user/uploaded-image/${word.userId}` : 
           `${API_URL}/user/uploaded-image/${TEST_USER_ID}`} 
                alt="fetched img" 
-               width="50"
-               height="50"
+               className="small"
         />
         <div>
           <Link to={'/user/details/' + String(word.userId)}>User Info</Link>
-          &nbsp;
-          <Link to={'/words'}>Back</Link>
         </div>
         <div>{loginState === word.userId? <Link to={'/word/' + String(word.id)}>Edit</Link> : <p> </p>}</div>  
         <div>{loginState === word.userId? <Link to={'/word/delete/' + String(word.id)}>Delete</Link>: <p> </p>}</div>

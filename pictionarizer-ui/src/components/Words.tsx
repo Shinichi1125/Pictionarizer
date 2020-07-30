@@ -76,8 +76,7 @@ class WordRowCreator extends React.Component<Word>{
           <td>           
             <img src={`${API_URL}/word/uploaded-image/${word.id}`} 
                 alt="fetched img" 
-                width="75"
-                height="75"
+                className="normal-size"
             />            
           </td>
           <td><Link to={'word/details/' + String(word.id)}>Details</Link></td>   

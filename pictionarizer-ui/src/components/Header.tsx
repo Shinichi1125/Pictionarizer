@@ -32,8 +32,7 @@ class Header extends React.Component{
               `${API_URL}/user/uploaded-image/${loginState}` : 
               `${API_URL}/user/uploaded-image/${TEST_USER_ID}`}
                 alt="fetched img" 
-                width="35"
-                height="35"
+                className="small"
               />
             </li>
             &nbsp;
