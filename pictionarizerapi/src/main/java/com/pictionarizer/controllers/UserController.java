@@ -73,7 +73,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ResponseEntity<?>/*int*/ checkIfValidUser(
+	public ResponseEntity<?> checkIfValidUser(
 			@RequestParam("email") String email,
 			@RequestParam("password") String password) {  
 		int userId = 0;

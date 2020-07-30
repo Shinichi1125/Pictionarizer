@@ -26,10 +26,13 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
   validate(values: LoginInfo){
     let errors: Partial<LoginInfo> = {};
     if(values.email === ''){
-      errors.email = "Enter your email address"
+      errors.email = 'Enter your email address'
     }
     if(values.password.length < 8){
       errors.password = 'Enter at least 8 characters for your password'
+    }
+    if(values.email === "The email address and the password don't match" && values.password === ''){
+      errors.email = "The email address and the password don't match"
     }
     return errors; 
   }
@@ -42,7 +45,10 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
     .then(() => this.props.history.push('/'))
     .then(() => window.location.reload(true)) 
     .catch((error) => {
-      console.log(error);
+      console.log(error.response.data.message);
+      values.email = error.response.data.message;
+      values.password = '';
+      this.validate(values);
    })
   }
 

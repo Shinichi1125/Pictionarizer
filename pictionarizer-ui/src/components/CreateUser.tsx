@@ -58,7 +58,7 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
     };
 
     await UsersDataService.createUser(user)
-    .then(() => this.props.history.push('/users'))       
+    .then(() => this.props.history.push('/'))       
   }
   
   render(){
@@ -69,7 +69,7 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
 
     return(
       <div>
-        <h2>Create User</h2>
+        <br></br>
         <div>
           <Formik
             initialValues={{ id, name, ownLanguage, targetLanguage, 
@@ -118,7 +118,7 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
                     <label>Image</label>&nbsp;
                     <input id="image" type="file" name="image" onChange={this.onChange}/>
                   </fieldset>
-                  <button type="submit">Save</button>
+                  <button type="submit">Sign up</button>
                 </Form>
               )
             }      

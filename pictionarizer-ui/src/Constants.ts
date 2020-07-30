@@ -6,3 +6,4 @@ export const CONFIG = {
 };
 export const TOAST_MILISEC = 3000;
 export const TEST_USER_ID = 2;
+export const LOGO_ID = 12; 
