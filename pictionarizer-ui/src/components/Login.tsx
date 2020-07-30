@@ -5,6 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import ILoginInfoProps from '../interfaces/ILoginInfoProps.interface';
 import ILoginInfoState from '../interfaces/ILoginInfoState.interface';
 import { setLoginId } from '../LoginLocalStorage';
+import { EASY_EMAIL_ADDRESS, EASY_PASSWORD } from '../Constants';
 
 class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
 
@@ -21,6 +22,21 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
 
     this.onSubmit = this.onSubmit.bind(this)
     this.validate = this.validate.bind(this)
+    this.easyLogin = this.easyLogin.bind(this)
+  }
+
+  easyLogin(){
+    let values: LoginInfo;
+    values = {
+      email: EASY_EMAIL_ADDRESS,
+      password: EASY_PASSWORD
+    }
+    UsersDataService.userLogin(values)
+    .then(res =>{
+      setLoginId(String(res.data));
+    })
+    .then(() => this.props.history.push('/'))
+    .then(() => window.location.reload(true))
   }
 
   validate(values: LoginInfo){
@@ -70,12 +86,12 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
                 <Form>
                   <ErrorMessage name="email" component="div"/>
                   <fieldset>
-                    <label>Email: </label>
+                    <label>Email: </label>&nbsp;
                     <Field type="text" name="email"/>
                   </fieldset>
                   <ErrorMessage name="password" component="div"/>
                   <fieldset>
-                    <label>Password: </label>
+                    <label>Password: </label>&nbsp;
                     <Field type="text" name="password"/>
                   </fieldset>
                   <button type="submit">Send</button>
@@ -83,6 +99,11 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
               )
             }
           </Formik>
+          <br></br>
+          <button type="button" 
+                  className="btn btn-success" 
+                  onClick={() => this.easyLogin()}
+          >Easy Log in</button>
         </div>
       </div>
     )
