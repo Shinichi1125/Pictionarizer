@@ -11,7 +11,7 @@ class Header extends React.Component{
     return(
       <div>
         <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-          <ul className="navbar-nav">
+          <ul className="navbar-nav navbar-collapse">
             <li>
               <img src={`${API_URL}/user/uploaded-image/${LOGO_ID}`}
                 alt="fetched img" 
@@ -19,6 +19,8 @@ class Header extends React.Component{
                 height="35"
               />
             </li>
+            &nbsp;
+            <li className="text-white">Pictionarizer</li>
           </ul>
           <ul className="navbar-nav navbar-collapse justify-content-end">
             <li className="nav-link">{loginState === 0?<Link to={'user/create'}>Sign up</Link>: <span></span>}</li>
