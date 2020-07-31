@@ -22,6 +22,7 @@ function App() {
   return (
     <div className="App">
       <Header/>
+      <br/><br/><br/>
       <Switch>
         <Route exact path="/" component={Home}/>
         <Route exact path="/words" component={Words}/>

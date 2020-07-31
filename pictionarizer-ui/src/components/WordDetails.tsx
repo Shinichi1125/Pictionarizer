@@ -63,7 +63,7 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
           `${API_URL}/user/uploaded-image/${word.userId}` : 
           `${API_URL}/user/uploaded-image/${TEST_USER_ID}`} 
                alt="fetched img" 
-               className="small"
+               className="small round-border"
         />
         <div>
           <Link to={'/user/details/' + String(word.userId)}>User Info</Link>

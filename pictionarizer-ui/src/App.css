@@ -6,6 +6,11 @@
   color: #61dafb;
 }
 
+.Header {
+  position: fixed; 
+  width: 100%;
+}
+
 .round-border{
   border-radius: 50%;
   border: white 2px solid;

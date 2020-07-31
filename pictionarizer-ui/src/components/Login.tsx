@@ -1,7 +1,7 @@
 import React from 'react';
 import LoginInfo from '../interfaces/LoginInfo.interface';
 import UsersDataService from '../api/UsersDataService'; 
-import { Formik, Form, Field, ErrorMessage } from 'formik'; 
+import { Formik, Form, Field, ErrorMessage, FormikBag } from 'formik'; 
 import ILoginInfoProps from '../interfaces/ILoginInfoProps.interface';
 import ILoginInfoState from '../interfaces/ILoginInfoState.interface';
 import { setLoginId } from '../LoginLocalStorage';
@@ -62,9 +62,10 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
     .then(() => window.location.reload(true)) 
     .catch((error) => {
       console.log(error.response.data.message);
-      values.email = error.response.data.message;
-      values.password = '';
-      this.validate(values);
+     /* FormikBag.setErrors({
+        email: error.response.data.message,
+        password: ''
+      })  */
    })
   }
 

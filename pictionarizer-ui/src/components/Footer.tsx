@@ -4,7 +4,8 @@ class Footer extends React.Component{
   render(){
     return(
       <div>
-        <hr/> Footer 
+        <hr/> 
+        <p>© 2020 Pictionarizer</p>
       </div>
     )
   }
