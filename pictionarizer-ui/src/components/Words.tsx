@@ -79,7 +79,7 @@ class WordRowCreator extends React.Component<Word>{
                 className="normal-size"
             />            
           </td>
-          <td><Link to={'word/details/' + String(word.id)}>Details</Link></td>   
+          <td><Link to={'word/details/' + String(word.id)}>📝Details</Link></td>   
         </tr>
     )
   }

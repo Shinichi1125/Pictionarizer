@@ -42,13 +42,13 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
   validate(values: LoginInfo){
     let errors: Partial<LoginInfo> = {};
     if(values.email === ''){
-      errors.email = 'Enter your email address'
+      errors.email = '⚠️Enter your email address⚠️'
     }
     if(values.password.length < 8){
-      errors.password = 'Enter at least 8 characters for your password'
+      errors.password = '⚠️Enter at least 8 characters for your password⚠️'
     }
     if(values.email === "The email address and the password don't match" && values.password === ''){
-      errors.email = "The email address and the password don't match"
+      errors.email = "⚠️The email address and the password don't match⚠️"
     }
     return errors; 
   }
@@ -62,7 +62,7 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
     .then(() => window.location.reload(true)) 
     .catch((error) => {
       console.log(error.response.data.message);
-     /* FormikBag.setErrors({
+      /*formikBag.setErrors({
         email: error.response.data.message,
         password: ''
       })  */
@@ -85,17 +85,17 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
             {
               (props) => (
                 <Form>
-                  <ErrorMessage name="email" component="div"/>
+                  <ErrorMessage name="email" component="div" className="text-danger"/>
                   <fieldset>
-                    <label>Email: </label>&nbsp;
+                    <label>📧Email: </label>&nbsp;
                     <Field type="text" name="email"/>
                   </fieldset>
-                  <ErrorMessage name="password" component="div"/>
+                  <ErrorMessage name="password" component="div" className="text-danger"/>
                   <fieldset>
-                    <label>Password: </label>&nbsp;
+                    <label>🔑Password: </label>&nbsp;
                     <Field type="text" name="password"/>
                   </fieldset>
-                  <button type="submit">Send</button>
+                  <button type="submit" className="btn btn-primary">Send</button>
                 </Form>
               )
             }
@@ -104,7 +104,7 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
           <button type="button" 
                   className="btn btn-success" 
                   onClick={() => this.easyLogin()}
-          >Easy Log in</button>
+          >💡Easy Log in</button>
         </div>
       </div>
     )

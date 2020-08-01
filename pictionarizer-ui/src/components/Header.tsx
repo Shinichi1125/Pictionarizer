@@ -23,9 +23,9 @@ class Header extends React.Component{
             <li className="text-white">Pictionarizer</li>
           </ul>
           <ul className="navbar-nav navbar-collapse justify-content-end">
-            <li className="nav-link">{loginState === 0?<Link to={'user/create'}>Sign up</Link>: <span></span>}</li>
-            <li className="nav-link">{loginState === 0?<Link to={'/login'}>Log in</Link>: <span></span>}</li>
-            <li>{loginState !== 0?<button onClick={() => logoutAndRefresh()}>Log out</button>: <span></span>}</li>
+            <li className="nav-link">{loginState === 0?<Link to={'user/create'}>📑Sign up</Link>: <span></span>}</li>
+            <li className="nav-link">{loginState === 0?<Link to={'/login'}>📥Log in</Link>: <span></span>}</li>
+            <li>{loginState !== 0? <button onClick={() => logoutAndRefresh()}>📤Log out</button>: <span></span>}</li>
             &nbsp;
             <li>
               <img src={ loginState > 0 ? 
