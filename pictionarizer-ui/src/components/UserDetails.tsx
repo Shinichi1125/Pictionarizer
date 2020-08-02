@@ -8,6 +8,7 @@ import IUserState from '../interfaces/IUserState.interface';
 import { API_URL, TEST_USER_ID } from '../Constants';
 import { Link } from 'react-router-dom';
 import { getLoginId } from '../LoginLocalStorage';
+import WordRowCreator from './WordRowCreator'
 
 const loginState = Number(getLoginId());
 
@@ -69,16 +70,16 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
         <div>Own Language: {user.ownLanguage}</div>
         <div>Country: {user.country}</div>
         <div>Description: {user.description}</div>       
-        <div>{loginState === user.id? <Link to={'/user/' + String(user.id)}>Edit</Link>: <p> </p>}</div>  
+        <div>{loginState === user.id? <Link to={'/user/' + String(user.id)}><span role="img" aria-label="edit">✏️</span>Edit</Link>: <p> </p>}</div>  
         <div>
           {loginState === user.id && loginState !== TEST_USER_ID?
-          <Link to={'/user/delete/' + String(user.id)}>Delete</Link>:
+          <Link to={'/user/delete/' + String(user.id)}><span role="img" aria-label="delete">🗑️</span>Delete</Link>:
           <p> </p>}
         </div>
         <div>
           Words: <br></br>
           {this.state.words.map((word)=>
-            <WordsList 
+            <WordRowCreator 
               key = {word.id}
               id={word.id}
               userId={word.userId}
@@ -91,27 +92,6 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
             />)}
         </div>
       </div>
-    )
-  }
-}
-
-class WordsList extends React.Component<Word>{
-
-  render(){
-    let word = this.props;
-    
-    return(
-        <div>
-          <span>{word.targetLangWordName}</span> &nbsp;&nbsp;
-          <span>
-            <img src={`${API_URL}/word/uploaded-image/${word.id}`} 
-                alt="fetched img" 
-                width="50"
-                height="50"
-            />  
-          </span>&nbsp;&nbsp;
-          <span><Link to={'/word/details/' + String(word.id)}>Details</Link></span> 
-        </div>
     )
   }
 }

@@ -54,6 +54,8 @@
   text-align: left;
   border-top: gray 1.5px solid;
   border-bottom: gray 1.5px solid;
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
 }
 
 .row-image {
