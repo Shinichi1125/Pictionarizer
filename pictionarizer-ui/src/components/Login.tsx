@@ -87,12 +87,12 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
                 <Form>
                   <ErrorMessage name="email" component="div" className="text-danger"/>
                   <fieldset>
-                    <label>📧Email: </label>&nbsp;
+                    <label><span role="img" aria-label="email">📧</span>Email: </label>&nbsp;
                     <Field type="text" name="email"/>
                   </fieldset>
                   <ErrorMessage name="password" component="div" className="text-danger"/>
                   <fieldset>
-                    <label>🔑Password: </label>&nbsp;
+                    <label><span role="img" aria-label="password">🔑</span>Password: </label>&nbsp;
                     <Field type="text" name="password"/>
                   </fieldset>
                   <button type="submit" className="btn btn-primary">Send</button>
@@ -104,7 +104,7 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
           <button type="button" 
                   className="btn btn-success" 
                   onClick={() => this.easyLogin()}
-          >💡Easy Log in</button>
+          ><span role="img" aria-label="light bulb">💡</span>Easy Log in</button>
         </div>
       </div>
     )
