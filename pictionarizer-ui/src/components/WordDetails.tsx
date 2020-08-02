@@ -47,7 +47,7 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
     return(
       <div>
         <h2>Word Details</h2>
-        <div>Image:  </div>
+        <div>Word ID: {word.id} </div>
         <img src={`${API_URL}/word/uploaded-image/${this.state.wordId}`} 
                alt="fetched img" 
                className="large"

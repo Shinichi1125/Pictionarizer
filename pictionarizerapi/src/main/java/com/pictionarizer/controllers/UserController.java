@@ -55,10 +55,10 @@ public class UserController {
 		return repository.findById(id).get();
 	}
 	
-//	@RequestMapping(value = "/users/name/{id}", method = RequestMethod.GET)
-//	public String getUserName(@PathVariable("id") int id) {
-//		return repository.findById(id).get().getName();
-//	}
+	@RequestMapping(value = "/user/name/{id}", method = RequestMethod.GET)
+	public String getUserName(@PathVariable("id") int id) {
+		return repository.findById(id).get().getName();
+	}
 	
 	public class Error {
 		String message; 

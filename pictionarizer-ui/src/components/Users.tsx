@@ -76,7 +76,7 @@ class UserRowCreator extends React.Component<User>{
                 className="normal-size round-border"
             />
           </td>
-          <td><Link to={'user/details/' + String(user.id)}>Details</Link></td> 
+          <td><Link to={'user/details/' + String(user.id)}>📝Details</Link></td> 
         </tr>
     )
   }
