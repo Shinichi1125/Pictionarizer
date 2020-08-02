@@ -62,8 +62,9 @@ class WordRowCreator extends React.Component<Word>{
               className="row-image"
           />        
           <h5><Link to={'word/details/' + String(word.id)}>{word.targetLangExSentence}</Link></h5>   
-          {/*<p>by {userName !== null? userName: 'userName'}</p>  */}
-          <p>by {word.userId}  <span>&nbsp;&nbsp;{word.createdDate}</span></p>              
+         {/* <p>by {userName !== null? userName: 'userName'}</p>  */} 
+          <p>by {word.userId}  <span>&nbsp;&nbsp;{word.createdDate}</span></p>    
+          <br/>         
         </div>
     )
   }
