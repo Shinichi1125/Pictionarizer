@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.pictionarizer.model.Login;
+//import com.pictionarizer.model.Login;
 import com.pictionarizer.model.User;
 import com.pictionarizer.model.Word;
 import com.pictionarizer.repos.UserRepository;

@@ -111,7 +111,4 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
   }
 }
 
-/*<ErrorMessage name="email" component="div"/> */
-/* <ErrorMessage name="password" component="div"/>*/
-
 export default Login; 
