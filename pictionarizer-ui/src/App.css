@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: "Helvetica", "Arial", sans-serif;
 }
 
 .App-link {
@@ -9,6 +10,19 @@
 .Header {
   position: fixed; 
   width: 100%;
+}
+
+.yellow-highlight {
+  background-color: yellow
+}
+
+.no-margin-bottom {
+  margin-bottom: 0px;
+}
+
+.space-out {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .round-border{
@@ -37,17 +51,6 @@
   height: 18.75rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
 .word-row {
   width: 50%;
   margin: auto;
@@ -66,3 +69,22 @@
   margin-right: 1rem;
 }
 
+.word-details {
+  width: 50%;
+  margin: auto; 
+  border: gray 2px solid; 
+  border-radius: 5%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}

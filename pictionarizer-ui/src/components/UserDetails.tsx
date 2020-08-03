@@ -59,15 +59,14 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
 
     return(
       <div>
-        <h2>User Details</h2>
         <img src={`${API_URL}/user/uploaded-image/${this.state.userId}`} 
             alt="fetched img" 
             className="large round-border"
         />
         <br></br>
-        <div>Name: {user.name}</div>
-        <div>Target Language: {user.targetLanguage}</div>
-        <div>Own Language: {user.ownLanguage}</div>
+        <h3 className="no-margin-bottom">{user.name}</h3>
+        <div>Learning: {user.targetLanguage}</div>
+        <div>Speaks: {user.ownLanguage}</div>
         <div>Country: {user.country}</div>
         <div>Description: {user.description}</div>       
         <div>{loginState === user.id? <Link to={'/user/' + String(user.id)}><span role="img" aria-label="edit">✏️</span>Edit</Link>: <p> </p>}</div>  

@@ -43,28 +43,33 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
   render(){
     let word: Word;
     word= this.state.wordData;
+    let date = String(word.createdDate);
+    let truncatedDate = date.slice(0, 10);
 
     return(
-      <div>
-        <h2>Word Details</h2>
-        <div>Word ID: {word.id} </div>
-        <img src={`${API_URL}/word/uploaded-image/${this.state.wordId}`} 
-               alt="fetched img" 
-               className="large"
-        />
-        <br></br>
-        <div>Word: {word.targetLangWordName}</div>
-        <div>Meaning: {word.ownLangWordName}</div>
-        <div>Sentence: {word.targetLangExSentence}</div>
-        <div>Meaning: {word.ownLangExSentence}</div>
-        <div>Created Date: {String(word.createdDate)}</div>
-        <div>Created by:  </div>
-        <img src={word.userId > 0 ? 
-          `${API_URL}/user/uploaded-image/${word.userId}` : 
-          `${API_URL}/user/uploaded-image/${TEST_USER_ID}`} 
-               alt="fetched img" 
-               className="small round-border"
-        />
+      <div className="word-details">
+        <h3 className="no-margin-bottom">
+          <span className="yellow-highlight">"{word.targetLangWordName}"</span> 
+        </h3>
+        <div><strong>({word.ownLangWordName})</strong></div>
+        <div className="space-out">
+          <img src={`${API_URL}/word/uploaded-image/${this.state.wordId}`} 
+                alt="fetched img" 
+                className="large"
+          />
+        </div>
+        <div>"{word.targetLangExSentence}"</div>
+        <div>({word.ownLangExSentence})</div>       
+        <div>
+          <img src={word.userId > 0 ? 
+            `${API_URL}/user/uploaded-image/${word.userId}` : 
+            `${API_URL}/user/uploaded-image/${TEST_USER_ID}`} 
+                alt="fetched img" 
+                className="small round-border"
+          />
+          &nbsp;
+          {truncatedDate}
+        </div>
         <div>
           <Link to={'/user/details/' + String(word.userId)}><span role="img" aria-label="info">ℹ️</span> User Info</Link>
         </div>
