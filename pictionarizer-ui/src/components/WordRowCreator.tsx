@@ -4,6 +4,7 @@ import User from '../interfaces/User.interface';
 import { API_URL } from '../Constants';
 import { Link } from 'react-router-dom';
 import UsersDataService from '../api/UsersDataService'; 
+import moment from 'moment';
 
 class WordRowCreator extends React.Component<Word>{
 
@@ -41,8 +42,13 @@ class WordRowCreator extends React.Component<Word>{
               alt="fetched img" 
               className="row-image"
           />        
-          <h5><Link to={'/word/details/' + String(word.id)}>{word.targetLangExSentence}</Link></h5>   
-          <p>by <Link to={'/user/details/' + String(word.userId)}>{userName}</Link>  <span>&nbsp;&nbsp;{word.createdDate}</span></p>           
+          <h5>
+            <Link to={'/word/details/' + String(word.id)}>{word.targetLangExSentence}</Link>
+          </h5>   
+          <p>
+            by <Link to={'/user/details/' + String(word.userId)}>{userName}</Link>  
+            <span>&nbsp;&nbsp;{moment(word.createdDate).fromNow()}</span>
+          </p>           
         </div>
     )
   }
