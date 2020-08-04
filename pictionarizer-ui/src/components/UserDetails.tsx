@@ -59,21 +59,27 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
 
     return(
       <div>
-        <img src={`${API_URL}/user/uploaded-image/${this.state.userId}`} 
-            alt="fetched img" 
-            className="large round-border"
-        />
-        <br></br>
-        <h3 className="no-margin-bottom">{user.name}</h3>
-        <div>Learning: {user.targetLanguage}</div>
-        <div>Speaks: {user.ownLanguage}</div>
-        <div>Country: {user.country}</div>
-        <div>Description: {user.description}</div>       
-        <div>{loginState === user.id? <Link to={'/user/' + String(user.id)}><span role="img" aria-label="edit">✏️</span>Edit</Link>: <p> </p>}</div>  
-        <div>
-          {loginState === user.id && loginState !== TEST_USER_ID?
-          <Link to={'/user/delete/' + String(user.id)}><span role="img" aria-label="delete">🗑️</span>Delete</Link>:
-          <p> </p>}
+        <div className="object-details">
+          <img src={`${API_URL}/user/uploaded-image/${this.state.userId}`} 
+              alt="fetched img" 
+              className="large round-border user-details-image"
+          />
+          <br></br>
+          <h3 className="no-margin-bottom">
+            <span className="yellow-highlight">&nbsp;{user.name}&nbsp;</span>
+          </h3>
+          <div>Learning: {user.targetLanguage}</div>
+          <div>Speaks: {user.ownLanguage}</div>
+          <div>Country: {user.country}</div>
+          <br/>
+          <div>{user.description}</div>   
+          <br/>    
+          <div>{loginState === user.id? <Link to={'/user/' + String(user.id)}><span role="img" aria-label="edit">✏️</span>Edit</Link>: <p> </p>}</div>  
+          <div>
+            {loginState === user.id && loginState !== TEST_USER_ID?
+            <Link to={'/user/delete/' + String(user.id)}><span role="img" aria-label="delete">🗑️</span>Delete</Link>:
+            <p> </p>}
+          </div>
         </div>
         <div>
           Words: <br></br>

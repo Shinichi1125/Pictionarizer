@@ -47,9 +47,9 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
     let truncatedDate = date.slice(0, 10);
 
     return(
-      <div className="word-details">
+      <div className="object-details">
         <h3 className="no-margin-bottom">
-          <span className="yellow-highlight">"{word.targetLangWordName}"</span> 
+          <span className="yellow-highlight">&nbsp;"{word.targetLangWordName}"&nbsp;</span> 
         </h3>
         <div><strong>({word.ownLangWordName})</strong></div>
         <div className="space-out">

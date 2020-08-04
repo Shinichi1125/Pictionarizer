@@ -69,13 +69,19 @@
   margin-right: 1rem;
 }
 
-.word-details {
+.object-details {
   width: 50%;
   margin: auto; 
   border: gray 2px solid; 
-  border-radius: 5%;
+  border-radius: 7.5%;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+}
+
+.user-details-image {
+  float: left;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .App-header {
