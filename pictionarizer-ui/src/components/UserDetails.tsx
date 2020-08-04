@@ -68,11 +68,11 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
           <h3 className="no-margin-bottom">
             <span className="yellow-highlight">&nbsp;{user.name}&nbsp;</span>
           </h3>
-          <div>Learning: {user.targetLanguage}</div>
-          <div>Speaks: {user.ownLanguage}</div>
-          <div>Country: {user.country}</div>
+          <div>Learning: <strong>{user.targetLanguage}</strong></div>
+          <div>Speaks: <strong>{user.ownLanguage}</strong></div>
+          <div>Country: <strong>{user.country}</strong></div>
           <br/>
-          <div>{user.description}</div>   
+          <div className="speech-bubble">{user.description}</div>   
           <br/>    
           <div>{loginState === user.id? <Link to={'/user/' + String(user.id)}><span role="img" aria-label="edit">✏️</span>Edit</Link>: <p> </p>}</div>  
           <div>

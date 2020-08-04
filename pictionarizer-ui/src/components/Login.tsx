@@ -53,7 +53,7 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
     return errors; 
   }
 
-  onSubmit(values: LoginInfo, formikBag: FormikBag<any, any>){
+  onSubmit(values: LoginInfo/*, formikBag: FormikBag<any, any>*/){
     UsersDataService.userLogin(values)
     .then(res =>{
       setLoginId(String(res.data));
@@ -62,10 +62,10 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
     .then(() => window.location.reload(true)) 
     .catch((error) => {
       console.log(error.response.data.message);
-      formikBag.setErrors({
+      /*formikBag.setErrors({
         email: error.response.data.message,
         password: ''
-      })  
+      })  */
    })
   }
 
