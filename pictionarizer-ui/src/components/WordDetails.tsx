@@ -58,7 +58,7 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
                 className="large"
           />
         </div>
-        <div>"{word.targetLangExSentence}"</div>
+        <div>{word.targetLangExSentence}</div>
         <div>({word.ownLangExSentence})</div>       
         <div>
           <img src={word.userId > 0 ? 

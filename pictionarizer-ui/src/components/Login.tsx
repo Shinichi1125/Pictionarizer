@@ -86,16 +86,18 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
               (props) => (
                 <Form>
                   <ErrorMessage name="email" component="div" className="text-danger"/>
+                  <div className="form-group">
                   <fieldset>
-                    <label><span role="img" aria-label="email">📧</span>Email: </label>&nbsp;
-                    <Field type="text" name="email"/>
+                    <Field type="text" name="email" placeholder="📧Email" size="40"/>
                   </fieldset>
+                  </div>
                   <ErrorMessage name="password" component="div" className="text-danger"/>
+                  <div className="form-group">
                   <fieldset>
-                    <label><span role="img" aria-label="password">🔑</span>Password: </label>&nbsp;
-                    <Field type="text" name="password"/>
+                    <Field type="text" name="password" placeholder="🔑Password" size="40"/>
                   </fieldset>
-                  <button type="submit" className="btn btn-primary">Send</button>
+                  </div>
+                  <button type="submit" className="btn btn-primary">Log in</button>
                 </Form>
               )
             }
