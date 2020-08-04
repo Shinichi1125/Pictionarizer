@@ -73,7 +73,7 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
     let {email, password} = this.state.loginData;
 
     return(
-      <div>
+      <div className="object-details">
         <h2>Enter Login Info</h2>
         <div>
           <Formik

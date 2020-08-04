@@ -32,6 +32,7 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
     this.onSubmit = this.onSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
     this.validate = this.validate.bind(this)
+    this.cancelUpdate = this.cancelUpdate.bind(this)
   }
 
   componentDidMount(){
@@ -43,6 +44,10 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
       data = res.data;
       this.setState({wordData:data});
     }) 
+  }
+
+  cancelUpdate(id: number){
+    this.props.history.push('/word/details/' + id)
   }
 
   validate(values: Word){
@@ -88,7 +93,7 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
 
     await WordsDataService.updateWord(id, word)
     .then(() => WordsDataService.updateToast("Word")) 
-    .then(() => this.props.history.push('/words'))   // gets back to the home page
+    .then(() => this.props.history.push('/'))   // gets back to the home page
     .then(() => window.location.reload(true))   // refresh the page to reflect the change   
   }
 
@@ -100,7 +105,7 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
       = this.state.wordData; 
 
     return(
-      <div>
+      <div className="object-details">
         <h2>Update Word</h2>
         <img src={`${API_URL}/word/uploaded-image/${this.state.wordId}`} 
                alt="fetched img" 
@@ -121,35 +126,40 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
             {
               (props) => (
                 <Form>
-                  <ErrorMessage name="targetLangWordName" component="div"/>
-                  <fieldset>
-                    <label>Word (Target Language)</label>&nbsp;
-                    <Field type="text" name="targetLangWordName"/>
+                  <ErrorMessage name="targetLangWordName" component="div" className="text-danger"/>
+                  <fieldset className="form-group">
+                    <Field type="text" name="targetLangWordName" 
+                      placeholder="Word in your target language" size="30"
+                    />
                   </fieldset>
-                  <ErrorMessage name="ownLangWordName" component="div"/>
-                  <fieldset>
-                    <label>Word (Own Language)</label>&nbsp;
-                    <Field type="text" name="ownLangWordName"/>
+                  <ErrorMessage name="ownLangWordName" component="div" className="text-danger"/>
+                  <fieldset className="form-group">
+                    <Field type="text" name="ownLangWordName" 
+                      placeholder="Word in your own language" size="30"
+                    />
                   </fieldset>
-                  <ErrorMessage name="targetLangExSentence" component="div"/>
-                  <fieldset>
-                    <label>Sentence (Target Language)</label>&nbsp;
-                    <Field type="text" size="75" name="targetLangExSentence"/>
+                  <ErrorMessage name="targetLangExSentence" component="div" className="text-danger"/>
+                  <fieldset className="form-group">
+                    <Field type="text" name="targetLangExSentence"
+                      placeholder="Sentence in your target language" 
+                      size="60" rows="2"
+                    />
                   </fieldset>
-                  <ErrorMessage name="ownLangExSentence" component="div"/>
-                  <fieldset>
-                    <label>Sentence (Own Language)</label>&nbsp;
-                    <Field type="text" size="75" name="ownLangExSentence"/>
+                  <ErrorMessage name="ownLangExSentence" component="div" className="text-danger"/>
+                  <fieldset className="form-group">
+                    <Field type="text" name="ownLangExSentence"
+                      placeholder="Sentence in your own language" 
+                      size="60" rows="2"
+                    />
                   </fieldset>
-                  <fieldset>
-                    <label>Date</label>&nbsp;
-                    <Field type="text" name="createdDate"/>
+                  <fieldset className="form-group">
+                    <Field type="text" name="createdDate" placeholder="Date"/>
                   </fieldset>
-                  <fieldset>
-                    <label>Image</label>&nbsp;
+                  <fieldset className="form-group">
                     <input id="image" type="file" name="image" onChange={this.onChange}/>
                   </fieldset>
-                  <button type="submit">Save</button>
+                  <button className="btn btn-secondary" onClick={() => this.cancelUpdate(id)}>Cancel</button>&nbsp;
+                  <button type="submit" className="btn btn-primary">Save</button>
                 </Form>
               )
             }      
