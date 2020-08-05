@@ -5,6 +5,7 @@ import UsersDataService from '../api/UsersDataService';
 import { Formik, Form, Field, ErrorMessage } from 'formik'; 
 import IUserProps from '../interfaces/IUserProps.interface';
 import IUserState from '../interfaces/IUserState.interface';
+import { SMALL_INPUT_FIELD } from '../Constants';
 
 class CreateUser extends React.Component<IUserProps, IUserState>{
 
@@ -30,6 +31,11 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
     this.onSubmit = this.onSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
     this.validate = this.validate.bind(this)
+    this.cancelCreate = this.cancelCreate.bind(this)
+  }
+
+  cancelCreate(){
+    this.props.history.push('/')
   }
 
   validate(values: User){
@@ -62,8 +68,8 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
       = this.state.userData; 
 
     return(
-      <div>
-        <br></br>
+      <div className="object-details">
+        <h2>Create an account</h2>
         <div>
           <Formik
             initialValues={{ id, name, ownLanguage, targetLanguage, 
@@ -75,44 +81,56 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
             {
               (props) => (
                 <Form>
-                  <ErrorMessage name="name" component="div"/>
-                  <fieldset>
-                    <label>Name</label>&nbsp;
-                    <Field type="text" name="name"/>
+                  <ErrorMessage name="name" component="div" className="text-danger"/>
+                  <fieldset className="form-group">
+                    <Field type="text" name="name"
+                      placeholder="Your name" size={SMALL_INPUT_FIELD}
+                    />
                   </fieldset>
-                  <ErrorMessage name="ownLanguage" component="div"/>
-                  <fieldset>
-                    <label>Own Language</label>&nbsp;
-                    <Field type="text" name="ownLanguage"/>
+                  <ErrorMessage name="targetLanguage" component="div" className="text-danger"/>
+                  <fieldset className="form-group">
+                    <Field type="text" name="targetLanguage"
+                      placeholder="Your target language" size={SMALL_INPUT_FIELD}
+                    />
                   </fieldset>
-                  <ErrorMessage name="targetLanguage" component="div"/>
-                  <fieldset>
-                    <label>Target Language</label>&nbsp;
-                    <Field type="text" name="targetLanguage"/>
+                  <ErrorMessage name="ownLanguage" component="div" className="text-danger"/>
+                  <fieldset className="form-group">
+                    <Field type="text" name="ownLanguage"
+                      placeholder="Your own language" size={SMALL_INPUT_FIELD}
+                    />
+                  </fieldset>                 
+                  <fieldset className="form-group">
+                    <Field type="text" name="country"
+                      placeholder="Your country" size={SMALL_INPUT_FIELD}
+                    />
                   </fieldset>
-                  <fieldset>
-                    <label>Country</label>&nbsp;
-                    <Field type="text" name="country"/>
+                  <ErrorMessage name="email" component="div" className="text-danger"/>
+                  <fieldset className="form-group">
+                    <Field type="text" name="email"
+                      placeholder="Your email address" size={SMALL_INPUT_FIELD}
+                    />
                   </fieldset>
-                  <ErrorMessage name="email" component="div"/>
-                  <fieldset>
-                    <label>Email</label>&nbsp;
-                    <Field type="text" name="email"/>
-                  </fieldset> 
-                  <ErrorMessage name="password" component="div"/>
-                  <fieldset>
-                    <label>Password</label>&nbsp;
-                    <Field type="password" name="password"/>
+                  <ErrorMessage name="password" component="div" className="text-danger"/>
+                  <fieldset className="form-group">
+                    <Field type="password" name="password"
+                      placeholder="Password" size={SMALL_INPUT_FIELD}
+                    />
                   </fieldset>
-                  <fieldset>
-                    <label>Description</label>&nbsp;
-                    <Field type="text" size="75" name="description"/>
+                  <fieldset className="form-group">
+                    <Field as="textarea" name="description"
+                      placeholder="Describe who you are, or just write whatever on your mind" 
+                      cols="60" rows="2"
+                    />
+                  </fieldset>      
+                  <fieldset className="custom-file" >                   
+                    <input className="custom-file-input" id="customFile" type="file" name="image" onChange={this.onChange}/>
+                    <label className="custom-file-label half-width-in-form" >
+                      Choose a file
+                    </label>
                   </fieldset>
-                  <fieldset>
-                    <label>Image</label>&nbsp;
-                    <input id="image" type="file" name="image" onChange={this.onChange}/>
-                  </fieldset>
-                  <button type="submit">Sign up</button>
+                  <br/><br/>
+                  <button className="btn btn-secondary" onClick={() => this.cancelCreate()}>Cancel</button>&nbsp;
+                  <button type="submit" className="btn btn-primary">Sign up</button>              
                 </Form>
               )
             }      

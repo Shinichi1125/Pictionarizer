@@ -15,8 +15,7 @@ class Header extends React.Component{
             <li>
               <img src={`${API_URL}/user/uploaded-image/${LOGO_ID}`}
                 alt="fetched img" 
-                width="50"
-                height="35"
+                className="logo-size"
               />
             </li>
             &nbsp;

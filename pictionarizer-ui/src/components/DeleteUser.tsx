@@ -1,10 +1,13 @@
 import React from 'react';
 import User from '../interfaces/User.interface';
 import Word from '../interfaces/Word.interface';
+import LoginInfo from '../interfaces/LoginInfo.interface';
 import UsersDataService from '../api/UsersDataService';
 import IUserProps from '../interfaces/IUserProps.interface';
 import IUserState from '../interfaces/IUserState.interface';
-import { API_URL } from '../Constants';
+import { API_URL, SMALL_INPUT_FIELD } from '../Constants';
+import { Formik, Form, Field, ErrorMessage } from 'formik'; 
+import { setLoginId } from '../LoginLocalStorage';
 
 class DeleteUser extends React.Component<IUserProps, IUserState>{
 
@@ -27,8 +30,9 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
       words: new Array<Word>()
     }
 
-    this.confirmDelete = this.confirmDelete.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
     this.cancelDelete = this.cancelDelete.bind(this)
+    this.validate = this.validate.bind(this)
   }
 
   componentDidMount(){
@@ -42,9 +46,25 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
     }) 
   }
 
-  confirmDelete(id: number){
-    UsersDataService.deleteUser(id)
-    .then(() => this.props.history.push('/'))       
+  validate(values: LoginInfo){
+    let errors: Partial<LoginInfo> = {};
+    if(values.email !== this.state.userData.email){
+      errors.email = "⚠️You didn't provide the correct email address⚠️"
+    }
+    if(values.password !== this.state.userData.password){
+      errors.password = "⚠️You didn't provide the correct password⚠️"
+    }
+    return errors; 
+  }
+
+  onSubmit(values: LoginInfo){
+    UsersDataService.userLogin(values)
+    .then(res =>{
+      UsersDataService.deleteUser(res.data)
+    })
+    .then(() => this.props.history.push('/'))  
+    .then(() => setLoginId(String(0)))  
+    .then(() => window.location.reload(true))   
   }
 
   cancelDelete(id: number){
@@ -52,20 +72,47 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
   }
   
   render(){
-    let id = Number(this.state.userId);
-    let userName = this.state.userData.name;
+    //let id = Number(this.state.userId);
+    //let userName = this.state.userData.name;
+    let email = '';
+    let password = '';
 
     return(
       <div className="object-details">
-        <h3>Are you sure you want to delete <span className="yellow-highlight">"{userName}"</span>?</h3>
-        <img src={`${API_URL}/user/uploaded-image/${id}`} 
+        <h3>Are you sure you want to delete <span className="yellow-highlight">"{this.state.userData.name}"</span>?</h3>
+        <img src={`${API_URL}/user/uploaded-image/${Number(this.state.userId)}`} 
                alt="fetched img" 
                className="extra-large round-border"
           />
         <br></br>
         <br></br>
-        <button className="btn btn-secondary" onClick={() => this.cancelDelete(id)}>Cancel</button>&nbsp;&nbsp;
-        <button className="btn btn-danger" onClick={() => this.confirmDelete(id)}>Delete</button> 
+        <div>
+          <Formik
+            initialValues={{ email, password }}
+            onSubmit={this.onSubmit}
+            validate={this.validate}
+            enableReinitialize={true}
+          >
+            {
+              (props) => (
+                <Form>
+                  <ErrorMessage name="email" component="div" className="text-danger"/>
+                  <fieldset className="form-group">
+                    <Field type="text" name="email" placeholder="Confirm email address" size={SMALL_INPUT_FIELD}/>
+                  </fieldset>
+                  <ErrorMessage name="password" component="div" className="text-danger"/>
+                  <fieldset className="form-group">
+                    <Field type="password" name="password"
+                      placeholder="Confirm password" size={SMALL_INPUT_FIELD}
+                    />
+                  </fieldset>                  
+                  <button className="btn btn-secondary" onClick={() => this.cancelDelete(Number(this.state.userId))}>Cancel</button>&nbsp;&nbsp;
+                  <button type="submit" className="btn btn-danger">Delete</button>             
+                </Form>
+              )
+            }      
+          </Formik>
+        </div> 
       </div>
     )
   }

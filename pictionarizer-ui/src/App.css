@@ -7,6 +7,11 @@
   color: #61dafb;
 }
 
+.logo-size {
+  width: 3rem;
+  height: 2rem;
+}
+
 .Header {
   position: fixed; 
   width: 100%;
