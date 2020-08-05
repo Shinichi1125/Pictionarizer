@@ -5,7 +5,7 @@ import UsersDataService from '../api/UsersDataService';
 import { Formik, Form, Field, ErrorMessage } from 'formik'; 
 import IUserProps from '../interfaces/IUserProps.interface';
 import IUserState from '../interfaces/IUserState.interface';
-import { API_URL } from '../Constants';
+import { API_URL, SMALL_INPUT_FIELD } from '../Constants';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -112,36 +112,36 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
                   <ErrorMessage name="name" component="div" className="text-danger"/>
                   <fieldset className="form-group">
                     <Field type="text" name="name"
-                      placeholder="Your name" size="25"
+                      placeholder="Your name" size={SMALL_INPUT_FIELD}
                     />
                   </fieldset>
                   <ErrorMessage name="targetLanguage" component="div" className="text-danger"/>
                   <fieldset className="form-group">
                     <Field type="text" name="targetLanguage"
-                      placeholder="Your target language" size="25"
+                      placeholder="Your target language" size={SMALL_INPUT_FIELD}
                     />
                   </fieldset>
                   <ErrorMessage name="ownLanguage" component="div" className="text-danger"/>
                   <fieldset className="form-group">
                     <Field type="text" name="ownLanguage"
-                      placeholder="Your own language" size="25"
+                      placeholder="Your own language" size={SMALL_INPUT_FIELD}
                     />
                   </fieldset>                 
                   <fieldset className="form-group">
                     <Field type="text" name="country"
-                      placeholder="Your country" size="25"
+                      placeholder="Your country" size={SMALL_INPUT_FIELD}
                     />
                   </fieldset>
                   <ErrorMessage name="email" component="div" className="text-danger"/>
                   <fieldset className="form-group">
                     <Field type="text" name="email"
-                      placeholder="Your email address" size="25"
+                      placeholder="Your email address" size={SMALL_INPUT_FIELD}
                     />
                   </fieldset>
                   <ErrorMessage name="password" component="div" className="text-danger"/>
                   <fieldset className="form-group">
                     <Field type="password" name="password"
-                      placeholder="Password" size="25"
+                      placeholder="Password" size={SMALL_INPUT_FIELD}
                     />
                   </fieldset>
                   <fieldset className="form-group">

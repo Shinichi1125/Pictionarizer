@@ -4,7 +4,7 @@ import WordsDataService from '../api/WordsDataService';
 import { Formik, Form, Field, ErrorMessage } from 'formik'; 
 import IWordProps from '../interfaces/IWordProps.interface';
 import IWordState from '../interfaces/IWordState.interface';
-import { API_URL } from '../Constants';
+import { API_URL, SMALL_INPUT_FIELD, TEXTAREA_COLS, TEXTAREA_ROWS } from '../Constants';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -129,35 +129,37 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
                   <ErrorMessage name="targetLangWordName" component="div" className="text-danger"/>
                   <fieldset className="form-group">
                     <Field type="text" name="targetLangWordName" 
-                      placeholder="Word in your target language" size="25"
+                      placeholder="Word in your target language" size={SMALL_INPUT_FIELD}
                     />
                   </fieldset>
                   <ErrorMessage name="ownLangWordName" component="div" className="text-danger"/>
                   <fieldset className="form-group">
                     <Field type="text" name="ownLangWordName" 
-                      placeholder="Word in your own language" size="25"
+                      placeholder="Word in your own language" size={SMALL_INPUT_FIELD}
                     />
                   </fieldset>
                   <ErrorMessage name="targetLangExSentence" component="div" className="text-danger"/>
                   <fieldset className="form-group">
                     <Field as="textarea" name="targetLangExSentence"
                       placeholder="Sentence in your target language" 
-                      cols="60" rows="2"
+                      cols={TEXTAREA_COLS} rows={TEXTAREA_ROWS}
                     />
                   </fieldset>
                   <ErrorMessage name="ownLangExSentence" component="div" className="text-danger"/>
                   <fieldset className="form-group">
                     <Field as="textarea" name="ownLangExSentence"
                       placeholder="Sentence in your own language" 
-                      cols="60" rows="2"
+                      cols={TEXTAREA_COLS} rows={TEXTAREA_ROWS}
                     />
                   </fieldset>
                   <fieldset className="form-group">
                     <Field type="text" name="createdDate" placeholder="Date"/>
                   </fieldset>
-                  <fieldset className="form-group">
-                    <input id="image" type="file" name="image" onChange={this.onChange}/>
+                  <fieldset className="custom-file" >
+                    <input className="custom-file-input" id="customFile" type="file" name="image" onChange={this.onChange}/>
+                    <label className="custom-file-label half-width-in-form" >Choose file</label>
                   </fieldset>
+                  <br/><br/>
                   <button className="btn btn-secondary" onClick={() => this.cancelUpdate(id)}>Cancel</button>&nbsp;
                   <button type="submit" className="btn btn-primary">Save</button>
                 </Form>

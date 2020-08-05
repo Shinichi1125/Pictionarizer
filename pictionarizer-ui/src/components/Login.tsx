@@ -88,13 +88,13 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
                   <ErrorMessage name="email" component="div" className="text-danger"/>
                   <div className="form-group">
                   <fieldset>
-                    <Field type="text" name="email" placeholder="📧Email" size="40"/>
+                    <Field type="text" name="email" placeholder="📧Email" size="35"/>
                   </fieldset>
                   </div>
                   <ErrorMessage name="password" component="div" className="text-danger"/>
                   <div className="form-group">
                   <fieldset>
-                    <Field type="text" name="password" placeholder="🔑Password" size="40"/>
+                    <Field type="text" name="password" placeholder="🔑Password" size="35"/>
                   </fieldset>
                   </div>
                   <button type="submit" className="btn btn-primary">Log in</button>
@@ -105,7 +105,7 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
           <small id="easyLoginHelpBlock" className="form-text text-muted">
             You can log in as Test User just by clicking the "Easy Log in" button below.
           </small>
-          <br></br>
+          <div><strong>↓</strong></div>
           <button type="button" 
                   className="btn btn-success" 
                   onClick={() => this.easyLogin()}
