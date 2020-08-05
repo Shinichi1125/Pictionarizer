@@ -72,15 +72,15 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
   }
   
   render(){
-    //let id = Number(this.state.userId);
-    //let userName = this.state.userData.name;
+    let id = Number(this.state.userId);
+    let userName = this.state.userData.name;
     let email = '';
     let password = '';
 
     return(
       <div className="object-details">
-        <h3>Are you sure you want to delete <span className="yellow-highlight">"{this.state.userData.name}"</span>?</h3>
-        <img src={`${API_URL}/user/uploaded-image/${Number(this.state.userId)}`} 
+        <h3>Are you sure you want to delete <span className="yellow-highlight">"{userName}"</span>?</h3>
+        <img src={`${API_URL}/user/uploaded-image/${id}`} 
                alt="fetched img" 
                className="extra-large round-border"
           />

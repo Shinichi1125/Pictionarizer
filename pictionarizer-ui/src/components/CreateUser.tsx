@@ -22,7 +22,8 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
         country: '',
         email: '',
         password: '',
-        image: null,
+        image: null,  // If initial value (like new File(["foo"], "foo.txt")) is provided, 
+                      // the backend won't set the default profile picture
         description: '' 
       },
       words: new Array<Word>()

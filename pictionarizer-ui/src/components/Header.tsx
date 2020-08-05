@@ -19,7 +19,7 @@ class Header extends React.Component{
               />
             </li>
             &nbsp;
-            <li className="text-white">Pictionarizer</li>
+            <li title="Jump to the top page"><Link className="website-title" to={'/'}>Pictionarizer</Link></li>
           </ul>
           <ul className="navbar-nav navbar-collapse justify-content-end">
             <li className="nav-link">{loginState === 0?<Link to={'user/create'}><span role="img" aria-label="sign up">📑</span>Sign up</Link>: <span></span>}</li>
