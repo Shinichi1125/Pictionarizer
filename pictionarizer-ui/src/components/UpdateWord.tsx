@@ -129,13 +129,13 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
                   <ErrorMessage name="targetLangWordName" component="div" className="text-danger"/>
                   <fieldset className="form-group">
                     <Field type="text" name="targetLangWordName" 
-                      placeholder="Word in your target language" size="30"
+                      placeholder="Word in your target language" size="25"
                     />
                   </fieldset>
                   <ErrorMessage name="ownLangWordName" component="div" className="text-danger"/>
                   <fieldset className="form-group">
                     <Field type="text" name="ownLangWordName" 
-                      placeholder="Word in your own language" size="30"
+                      placeholder="Word in your own language" size="25"
                     />
                   </fieldset>
                   <ErrorMessage name="targetLangExSentence" component="div" className="text-danger"/>

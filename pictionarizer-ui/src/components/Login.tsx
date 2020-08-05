@@ -102,6 +102,9 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
               )
             }
           </Formik>
+          <small id="easyLoginHelpBlock" className="form-text text-muted">
+            You can log in as Test User just by clicking the "Easy Log in" button below.
+          </small>
           <br></br>
           <button type="button" 
                   className="btn btn-success" 
