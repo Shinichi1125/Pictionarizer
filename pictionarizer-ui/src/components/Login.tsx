@@ -53,7 +53,7 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
     return errors; 
   }
 
-  onSubmit(values: LoginInfo/*, formikBag: FormikBag<any, any>*/){
+  onSubmit(values: LoginInfo/*, formikBag: FormikBag<String, String>*/){
     UsersDataService.userLogin(values)
     .then(res =>{
       setLoginId(String(res.data));

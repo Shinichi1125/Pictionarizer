@@ -149,10 +149,14 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
                       placeholder="Describe who you are, or simply write whatever on your mind" 
                       cols="60" rows="2"
                     />
+                  </fieldset>      
+                  <fieldset className="custom-file" >                   
+                    <input className="custom-file-input" id="customFile" type="file" name="image" onChange={this.onChange}/>
+                    <label className="custom-file-label half-width-in-form" >
+                      {image.name==="foo.txt"? "Choose a file": image.name}
+                    </label>
                   </fieldset>
-                  <fieldset className="form-group">
-                    <input id="image" type="file" name="image" onChange={this.onChange}/>
-                  </fieldset>
+                  <br/><br/>
                   <button className="btn btn-secondary" onClick={() => this.cancelUpdate(id)}>Cancel</button>&nbsp;
                   <button type="submit" className="btn btn-primary">Save</button>              
                 </Form>

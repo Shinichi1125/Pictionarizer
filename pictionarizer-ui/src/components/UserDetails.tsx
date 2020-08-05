@@ -77,7 +77,7 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
           <div>{loginState === user.id? <Link to={'/user/' + String(user.id)}><span role="img" aria-label="edit">✏️</span>Edit profile</Link>: <p> </p>}</div>  
           <div>
             {loginState === user.id && loginState !== TEST_USER_ID?
-            <Link to={'/user/delete/' + String(user.id)}><span role="img" aria-label="delete">🗑️</span>Delete account</Link>:
+            <Link className="text-danger" to={'/user/delete/' + String(user.id)}><span role="img" aria-label="delete">🗑️</span>Delete account</Link>:
             <p> </p>}
           </div>
         </div>

@@ -56,16 +56,16 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
     let userName = this.state.userData.name;
 
     return(
-      <div>
-        <h2>Are you sure you want to delete "{userName}"?</h2>
+      <div className="object-details">
+        <h3>Are you sure you want to delete <span className="yellow-highlight">"{userName}"</span>?</h3>
         <img src={`${API_URL}/user/uploaded-image/${id}`} 
                alt="fetched img" 
                className="extra-large round-border"
           />
         <br></br>
         <br></br>
-        <button onClick={() => this.confirmDelete(id)}>Yes</button>&nbsp;&nbsp;
-        <button onClick={() => this.cancelDelete(id)}>No</button>
+        <button className="btn btn-secondary" onClick={() => this.cancelDelete(id)}>Cancel</button>&nbsp;&nbsp;
+        <button className="btn btn-danger" onClick={() => this.confirmDelete(id)}>Delete</button> 
       </div>
     )
   }

@@ -74,7 +74,7 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
           <Link to={'/user/details/' + String(word.userId)}><span role="img" aria-label="info">ℹ️</span> User Info</Link>
         </div>
         <div>{loginState === word.userId? <Link to={'/word/' + String(word.id)}><span role="img" aria-label="edit">✏️</span>Edit</Link> : <p> </p>}</div>  
-        <div>{loginState === word.userId? <Link to={'/word/delete/' + String(word.id)}><span role="img" aria-label="delete">🗑️</span>Delete</Link>: <p> </p>}</div>
+        <div>{loginState === word.userId? <Link className="text-danger" to={'/word/delete/' + String(word.id)}><span role="img" aria-label="delete">🗑️</span>Delete</Link>: <p> </p>}</div>
       </div>
     )
   }

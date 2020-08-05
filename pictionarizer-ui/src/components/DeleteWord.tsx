@@ -41,7 +41,7 @@ class DeleteWord extends React.Component<IWordProps, IWordState>{
 
   confirmDelete(id: number){
     WordsDataService.deleteWord(id)
-    .then(() => this.props.history.push('/word'))       
+    .then(() => this.props.history.push('/'))       
   }
 
   cancelDelete(id: number){
@@ -53,16 +53,16 @@ class DeleteWord extends React.Component<IWordProps, IWordState>{
     let wordName = this.state.wordData.targetLangWordName;
 
     return(
-      <div>
-        <h2>Are you sure you want to delete "{wordName}"?</h2>
+      <div className="object-details">
+        <h3>Are you sure you want to delete <span className="yellow-highlight">"{wordName}"</span>?</h3>
         <img src={`${API_URL}/word/uploaded-image/${id}`} 
                alt="fetched img" 
                className="extra-large"
           />
         <br></br>
         <br></br>
-        <button onClick={() => this.confirmDelete(id)}>Yes</button>&nbsp;&nbsp;
-        <button onClick={() => this.cancelDelete(id)}>No</button>
+        <button className="btn btn-secondary" onClick={() => this.cancelDelete(id)}>Cancel</button>&nbsp;&nbsp;
+        <button className="btn btn-danger" onClick={() => this.confirmDelete(id)}>Delete</button>        
       </div>
     )
   }
