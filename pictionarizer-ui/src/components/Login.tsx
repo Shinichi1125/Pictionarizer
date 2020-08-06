@@ -1,7 +1,7 @@
 import React from 'react';
 import LoginInfo from '../interfaces/LoginInfo.interface';
 import UsersDataService from '../api/UsersDataService'; 
-import { Formik, Form, Field, ErrorMessage, FormikBag } from 'formik'; 
+import { Formik, Form, Field, ErrorMessage, FormikBag, FormikHelpers } from 'formik'; 
 import ILoginInfoProps from '../interfaces/ILoginInfoProps.interface';
 import ILoginInfoState from '../interfaces/ILoginInfoState.interface';
 import { setLoginId } from '../LoginLocalStorage';
@@ -47,13 +47,10 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
     if(values.password.length < 8){
       errors.password = '⚠️Enter at least 8 characters for your password⚠️'
     }
-    if(values.email === "The email address and the password don't match" && values.password === ''){
-      errors.email = "⚠️The email address and the password don't match⚠️"
-    }
     return errors; 
   }
 
-  onSubmit(values: LoginInfo/*, formikBag: FormikBag<String, String>*/){
+  onSubmit(values: LoginInfo, formikBag: FormikHelpers<LoginInfo>){
     UsersDataService.userLogin(values)
     .then(res =>{
       setLoginId(String(res.data));
@@ -62,10 +59,10 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
     .then(() => window.location.reload(true)) 
     .catch((error) => {
       console.log(error.response.data.message);
-      /*formikBag.setErrors({
+      formikBag.setErrors({
         email: error.response.data.message,
         password: ''
-      })  */
+      })  
    })
   }
 
