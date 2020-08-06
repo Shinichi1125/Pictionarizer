@@ -49,6 +49,8 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
     const chosenFile = e.currentTarget.files[0];
     let tempUserData = this.state.userData;
     tempUserData.image = chosenFile;  
+    console.log("Content of tempUserData: ");
+    console.log(tempUserData);
     this.setState({userData:tempUserData});
   }  
 

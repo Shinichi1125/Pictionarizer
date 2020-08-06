@@ -127,12 +127,14 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
                       cols={TEXTAREA_COLS} rows={TEXTAREA_ROWS}
                     />
                   </fieldset>
-                  <fieldset className="form-group">
-                    <Field type="text" name="createdDate" placeholder="Date" size="60"/>
+                  <fieldset disabled className="form-group">
+                    <Field type="text" id="disabledTextInput" name="createdDate" placeholder="Date" size="60"/>
                   </fieldset>
                   <fieldset className="custom-file" >
                     <input className="custom-file-input" id="customFile" type="file" name="image" onChange={this.onChange}/>
-                    <label className="custom-file-label half-width-in-form" >Choose file</label>
+                    <label className="custom-file-label half-width-in-form" >
+                      {image.name === 'foo.txt'? 'Choose file': image.name}
+                    </label>
                   </fieldset>
                   <br/><br/>
                   <button className="btn btn-secondary" onClick={() => this.cancelCreate()}>Cancel</button>&nbsp;
