@@ -71,6 +71,7 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
           <div>Learning: <strong>{user.targetLanguage}</strong></div>
           <div>Speaks: <strong>{user.ownLanguage}</strong></div>
           <div>Country: <strong>{user.country}</strong></div>
+          <div>User ID: {user.id}</div>
           <br/>
           <div className="speech-bubble">{user.description}</div>   
           <br/>    
@@ -82,7 +83,8 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
           </div>
         </div>
         <div>
-          Words: <br></br>
+          <br/>
+          <h3>【Words】</h3>
           {this.state.words.map((word)=>
             <WordRowCreator 
               key = {word.id}

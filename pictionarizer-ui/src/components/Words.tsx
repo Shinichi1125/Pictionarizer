@@ -1,7 +1,6 @@
 import React from 'react';
 import Word from '../interfaces/Word.interface';
 import WordsDataService from '../api/WordsDataService';
-//import UsersDataService from '../api/UsersDataService';
 import { Link } from 'react-router-dom';
 import { getLoginId } from '../LoginLocalStorage';
 import WordRowCreator from './WordRowCreator';
