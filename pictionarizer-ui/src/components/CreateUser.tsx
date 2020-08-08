@@ -23,7 +23,7 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
         country: '',
         email: '',
         password: '',
-        image: null,  // If initial value (like new File(["foo"], "foo.txt")) is provided, 
+        image: new File(["foo"], "foo.txt"),  // If initial value (like new File(["foo"], "foo.txt")) is provided, 
                       // the backend won't set the default profile picture
         description: '' 
       },
@@ -61,6 +61,10 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
       id: this.state.userData.id
     };
 
+    if(user.image.name === 'foo.txt'){
+      user.image = null;
+    }
+
     let loginInput = {
       email: user.email,
       password: user.password
@@ -76,18 +80,17 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
   }
   
   render(){
-    let { id, name, ownLanguage, 
-      targetLanguage, country, email, 
-      password, image, description} 
-      = this.state.userData; 
+    let init: User = { id: null, name: '', ownLanguage: '', 
+      targetLanguage: '', country: '', email: '', 
+      password: '', image: null, description: ''} 
+      //= this.state.userData; 
 
     return(
       <div className="object-details">
         <h2>Create an account</h2>
         <div>
           <Formik
-            initialValues={{ id, name, ownLanguage, targetLanguage, 
-              country, email, password, image, description}}
+            initialValues={init}
             onSubmit={this.onSubmit}
             validate={this.validate}
             enableReinitialize={true}
@@ -139,7 +142,7 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
                   <fieldset className="custom-file" >                   
                     <input className="custom-file-input" id="customFile" type="file" name="image" onChange={this.onChange}/>
                     <label className="custom-file-label half-width-in-form" >
-                      Choose a file
+                    {this.state.userData.image.name === 'foo.txt'? 'Choose file': this.state.userData.image.name}
                     </label>
                   </fieldset>
                   <br/><br/>
