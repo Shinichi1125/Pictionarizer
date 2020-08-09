@@ -36,6 +36,8 @@ class WordRowCreator extends React.Component<Word>{
   render(){
     let word = this.props;
     let userName = this.state.userData.name;
+    let targetLanguage = this.state.userData.targetLanguage;
+
     return(
         <div className="word-row">          
           <img src={`${API_URL}/word/uploaded-image/${word.id}`} 
@@ -47,7 +49,12 @@ class WordRowCreator extends React.Component<Word>{
           </h5>   
           <p>
             by <Link to={'/user/details/' + String(word.userId)}>{userName}</Link>  
-            <span>&nbsp;&nbsp;{moment(word.createdDate).fromNow()}</span>
+            <span>&nbsp;
+              <span className="yellow-highlight">
+                in {targetLanguage}
+              </span>
+              &nbsp;{moment(word.createdDate).fromNow()}
+            </span>
           </p>           
         </div>
     )

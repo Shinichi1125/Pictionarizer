@@ -98,8 +98,7 @@
   margin: auto; 
   border: gray 2px solid; 
   border-radius: 30px;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding: 0.5rem;
   background-color: #f6f6f4;
 }
 

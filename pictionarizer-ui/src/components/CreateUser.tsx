@@ -23,8 +23,7 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
         country: '',
         email: '',
         password: '',
-        image: new File(["foo"], "foo.txt"),  // If initial value (like new File(["foo"], "foo.txt")) is provided, 
-                      // the backend won't set the default profile picture
+        image: new File(["foo"], "foo.txt"),  
         description: '' 
       },
       words: new Array<Word>()
@@ -61,6 +60,9 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
       id: this.state.userData.id
     };
 
+    // If no file is selected, assign null   
+    // so that the backend will set the default profile picture
+    // (the backend will do so only when the "image" field is null)
     if(user.image.name === 'foo.txt'){
       user.image = null;
     }
@@ -83,7 +85,6 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
     let init: User = { id: null, name: '', ownLanguage: '', 
       targetLanguage: '', country: '', email: '', 
       password: '', image: null, description: ''} 
-      //= this.state.userData; 
 
     return(
       <div className="object-details">

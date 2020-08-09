@@ -133,7 +133,7 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
                   <fieldset className="custom-file" >
                     <input className="custom-file-input" id="customFile" type="file" name="image" onChange={this.onChange}/>
                     <label className="custom-file-label half-width-in-form" >
-                      {image.name === 'foo.txt'? 'Choose file': image.name}
+                      {this.state.wordData.image.name === 'foo.txt'? 'Choose file': this.state.wordData.image.name}
                     </label>
                   </fieldset>
                   <br/><br/>
