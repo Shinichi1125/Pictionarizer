@@ -219,21 +219,21 @@ public class WordController {
 	}
 	
 	// temporary, experimental method to see if image upload works with the local device
-	@PostMapping("/uploadFile")
-    public String fileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
-    	if(file.isEmpty()) {
-    		return "api/error";
-    	}
-    	
-    	try {
-    		// read and write the file to the selected location
-    		byte[] bytes = (file).getBytes();
-    		Path path = Paths.get(UPLOAD_FOLDER + (file).getOriginalFilename());
-    		Files.write(path, bytes);
-    	} catch (IOException e) {
-    		e.printStackTrace();
-    	}
-    	
-    	return "redirect:/api";
-    }
+//	@PostMapping("/uploadFile")
+//    public String fileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+//    	if(file.isEmpty()) {
+//    		return "api/error";
+//    	}
+//    	
+//    	try {
+//    		// read and write the file to the selected location
+//    		byte[] bytes = (file).getBytes();
+//    		Path path = Paths.get(UPLOAD_FOLDER + (file).getOriginalFilename());
+//    		Files.write(path, bytes);
+//    	} catch (IOException e) {
+//    		e.printStackTrace();
+//    	}
+//    	
+//    	return "redirect:/api";
+//    }
 }

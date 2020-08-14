@@ -49,7 +49,7 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
     return(
       <div className="object-details">
         <h3 className="no-margin-bottom">
-          <span className="yellow-highlight">&nbsp;"{word.targetLangWordName}"&nbsp;</span> 
+          <span className="yellow-highlight">&nbsp;<strong>"{word.targetLangWordName}"</strong>&nbsp;</span> 
         </h3>
         <div><strong>({word.ownLangWordName})</strong></div>
         <div className="space-out">
@@ -58,8 +58,10 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
                 className="large"
           />
         </div>
-        <div>{word.targetLangExSentence}</div>
-        <div>({word.ownLangExSentence})</div>       
+        <div className="word-text">
+          <div><strong>{word.targetLangExSentence}</strong></div>
+          <div className="white-text">({word.ownLangExSentence})</div> 
+        </div>     
         <div>
           <img src={word.userId > 0 ? 
             `${API_URL}/user/uploaded-image/${word.userId}` : 

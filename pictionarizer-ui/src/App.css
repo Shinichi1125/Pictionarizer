@@ -108,6 +108,18 @@
   margin-right: 1rem;
 }
 
+.word-text {
+  width: 90%;
+  margin: 0px auto 0.5rem auto;
+  padding: 0.5rem;
+  background-color: #ade0ff;
+  border-radius: 30px;
+}
+
+.white-text {
+  color: white; 
+}
+
 /* 吹き出し本体 */
 .speech-bubble{
   width: 65%;

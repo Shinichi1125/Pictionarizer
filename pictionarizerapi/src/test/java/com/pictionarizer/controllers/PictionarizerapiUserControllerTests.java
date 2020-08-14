@@ -89,19 +89,19 @@ public class PictionarizerapiUserControllerTests {
 		assertTrue(userActual.isPresent());
 	}
 	
-//	@Test 
-//	@DisplayName("Test case where no user can be fetched")
-//	void testGetUserThrowException() {
-//		// set the mock class's I/O
-//		when(repository.findById(0)).thenThrow(new EmptyResultDataAccessException(1));
-//		
-//		// check if ReportNotFoundException gets thrown when a report cannot be fetched
-//		try {
-//			Optional<User> userOpt = Optional.ofNullable(repository.findById(0).get());
-//		} catch(NoSuchElementException e) {
-//			assertEquals(e.getMessage(), "No value present"); 
-//		}
-//	}
+	@Test 
+	@DisplayName("Test case where no user can be fetched")
+	void testGetUserThrowException() {
+		// set the mock class's I/O
+		when(repository.findById(0)).thenThrow(new NoSuchElementException());
+		
+		// check if NoSuchElementException gets thrown when the designated user cannot be fetched
+		try {
+			Optional<User> userOpt = Optional.ofNullable(repository.findById(0).get());
+		} catch(NoSuchElementException e) {
+			assertEquals(e.getMessage(), "No value present"); 
+		}
+	}
 	
 	@Test
 	@DisplayName("Test case where user is deleted")

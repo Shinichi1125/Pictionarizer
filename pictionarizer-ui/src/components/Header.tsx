@@ -31,7 +31,7 @@ class Header extends React.Component{
               `${API_URL}/user/uploaded-image/${loginState}` : 
               `${API_URL}/user/uploaded-image/${TEST_USER_ID}`}
                 alt="fetched img" 
-                className="small"
+                className="small round-border"
               />
             </li>
             &nbsp;
