@@ -47,7 +47,7 @@ import com.pictionarizer.repos.UserRepository;
 @DisplayName("Unit test for UserController")
 public class PictionarizerapiUserControllerTests {
 	
-	@Mock//Bean  //Mock class object
+	@Mock  //Bean  //Mock class object
 	private UserRepository repository;
 	
 	//@Autowired
@@ -128,60 +128,60 @@ public class PictionarizerapiUserControllerTests {
 		}
 	}
 	
-//	@Test
-//	@DisplayName("Test case where user (including image) is updated")
-//	void testUpdateUser() throws Exception {
-//		User existingUser = new User(); 
-//		existingUser.setId(28);
-//		existingUser.setName("Alex");
-//		existingUser.setTargetLanguage("Swedish");
-//		existingUser.setOwnLanguage("English");
-//		existingUser.setEmail("alex.armstrong@gmail.com");
-//		existingUser.setPassword("testpassword");
-//		existingUser.setDescription("Mod ökats hundra gånger, muskler ökats tusen gånger!");
-//		
-//		existingUser.setImage(Base64.getDecoder().decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="));
-//		
-//		when(repository.findById(28)).thenReturn(Optional.of(existingUser));
-//		when(repository.save(any())).thenAnswer((invocation) -> invocation.getArguments()[0]); 
-//		
-//		String base64ImageToUpload = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
-//		
-//		MockMultipartHttpServletRequestBuilder builder = MockMvcRequestBuilders.multipart("/api/user/28");
-//		
-//		mockMvc.perform(builder
-//				.file("image", Base64.getDecoder().decode(base64ImageToUpload))
-//		        .param("name", "Armstrong")
-//		        .param("ownLanguage", "English")
-//		        .param("targetLanguage", "Swedish")
-//		        .param("country", "Amestris")
-//		        .param("email", "john@example.com")
-//		        .param("password", "testpassword")
-//		        .param("description", "Mod ökats hundra gånger, muskler ökats tusen gånger!")
-//		        .with(request -> {
-//		          request.setMethod("PUT");
-//		          return request;
-//		        }))
-//	        .andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()))
-//	        .andExpect(jsonPath("$.name").value("Armstrong"))
-//	        .andExpect(jsonPath("$.ownLanguage").value("Japanese"))
-//	        .andExpect(jsonPath("$.targetLanguage").value("Chinese"))
-//	        .andExpect(jsonPath("$.country").value("Amestris"))
-//	        .andExpect(jsonPath("$.email").value("john@example.com"))
-//	        .andExpect(jsonPath("$.password").value("testpassword2"))
-//	        .andExpect(jsonPath("$.description").value("abc"))
-//	        .andExpect(jsonPath("$.image").value(base64ImageToUpload));
-//		
-//	    ArgumentCaptor<User> argument = ArgumentCaptor.forClass(User.class);
-//	    verify(repository, times(1)).save(argument.capture());
-//	    assertEquals("Armstrong", argument.getValue().getName());
-//	    assertEquals("English", argument.getValue().getOwnLanguage());
-//	    assertEquals("Swedish", argument.getValue().getTargetLanguage());
-//	    assertEquals("Amestris", argument.getValue().getCountry());
-//	    assertEquals("alex.armstrong@gmail.com", argument.getValue().getEmail());
-//	    assertEquals("testpassword", argument.getValue().getPassword());
-//	    assertEquals(base64ImageToUpload, Base64.getEncoder().encodeToString(argument.getValue().getImage()));
-//	}
+	@Test
+	@DisplayName("Test case where user (including image) is updated")
+	void testUpdateUser() throws Exception {
+		User existingUser = new User(); 
+		existingUser.setId(28);
+		existingUser.setName("Alex");
+		existingUser.setTargetLanguage("Swedish");
+		existingUser.setOwnLanguage("English");
+		existingUser.setEmail("alex.armstrong@gmail.com");
+		existingUser.setPassword("testpassword");
+		existingUser.setDescription("Mod ökats hundra gånger, muskler ökats tusen gånger!");
+		
+		existingUser.setImage(Base64.getDecoder().decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="));
+		
+		when(repository.findById(28)).thenReturn(Optional.of(existingUser));
+		when(repository.save(any())).thenAnswer((invocation) -> invocation.getArguments()[0]); 
+		
+		String base64ImageToUpload = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
+		
+		MockMultipartHttpServletRequestBuilder builder = MockMvcRequestBuilders.multipart("/api/user/28");
+		
+		mockMvc.perform(builder
+				.file("image", Base64.getDecoder().decode(base64ImageToUpload))
+		        .param("name", "Armstrong")
+		        .param("ownLanguage", "English")
+		        .param("targetLanguage", "Swedish")
+		        .param("country", "Amestris")
+		        .param("email", "john@example.com")
+		        .param("password", "testpassword")
+		        .param("description", "Mod ökats hundra gånger, muskler ökats tusen gånger!")
+		        .with(request -> {
+		          request.setMethod("PUT");
+		          return request;
+		        }))
+	        .andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()))
+	        .andExpect(jsonPath("$.name").value("Armstrong"))
+	        .andExpect(jsonPath("$.ownLanguage").value("Japanese"))
+	        .andExpect(jsonPath("$.targetLanguage").value("Chinese"))
+	        .andExpect(jsonPath("$.country").value("Amestris"))
+	        .andExpect(jsonPath("$.email").value("john@example.com"))
+	        .andExpect(jsonPath("$.password").value("testpassword2"))
+	        .andExpect(jsonPath("$.description").value("abc"))
+	        .andExpect(jsonPath("$.image").value(base64ImageToUpload));
+		
+	    ArgumentCaptor<User> argument = ArgumentCaptor.forClass(User.class);
+	    verify(repository, times(1)).save(argument.capture());
+	    assertEquals("Armstrong", argument.getValue().getName());
+	    assertEquals("English", argument.getValue().getOwnLanguage());
+	    assertEquals("Swedish", argument.getValue().getTargetLanguage());
+	    assertEquals("Amestris", argument.getValue().getCountry());
+	    assertEquals("alex.armstrong@gmail.com", argument.getValue().getEmail());
+	    assertEquals("testpassword", argument.getValue().getPassword());
+	    assertEquals(base64ImageToUpload, Base64.getEncoder().encodeToString(argument.getValue().getImage()));
+	}
 	
 }
 
