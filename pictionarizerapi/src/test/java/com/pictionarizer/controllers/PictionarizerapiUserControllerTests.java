@@ -50,7 +50,7 @@ public class PictionarizerapiUserControllerTests {
 	@Mock  //Bean  //Mock class object
 	private UserRepository repository;
 	
-	//@Autowired
+	@Autowired
 	MockMvc mockMvc;
 	
 	@Test 
