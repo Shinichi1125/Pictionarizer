@@ -50,7 +50,7 @@ class WordRowCreator extends React.Component<Word>{
           <p>
             by <Link to={'/user/details/' + String(word.userId)}>{userName}</Link>  
             <span>&nbsp;
-              <span className="yellow-highlight">
+              <span>
                 in {targetLanguage}
               </span>
               &nbsp;{moment(word.createdDate).fromNow()}
