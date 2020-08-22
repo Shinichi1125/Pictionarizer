@@ -36,6 +36,8 @@ import com.pictionarizer.repos.UserRepository;
 @CrossOrigin
 public class UserController {
 	
+	private int passwordMinLength = 8;
+	
 	private UserRepository repository;
 	
 	// logger for a debugging purpose
@@ -196,6 +198,11 @@ public class UserController {
 		}
 		
 		user = optUser.get();
+		
+		if(password.length() < passwordMinLength) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, 
+					"Password must be at least " + String.valueOf(passwordMinLength) + "characters") ;
+		}
 		
 		user = convertUser(
 				name,

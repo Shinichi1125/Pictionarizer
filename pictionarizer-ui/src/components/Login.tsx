@@ -8,12 +8,12 @@ import { setLoginId } from '../LoginLocalStorage';
 import { EASY_EMAIL_ADDRESS, EASY_PASSWORD } from '../Constants';
 
 class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
-
+/*
   public static defaultProps: ILoginInfoProps = {
     match: {
       id: '24';
     }
-  };  
+  };  */
 
   constructor(props: ILoginInfoProps){
     super(props)

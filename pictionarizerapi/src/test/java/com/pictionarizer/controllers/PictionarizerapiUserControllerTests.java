@@ -135,5 +135,47 @@ public class PictionarizerapiUserControllerTests {
     
     verify(userRepository, never()).save(any());
   }
+  
+  @Test
+  @DisplayName("When an update request cannot be handled because the password is too short")
+  public void testUpdateUserTooShortPassword() throws Exception {
+	// User before update
+    User existingUser = new User();
+    existingUser.setId(28);
+    existingUser.setName("Alex");
+    existingUser.setTargetLanguage("Swedish");
+    existingUser.setOwnLanguage("English");
+    existingUser.setEmail("alex.armstrong@gmail.com");
+    existingUser.setPassword("testpassword");
+    existingUser.setDescription("Mod ökats hundra gånger, muskler ökats tusen gånger!");
+    existingUser.setImage(Base64.getDecoder().decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=")); // 画像はhttps://png-pixel.com/で作った
+	    
+    int requestId = 28;    // user ID that doesn't exist in the database
+    
+ // return the User (before update) that is fetched by UserRepository#findById() with ID=28
+    when(userRepository.findById(requestId)).thenReturn(Optional.of(existingUser));
+    // UserRepository#save() returns the fetched entity as it is
+    when(userRepository.save(any())).thenAnswer((invocation) -> invocation.getArguments()[0]);
+    
+    String base64ImageToUpload = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=";
+    
+    mockMvc.perform(MockMvcRequestBuilders.multipart("/api/user/{id}", requestId)
+    	.file("image", Base64.getDecoder().decode(base64ImageToUpload)) 
+        .param("name", "Armstrong")
+        .param("ownLanguage", "Japanese")
+        .param("targetLanguage", "Chinese")
+        .param("country", "Amestris")
+        .param("email", "john@example.com")
+        .param("password", "test")
+        .param("description", "abc")
+        .with(request -> {
+            request.setMethod("PUT");
+            return request;
+        }))
+        // Status Bad Request should be returned
+        .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    
+    verify(userRepository, never()).save(any());
+  }
 }
 
