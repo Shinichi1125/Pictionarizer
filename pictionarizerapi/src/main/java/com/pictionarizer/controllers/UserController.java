@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 //import com.pictionarizer.model.Login;
 import com.pictionarizer.model.User;
@@ -189,6 +190,11 @@ public class UserController {
 		User user = null;
 		Optional<User> optUser = Optional.ofNullable(user);
 		optUser = repository.findById(id);
+		
+		if(!optUser.isPresent()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found");
+		}
+		
 		user = optUser.get();
 		
 		user = convertUser(

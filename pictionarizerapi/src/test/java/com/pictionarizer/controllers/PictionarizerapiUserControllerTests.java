@@ -38,7 +38,7 @@ public class PictionarizerapiUserControllerTests {
   
   @Test
   @DisplayName("When an update request that updates all the elements (including image) is sent, the User data gets updated properly, and the updated User data gets returned in a form of JSON")
-  public void testUpdateUser() throws Exception {
+  public void testUpdateUserWithImage() throws Exception {
     // User before update
     User existingUser = new User();
     existingUser.setId(28);
@@ -93,6 +93,47 @@ public class PictionarizerapiUserControllerTests {
     assertEquals("testpassword2", argument.getValue().getPassword());
     assertEquals("abc", argument.getValue().getDescription());
     assertEquals(base64ImageToUpload, Base64.getEncoder().encodeToString(argument.getValue().getImage()));
+  }
+  
+  @Test
+  @DisplayName("When an update request cannot be handled because the user whose ID matches the requested one does not exist")
+  public void testUpdateUserNotExist() throws Exception {
+	// User before update
+    User existingUser = new User();
+    existingUser.setId(28);
+    existingUser.setName("Alex");
+    existingUser.setTargetLanguage("Swedish");
+    existingUser.setOwnLanguage("English");
+    existingUser.setEmail("alex.armstrong@gmail.com");
+    existingUser.setPassword("testpassword");
+    existingUser.setDescription("Mod ökats hundra gånger, muskler ökats tusen gånger!");
+    existingUser.setImage(Base64.getDecoder().decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=")); // 画像はhttps://png-pixel.com/で作った
+	    
+    int requestId = 2013;    // user ID that doesn't exist in the database
+    
+    // request is sent with ID number 2013 which does not exist, so "empty" is returned 
+    when(userRepository.findById(requestId)).thenReturn(Optional.empty());
+    
+    String base64ImageToUpload = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=";
+    
+    // send an update request, but because of the wrong ID update won't take place, instead NotFound gets returned
+    mockMvc.perform(MockMvcRequestBuilders.multipart("/api/user/{id}", requestId)
+    	.file("image", Base64.getDecoder().decode(base64ImageToUpload)) 
+        .param("name", "Armstrong")
+        .param("ownLanguage", "Japanese")
+        .param("targetLanguage", "Chinese")
+        .param("country", "Amestris")
+        .param("email", "john@example.com")
+        .param("password", "testpassword2")
+        .param("description", "abc")
+        .with(request -> {
+            request.setMethod("PUT");
+            return request;
+        }))
+        // Status NotFound should be returned
+        .andExpect(MockMvcResultMatchers.status().isNotFound());
+    
+    verify(userRepository, never()).save(any());
   }
 }
 
