@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -31,10 +32,13 @@ public class PictionarizerapiUserControllerTests {
   @MockBean
   private WordRepository wordRepository;
   
+  @MockBean
+  private UserController userController;
+  
   @Autowired // have Spring instantiate the field
   private MockMvc mockMvc;
   
-  
+  private int alexId = 28;
   
   @Test
   @DisplayName("When an update request that updates all the elements (including image) is sent, the User data gets updated properly, and the updated User data gets returned in a form of JSON")
@@ -141,7 +145,7 @@ public class PictionarizerapiUserControllerTests {
   public void testUpdateUserTooShortPassword() throws Exception {
 	// User before update
     User existingUser = new User();
-    existingUser.setId(28);
+    existingUser.setId(alexId);
     existingUser.setName("Alex");
     existingUser.setTargetLanguage("Swedish");
     existingUser.setOwnLanguage("English");
@@ -150,7 +154,7 @@ public class PictionarizerapiUserControllerTests {
     existingUser.setDescription("Mod ökats hundra gånger, muskler ökats tusen gånger!");
     existingUser.setImage(Base64.getDecoder().decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=")); // 画像はhttps://png-pixel.com/で作った
 	    
-    int requestId = 28;    // user ID that doesn't exist in the database
+    int requestId = alexId;    // user ID that doesn't exist in the database
     
  // return the User (before update) that is fetched by UserRepository#findById() with ID=28
     when(userRepository.findById(requestId)).thenReturn(Optional.of(existingUser));
@@ -177,5 +181,27 @@ public class PictionarizerapiUserControllerTests {
     
     verify(userRepository, never()).save(any());
   }
+  /*
+  @Test
+  @DisplayName("When correct login information is given and the matched user is fetched")
+  public void testCheckIfValidUserFound() throws Exception {
+	  //Integer userIdObj = Integer.valueOf(28);
+	  ResponseEntity<?> loginEntity = new ResponseEntity<?>();
+	  
+	  User existingUser = new User();
+      existingUser.setId(alexId);
+      existingUser.setName("Alex");
+      existingUser.setTargetLanguage("Swedish");
+      existingUser.setOwnLanguage("English");
+      existingUser.setEmail("alex.armstrong@gmail.com");
+      existingUser.setPassword("testpassword");
+      existingUser.setDescription("Mod ökats hundra gånger, muskler ökats tusen gånger!");
+      existingUser.setImage(Base64.getDecoder().decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=")); // 画像はhttps://png-pixel.com/で作った
+	  
+      String requestEmail = "alex.armstrong@gmail.com";
+      String requestPassword = "testpassword";
+      
+      when(userController.checkIfValidUser(requestEmail, requestPassword)).thenReturn(Optional.of(userIdObj));
+  }*/
 }
 
