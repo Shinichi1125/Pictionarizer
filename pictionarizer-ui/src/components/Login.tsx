@@ -60,6 +60,8 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
   onSubmit(values: LoginInfo, formikBag: FormikHelpers<LoginInfo>){
     UsersDataService.userLogin(values)
     .then(res =>{
+      console.log("res contents: ");
+      console.log(res);
       setLoginId(String(res.data));
     })
     .then(() => this.props.history.push('/'))

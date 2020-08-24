@@ -181,12 +181,12 @@ public class PictionarizerapiUserControllerTests {
     
     verify(userRepository, never()).save(any());
   }
-  /*
+  
   @Test
   @DisplayName("When correct login information is given and the matched user is fetched")
   public void testCheckIfValidUserFound() throws Exception {
 	  //Integer userIdObj = Integer.valueOf(28);
-	  ResponseEntity<?> loginEntity = new ResponseEntity<?>();
+	  //ResponseEntity<?> loginEntity = new ResponseEntity<?>();
 	  
 	  User existingUser = new User();
       existingUser.setId(alexId);
@@ -201,7 +201,19 @@ public class PictionarizerapiUserControllerTests {
       String requestEmail = "alex.armstrong@gmail.com";
       String requestPassword = "testpassword";
       
-      when(userController.checkIfValidUser(requestEmail, requestPassword)).thenReturn(Optional.of(userIdObj));
-  }*/
+      //when(userController.checkIfValidUser(requestEmail, requestPassword)).thenReturn(Optional.of(userIdObj));
+      
+      mockMvc.perform(MockMvcRequestBuilders.get("/api/login")
+    	        .param("email", requestEmail)
+    	        .param("password", requestPassword)
+    	        .with(request -> {
+    	            request.setMethod("GET");
+    	            return request;
+    	        }))
+    	        // Status Bad Request should be returned
+    	        .andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()))
+    	        .andExpect(jsonPath("$.data").value(alexId));
+      
+  } 
 }
 
