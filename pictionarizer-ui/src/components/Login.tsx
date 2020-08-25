@@ -1,7 +1,7 @@
 import React from 'react';
 import LoginInfo from '../interfaces/LoginInfo.interface';
 import UsersDataService from '../api/UsersDataService'; 
-import { Formik, Form, Field, ErrorMessage, FormikBag, FormikHelpers } from 'formik'; 
+import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik'; 
 import ILoginInfoProps from '../interfaces/ILoginInfoProps.interface';
 import ILoginInfoState from '../interfaces/ILoginInfoState.interface';
 import { setLoginId } from '../LoginLocalStorage';
@@ -10,7 +10,7 @@ import { EASY_EMAIL_ADDRESS, EASY_PASSWORD } from '../Constants';
 class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
 
   public static defaultProps: ILoginInfoProps = {
-    id: '24',
+    id: '0',
     history: undefined,
     location: undefined,
     match: undefined

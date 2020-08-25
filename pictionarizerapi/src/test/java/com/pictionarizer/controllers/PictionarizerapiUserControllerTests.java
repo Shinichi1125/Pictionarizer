@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -32,7 +33,7 @@ public class PictionarizerapiUserControllerTests {
   @MockBean
   private WordRepository wordRepository;
   
-  @MockBean
+  @Mock
   private UserController userController;
   
   @Autowired // have Spring instantiate the field
