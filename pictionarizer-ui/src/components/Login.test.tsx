@@ -5,7 +5,10 @@ import Login from './Login';
 //import { Route } from 'react-router-dom';
 
 describe('Login', () => {
-    const login = shallow(<Login/>);
+    let loginState = 0; 
+    const mockEasyLogin = jest.fn();
+    const props = { easyLogin: mockEasyLogin };
+    const login = shallow(<Login {...props}/>);
 
     it('renders properly', () => {
         expect(login).toMatchSnapshot();
@@ -21,5 +24,14 @@ describe('Login', () => {
           });
     });  
 
+    describe('when clicking the `Easy Log in` button', () => {
+        beforeEach(() => {
+            login.find('.btn-success').simulate('click');
+        });
+
+        it('calls the easyLogin function', () => {
+            expect(mockEasyLogin).toHaveBeenCalled();
+        });  
+    });
 
 }); 
