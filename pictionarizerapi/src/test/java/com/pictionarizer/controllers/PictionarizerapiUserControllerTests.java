@@ -33,9 +33,6 @@ public class PictionarizerapiUserControllerTests {
   @MockBean
   private WordRepository wordRepository;
   
-  @Mock
-  private UserController userController;
-  
   @Autowired // have Spring instantiate the field
   private MockMvc mockMvc;
   
@@ -211,7 +208,7 @@ public class PictionarizerapiUserControllerTests {
     	            request.setMethod("GET");
     	            return request;
     	        }))
-    	        // Status Bad Request should be returned
+    	        // Status 200 should be returned
     	        .andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()))
     	        .andExpect(jsonPath("$.data").value(alexId));
       

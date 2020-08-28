@@ -87,5 +87,7 @@ class UsersDataService {
   }
 }
 
-export default new UsersDataService()
+export default new UsersDataService();
+
+
 
