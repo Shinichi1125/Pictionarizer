@@ -41,8 +41,8 @@ public class PictionarizerapiUserControllerTests {
   private int alexId = 28;
   
   @Test
-  @DisplayName("When an update request that updates all the elements (including image) is sent, the User data gets updated properly, and the updated User data gets returned in a form of JSON")
-  public void testUpdateUserWithImage() throws Exception {
+  @DisplayName("When an update request, the User data gets updated properly, and the updated User data gets returned in a form of JSON")
+  public void testUpdateUser() throws Exception {
     // User before update
     User existingUser = new User();
     existingUser.setId(28);
@@ -179,15 +179,13 @@ public class PictionarizerapiUserControllerTests {
         // Status Bad Request should be returned
         .andExpect(MockMvcResultMatchers.status().isBadRequest());
     
+    // make sure that the save method is not called
     verify(userRepository, never()).save(any());
   }
   
   @Test
   @DisplayName("When correct login information is given and the matched user is fetched")
   public void testCheckIfValidUserFound() throws Exception {
-	  //Integer userIdObj = Integer.valueOf(28);
-	  //ResponseEntity<?> loginEntity = new ResponseEntity<?>();
-	  
 	  User existingUser = new User();
       existingUser.setId(alexId);
       existingUser.setName("Alex");
@@ -213,6 +211,36 @@ public class PictionarizerapiUserControllerTests {
     	        // Status 200 should be returned
     	        .andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()))
     	        .andExpect(jsonPath("$.userId").value(alexId));
+  } 
+  
+  @Test
+  @DisplayName("When a wrong combination of email and password is given and no user is found")
+  public void testCheckIfValidUserNotFound() throws Exception {
+	  User existingUser = new User();
+      existingUser.setId(alexId);
+      existingUser.setName("Alex");
+      existingUser.setTargetLanguage("Swedish");
+      existingUser.setOwnLanguage("English");
+      existingUser.setEmail("alex.armstrong@gmail.com");
+      existingUser.setPassword("testpassword");
+      existingUser.setDescription("Mod ökats hundra gånger, muskler ökats tusen gånger!");
+      existingUser.setImage(Base64.getDecoder().decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=")); // 画像はhttps://png-pixel.com/で作った
+	  
+      String requestEmail = "wrong.address@gmail.com";
+      String requestPassword = "randomNonsense";
+         
+      when(userRepository.findAll()).thenReturn(Collections.singletonList(existingUser));
+      
+      mockMvc.perform(MockMvcRequestBuilders.get("/api/login")
+    	        .param("email", requestEmail)
+    	        .param("password", requestPassword)
+    	        .with(request -> {
+    	            request.setMethod("GET");
+    	            return request;
+    	        }))
+			   // Status NotFound should be returned
+			    .andExpect(MockMvcResultMatchers.status().isNotFound())
+    	        .andExpect(jsonPath("$.message").value("The email address and the password don't match"));
   } 
 }
 
