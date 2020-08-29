@@ -91,10 +91,16 @@ public class UserController {
 			if(userEmail.equals(inputEmail) && userPassword.equals(inputPassword)) {
 				userId = user.getId();
 			}
+			LOGGER.info("userEmail: " + userEmail);
+			LOGGER.info("inputEmail: " + inputEmail);
+			LOGGER.info("userPassword: " + userPassword);
+			LOGGER.info("inputPassword: " + inputPassword);
+			LOGGER.info("userId: " + String.valueOf(userId));
 		}	
 		
 		if(userId > 0) {
 			Integer userIdObj = Integer.valueOf(userId);
+			LOGGER.info("The content of userIdObj: " + userIdObj.toString());
 			return new ResponseEntity<>(userIdObj, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(

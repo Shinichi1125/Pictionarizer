@@ -20,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -199,8 +200,9 @@ public class PictionarizerapiUserControllerTests {
       String requestEmail = "alex.armstrong@gmail.com";
       String requestPassword = "testpassword";
       
-      //when(userController.checkIfValidUser(requestEmail, requestPassword)).thenReturn(Optional.of(userIdObj));
+      when(userRepository.findById(alexId)).thenReturn(Optional.of(existingUser));
       
+      MvcResult result =
       mockMvc.perform(MockMvcRequestBuilders.get("/api/login")
     	        .param("email", requestEmail)
     	        .param("password", requestPassword)
@@ -209,9 +211,12 @@ public class PictionarizerapiUserControllerTests {
     	            return request;
     	        }))
     	        // Status 200 should be returned
-    	        .andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()))
-    	        .andExpect(jsonPath("$.data").value(alexId));
+    	        //.andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()))
+    	        //.andExpect(jsonPath("$.data").value(alexId));
+      			.andReturn();
       
+      String content = result.getResponse().getContentAsString();
+      assertEquals(content, String.valueOf(alexId));
   } 
 }
 
