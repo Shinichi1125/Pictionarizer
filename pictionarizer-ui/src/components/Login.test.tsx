@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Login from './Login';
 import { EASY_EMAIL_ADDRESS, EASY_PASSWORD } from '../Constants';
-import '../api/UsersDataService'; 
+import UsersDataService from '../api/UsersDataService'; 
 import LoginInfo from '../interfaces/LoginInfo.interface';
 //import "./setUpTests";
 
@@ -10,7 +10,7 @@ describe('Login', () => {
     let loginState = 0;    
     const mockEasyLogin = jest.fn();
 
-    const UsersDataService = require('../api/UsersDataService');
+    //const UsersDataService = require('../api/UsersDataService').default;
     const axios = require('axios');
     jest.mock('axios');
 
@@ -21,8 +21,8 @@ describe('Login', () => {
             push: mockHistoryPush,
         }),
     }));
-    const props = { easyLogin: mockEasyLogin };
 
+    const props = { easyLogin: mockEasyLogin };
     const login = shallow(<Login {...props}/>);
 
     it('renders properly', () => {
@@ -52,7 +52,8 @@ describe('Login', () => {
                 password: EASY_PASSWORD
             }
             const setLoginId = await UsersDataService.userLogin(loginInput);
-            expect(setLoginId).toEqual(2);       
+            expect(setLoginId.data.userId).toEqual(2);  
+            expect(mockHistoryPush).toHaveBeenCalledWith('/');     
         });
 
         it('calls the easyLogin function', () => {
