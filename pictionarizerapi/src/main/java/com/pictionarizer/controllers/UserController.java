@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.pictionarizer.model.LoginValue;
 //import com.pictionarizer.model.Login;
 import com.pictionarizer.model.User;
 import com.pictionarizer.model.Word;
@@ -99,9 +100,11 @@ public class UserController {
 		}	
 		
 		if(userId > 0) {
-			Integer userIdObj = Integer.valueOf(userId);
-			LOGGER.info("The content of userIdObj: " + userIdObj.toString());
-			return new ResponseEntity<>(userIdObj, HttpStatus.OK);
+			//Integer userIdObj = Integer.valueOf(userId);
+			LoginValue fetchedUserId = new LoginValue();
+			fetchedUserId.setUserId(userId);
+			LOGGER.info("The content of userIdObj: " + userId);
+			return new ResponseEntity<>(fetchedUserId, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(
 					new Error("The email address and the password don't match"),  

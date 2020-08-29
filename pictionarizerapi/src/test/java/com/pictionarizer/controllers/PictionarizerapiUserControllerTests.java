@@ -4,6 +4,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.Optional;
 import com.pictionarizer.model.User;
 import com.pictionarizer.repos.UserRepository;
@@ -199,10 +200,9 @@ public class PictionarizerapiUserControllerTests {
 	  
       String requestEmail = "alex.armstrong@gmail.com";
       String requestPassword = "testpassword";
+         
+      when(userRepository.findAll()).thenReturn(Collections.singletonList(existingUser));
       
-      when(userRepository.findById(alexId)).thenReturn(Optional.of(existingUser));
-      
-      MvcResult result =
       mockMvc.perform(MockMvcRequestBuilders.get("/api/login")
     	        .param("email", requestEmail)
     	        .param("password", requestPassword)
@@ -211,12 +211,8 @@ public class PictionarizerapiUserControllerTests {
     	            return request;
     	        }))
     	        // Status 200 should be returned
-    	        //.andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()))
-    	        //.andExpect(jsonPath("$.data").value(alexId));
-      			.andReturn();
-      
-      String content = result.getResponse().getContentAsString();
-      assertEquals(content, String.valueOf(alexId));
+    	        .andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()))
+    	        .andExpect(jsonPath("$.userId").value(alexId));
   } 
 }
 
