@@ -42,7 +42,7 @@ import com.pictionarizer.repos.WordRepository;
 public class WordController {
 	
 	// temporary, experimental destination folder for uploading files 
-	private static String UPLOAD_FOLDER = "C://springimage//";
+	//private static String UPLOAD_FOLDER = "C://springimage//";
 	
 	// logger for a debugging purpose
 	//private static final Logger LOGGER = LoggerFactory.getLogger(WordController.class);
