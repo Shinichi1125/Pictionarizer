@@ -15,14 +15,20 @@ describe('Login', () => {
     jest.mock('axios');
 
     const mockHistoryPush = jest.fn();
-    jest.mock('react-router-dom', () => ({
+    /*jest.mock('react-router-dom', () => ({
         ...jest.requireActual('react-router-dom'),
         history: () => ({
             push: mockHistoryPush,
         }),
     }));
 
-    const props = { easyLogin: mockEasyLogin };
+    const props = { easyLogin: mockEasyLogin }; */
+
+    const props: any = {
+        history: {
+          push: mockHistoryPush //jest.fn(),
+        },
+      };
     const login = shallow(<Login {...props}/>);
 
     it('renders properly', () => {
@@ -53,7 +59,7 @@ describe('Login', () => {
             }
             const setLoginId = await UsersDataService.userLogin(loginInput);
             expect(setLoginId.data.userId).toEqual(2);  
-            expect(mockHistoryPush).toHaveBeenCalledWith('/');     
+            expect(props.history.push).toHaveBeenCalledWith('/');     
         });
 
         it('calls the easyLogin function', () => {

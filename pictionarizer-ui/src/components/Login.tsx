@@ -40,7 +40,7 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
     }
     UsersDataService.userLogin(values)
     .then(res =>{
-      setLoginId(String(res.data));
+      setLoginId(String(res.data.userId));
     })
     .then(() => this.props.history.push('/'))
     .then(() => window.location.reload(true))
@@ -62,7 +62,7 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
     .then(res =>{
       console.log("res contents: ");
       console.log(res);
-      setLoginId(String(res.data));
+      setLoginId(String(res.data.userId));
     })
     .then(() => this.props.history.push('/'))
     .then(() => window.location.reload(true)) 
