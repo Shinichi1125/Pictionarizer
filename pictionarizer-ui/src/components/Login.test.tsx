@@ -26,7 +26,7 @@ describe('Login', () => {
 
     const props: any = {
         history: {
-          push: mockHistoryPush //jest.fn(),
+          push: { push:[] } //jest.fn(),
         },
       };
     const login = shallow(<Login {...props}/>);
@@ -39,19 +39,23 @@ describe('Login', () => {
         expect(login.state()).toEqual({
             loginId: '0',
             loginData: {
-              email: '',
-              password: ''
+                email: '',
+                password: ''
             }
-          });
+        });
     });  
 
     describe('when clicking the `Easy Log in` button', () => {
         beforeEach(() => {
+            axios.get.mockResolvedValue({ data: {userId: 2} });  
             login.find('.btn-success').simulate('click');
         });
 
         it('calls an axios get request and returns the ID number 2', async () => {
-            axios.get.mockResolvedValue({ data:2 });   
+            const response = await axios.get('https://www.google.com')
+            console.log(`This is my response:`)
+            console.log(response)
+          
             let loginInput: LoginInfo;
             loginInput = {
                 email: EASY_EMAIL_ADDRESS,
@@ -59,7 +63,7 @@ describe('Login', () => {
             }
             const setLoginId = await UsersDataService.userLogin(loginInput);
             expect(setLoginId.data.userId).toEqual(2);  
-            expect(props.history.push).toHaveBeenCalledWith('/');     
+            expect(props.history.push).toContain('/');    
         });
 
         it('calls the easyLogin function', () => {
