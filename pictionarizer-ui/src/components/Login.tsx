@@ -44,6 +44,7 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
     })
     .then(() => this.props.history.push('/'))
     .then(() => window.location.reload(true))
+    //.then(() => this.props.location.reload(true))
   }
 
   validate(values: LoginInfo){
