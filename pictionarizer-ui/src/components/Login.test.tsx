@@ -19,24 +19,12 @@ describe('Login', () => {
       };
     const login = shallow(<Login {...props}/>);
 
-    // delete window.location, and then replace the reload part with a mock object
     const { location } = window;
+    // delete window.location, and then replace the reload part with a mock object
     delete window.location;
     window.location = { 
         reload: jest.fn(),
-        hash: undefined,
-        host: undefined,
-        hostname: undefined,
-        ancestorOrigins: undefined,
-        href: undefined,
-        origin: undefined,
-        pathname: undefined,
-        port: undefined,
-        protocol: undefined,
-        search: undefined,
-        assign: undefined,
-        replace: undefined
-    };
+    } as any;
 
     it('renders properly', () => {
         expect(login).toMatchSnapshot();
@@ -67,9 +55,28 @@ describe('Login', () => {
             const setLoginId = await UsersDataService.userLogin(loginInput);
             expect(setLoginId.data.userId).toEqual(2);  
             expect(props.history.push).toHaveBeenCalledWith('/'); 
-            expect(window.location.reload).toHaveBeenCalled();     
-            window.location = location;    // window should regain the original state after the test
+            expect(window.location.reload).toHaveBeenCalled();    
+            window.location = location;        // window should regain the original state after the test  
+        });
+    }); 
+
+    describe('when clicking `Log in` button with the correct email and password of the user Ismo', () => {
+        beforeEach(() => {
+            axios.get.mockResolvedValue({ data: {userId: 3} });
+            login.find('.btn-primary').simulate('click');
         });
 
-    });
+        it('calls an axios get request and returns the ID number 3', async () => {
+            let loginInput: LoginInfo;
+            loginInput = {
+                email: 'IsmoLeikola@gmail.com',
+                password: 'testpassword'
+            }
+            const setLoginId = await UsersDataService.userLogin(loginInput);
+            expect(setLoginId.data.userId).toEqual(3);  
+            expect(props.history.push).toHaveBeenCalledWith('/'); 
+            expect(window.location.reload).toHaveBeenCalled(); 
+            window.location = location; 
+        });
+    }); 
 }); 
