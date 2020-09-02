@@ -11,17 +11,32 @@ jest.mock('axios');
 
 describe('Login', () => {  
     const mockHistoryPush = jest.fn();
-    const mockLocationReload = jest.fn();
 
     const props: any = {
         history: {
-          push: mockHistoryPush //jest.fn(),
+          push: mockHistoryPush 
         },
-        location: {
-          reload: mockLocationReload
-        }
       };
     const login = shallow(<Login {...props}/>);
+
+    // delete window.location, and then replace the reload part with a mock object
+    const { location } = window;
+    delete window.location;
+    window.location = { 
+        reload: jest.fn(),
+        hash: undefined,
+        host: undefined,
+        hostname: undefined,
+        ancestorOrigins: undefined,
+        href: undefined,
+        origin: undefined,
+        pathname: undefined,
+        port: undefined,
+        protocol: undefined,
+        search: undefined,
+        assign: undefined,
+        replace: undefined
+    };
 
     it('renders properly', () => {
         expect(login).toMatchSnapshot();
@@ -52,13 +67,9 @@ describe('Login', () => {
             const setLoginId = await UsersDataService.userLogin(loginInput);
             expect(setLoginId.data.userId).toEqual(2);  
             expect(props.history.push).toHaveBeenCalledWith('/'); 
-            expect(props.location.reload).toHaveBeenCalled();  
-            //expect(window.location.reload).toHaveBeenCalled(); 
+            expect(window.location.reload).toHaveBeenCalled();     
+            window.location = location;    // window should regain the original state after the test
         });
 
-        it('calls the easyLogin function', () => {
-            //expect(mockEasyLogin).toHaveBeenCalled();          
-            //expect(mockHistoryPush).toHaveBeenCalledWith('/');
-        });  
     });
 }); 
