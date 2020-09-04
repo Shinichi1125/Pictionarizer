@@ -11,6 +11,12 @@ import { setLoginId } from '../LoginLocalStorage';
 
 class DeleteUser extends React.Component<IUserProps, IUserState>{
 
+  public static defaultProps: IUserProps = {
+    history: undefined,
+    location: undefined,
+    match: undefined
+  };  
+
   constructor(props: IUserProps){
     super(props)
 
