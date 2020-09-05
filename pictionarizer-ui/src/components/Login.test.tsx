@@ -4,6 +4,7 @@ import Login from './Login';
 import { EASY_EMAIL_ADDRESS, EASY_PASSWORD } from '../Constants';
 import UsersDataService from '../api/UsersDataService'; 
 import LoginInfo from '../interfaces/LoginInfo.interface';
+import { act } from 'react-dom/test-utils';
 //import "./setUpTests";
 
 const axios = require('axios');
@@ -83,10 +84,11 @@ describe('Login', () => {
                 email: 'IsmoLeikola@gmail.com',
                 password: 'testpassword'
             }
-            //act(() => {
-            //    // fire events that update state 
-            //});
-            const setLoginId = await UsersDataService.userLogin(loginInput);
+            let setLoginId: any;
+            act(() => {
+                //setLoginId = await UsersDataService.userLogin(loginInput);
+            });
+            setLoginId = await UsersDataService.userLogin(loginInput);
             expect(setLoginId.data.userId).toEqual(3);  
             expect(props.history.push).toHaveBeenCalledWith('/'); 
             expect(window.location.reload).toHaveBeenCalled(); 
