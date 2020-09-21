@@ -62,8 +62,22 @@ public class FollowerController {
 	
 	// fetch the people whom the user is following
 	@RequestMapping(value = "/followings/{id}", method = RequestMethod.GET)
-	public List<FollowerRelation> getFollowings(@PathVariable("id") int id){
-		return repository.findAllByFollowerId(id);
+	public List<User> getFollowings(@PathVariable("id") int id){
+		
+		List<FollowerRelation> followingIdList = repository.findAllByFollowerId(id);
+		List<User> userList = new ArrayList<User>();
+		User fetchedUser = new User();
+		int followingId = 0;
+		
+		if(followingIdList.size() > 0) {
+			for(FollowerRelation fr: followingIdList) {
+				followingId = fr.getFolloweeId();
+				fetchedUser = userRepository.findById(followingId).get();
+				userList.add(fetchedUser);
+			}
+		}
+		
+		return userList;
 	}
 	
 	@RequestMapping(value = "/follower", method = RequestMethod.POST)
