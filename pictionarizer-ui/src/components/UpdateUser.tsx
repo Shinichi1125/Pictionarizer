@@ -153,7 +153,7 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
                   <fieldset className="custom-file" >                   
                     <input className="custom-file-input" id="customFile" type="file" name="image" onChange={this.onChange}/>
                     <label className="custom-file-label half-width-in-form" >
-                      {image.name==="foo.txt"? "Choose a file": image.name}
+                      Choose a file
                     </label>
                   </fieldset>
                   <br/><br/>
@@ -170,3 +170,5 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
 }
 
 export default UpdateUser; 
+
+// L156 {image.name==="foo.txt"? "Choose a file": image.name}

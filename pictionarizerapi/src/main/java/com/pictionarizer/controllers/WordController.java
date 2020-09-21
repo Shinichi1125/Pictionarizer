@@ -72,14 +72,15 @@ public class WordController {
 	
 	@RequestMapping(value = "/words/{userId}", method = RequestMethod.GET)
 	public List<Word> getWordsByUser(@PathVariable("userId") int userId){
-		List<Word> allWords = repository.findAll();
-		List<Word> filteredWords = new ArrayList<Word>();
+		//List<Word> allWords = repository.findAll();
 		
-		for(Word word: allWords) {
-			if(word.getUserId() == userId) {
-				filteredWords.add(word);
-			}
-		}	
+		List<Word> filteredWords = repository.findAllByUserId(userId);
+		
+//		for(Word word: allWords) {
+//			if(word.getUserId() == userId) {
+//				filteredWords.add(word);
+//			}
+//		}	
 		
 		// reverse the list so that the newer elements will be displayed on top, older ones bottom
 		filteredWords = reverseArrayList(filteredWords);		
