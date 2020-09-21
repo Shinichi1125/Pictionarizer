@@ -85,10 +85,12 @@ describe('Login', () => {
                 password: 'testpassword'
             }
             let setLoginId: any;
-            act(() => {
-                //setLoginId = await UsersDataService.userLogin(loginInput);
+            //setLoginId = await UsersDataService.userLogin(loginInput);
+            await act(async () => {
+                login.find('.btn-primary').simulate('submit');
+                setLoginId = await UsersDataService.userLogin(loginInput);
+                await login.update();  // submitによってエレメントが変化する次回のレンダリングを待機
             });
-            setLoginId = await UsersDataService.userLogin(loginInput);
             expect(setLoginId.data.userId).toEqual(3);  
             expect(props.history.push).toHaveBeenCalledWith('/'); 
             expect(window.location.reload).toHaveBeenCalled(); 
