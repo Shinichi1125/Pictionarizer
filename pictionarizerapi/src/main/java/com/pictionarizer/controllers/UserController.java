@@ -237,6 +237,8 @@ public class UserController {
 		return repository.save(user);
 	}
 	
+	
+	
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
 	public void deleteUser(@PathVariable("id") int id) {
 		repository.deleteById(id);
