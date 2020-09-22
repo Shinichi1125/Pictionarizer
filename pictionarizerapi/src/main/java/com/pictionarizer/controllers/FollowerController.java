@@ -51,7 +51,7 @@ public class FollowerController {
 		if(followerIdList.size() > 0) {
 			for(FollowerRelation fr: followerIdList) {
 				followerId = fr.getFollowerId();
-				LOGGER.info("followerId: " + followerId);
+				//LOGGER.info("followerId: " + followerId);
 				fetchedUser = userRepository.findById(followerId).get();
 				userList.add(fetchedUser);
 			}
@@ -78,6 +78,24 @@ public class FollowerController {
 		}
 		
 		return userList;
+	}
+	
+	// fetch the number of followers the user has
+	@RequestMapping(value = "/no-of-followers/{id}", method = RequestMethod.GET)
+	public int getNoOfFollowers(@PathVariable("id") int id){
+		int noOfFollowers;
+		List<FollowerRelation> followerIdList = repository.findAllByFolloweeId(id);
+		noOfFollowers = followerIdList.size();
+		return noOfFollowers;
+	}
+	
+	// fetch the number of people the user is following
+	@RequestMapping(value = "/no-of-followings/{id}", method = RequestMethod.GET)
+	public int getNoOfFollowings(@PathVariable("id") int id){
+		int noOfFollowings;
+		List<FollowerRelation> followingIdList = repository.findAllByFollowerId(id);
+		noOfFollowings = followingIdList.size();
+		return noOfFollowings; 
 	}
 	
 	@RequestMapping(value = "/follower", method = RequestMethod.POST)
