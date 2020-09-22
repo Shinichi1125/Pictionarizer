@@ -86,8 +86,8 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
           <div>
             {this.state.followings} Following, 
             {this.state.followers === 1? 
-              <span> {this.state.followers} Follower</span>: 
-              <span> {this.state.followers} Followers</span>
+              <Link to={'/user/followers/' + String(user.id)}><span> {this.state.followers} Follower</span></Link>: 
+              <Link to={'/user/followers/' + String(user.id)}><span> {this.state.followers} Followers</span></Link>
             } 
           </div>
           <br/>

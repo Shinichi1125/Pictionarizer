@@ -85,6 +85,17 @@
   background-color: #f6f6f4;
 }
 
+.user-row {
+  width: 50%;
+  margin: auto;
+  text-align: left;
+  border-top: gray 1.5px solid;
+  border-bottom: gray 1.5px solid;
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+  background-color: #f6f6f4;
+}
+
 .row-image {
   width: 4.375rem;
   height: 4.375rem;

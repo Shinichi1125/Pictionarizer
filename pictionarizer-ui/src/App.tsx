@@ -17,6 +17,7 @@ import UserDetails from './components/UserDetails';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Login from './components/Login';
+import Follower from './components/Follower';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route exact path="/user/create" component={CreateUser}/>
         <Route exact path="/user/delete/:id" component={DeleteUser}/>
         <Route exact path="/user/details/:id" component={UserDetails}/>
+        <Route exact path="/user/followers/:id" component={Follower}/>
         <Route exact path="/user/:id" component={UpdateUser}/>
         <Route exact path="/word/create" component={CreateWord}/>
         <Route exact path="/word/:id" component={UpdateWord}/>
