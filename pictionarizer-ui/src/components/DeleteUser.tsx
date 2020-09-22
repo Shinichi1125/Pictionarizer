@@ -33,6 +33,8 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
         image: new File(["foo"], "foo.txt"),
         description: '' 
       },
+      followings: 0,
+      followers: 0,
       words: new Array<Word>()
     }
 

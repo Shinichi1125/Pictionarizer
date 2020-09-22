@@ -30,6 +30,8 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
         image: null,
         description: '' 
       },
+      followings: 0,
+      followers: 0,
       words: new Array<Word>()
     }
   }
@@ -51,6 +53,16 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
         words:[...this.state.words, ...info]
       })
     })
+
+    UsersDataService.getNoOfFollowings(id)
+    .then(res => {
+      this.setState({followings:res.data})
+    })
+
+    UsersDataService.getNoOfFollowers(id)
+    .then(res => {
+      this.setState({followers: res.data})
+    })
   }
 
   render(){    
@@ -64,7 +76,6 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
               alt="fetched img" 
               className="large round-border user-details-image"
           />
-          <br></br>
           <h3 className="no-margin-bottom">
             <span className="yellow-highlight">&nbsp;{user.name}&nbsp;</span>
             <span className="small-font">&nbsp;(User ID: {user.id})&nbsp;</span>
@@ -72,6 +83,13 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
           <div>Learning: <strong>{user.targetLanguage}</strong></div>
           <div>Speaks: <strong>{user.ownLanguage}</strong></div>
           <div>Country: <strong>{user.country}</strong></div>
+          <div>
+            {this.state.followings} Following, 
+            {this.state.followers === 1? 
+              <span> {this.state.followers} Follower</span>: 
+              <span> {this.state.followers} Followers</span>
+            } 
+          </div>
           <br/>
           <div className="speech-bubble">{user.description}</div>   
           <br/>    

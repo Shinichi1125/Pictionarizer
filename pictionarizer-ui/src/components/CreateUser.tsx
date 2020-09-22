@@ -6,7 +6,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import IUserProps from '../interfaces/IUserProps.interface';
 import IUserState from '../interfaces/IUserState.interface';
 import { SMALL_INPUT_FIELD } from '../Constants';
-import { setLoginId, getLoginId } from '../LoginLocalStorage';
+import { setLoginId } from '../LoginLocalStorage';
 
 class CreateUser extends React.Component<IUserProps, IUserState>{
 
@@ -26,6 +26,8 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
         image: new File(["foo"], "foo.txt"),  
         description: '' 
       },
+      followings: 0,
+      followers: 0,
       words: new Array<Word>()
     }
 

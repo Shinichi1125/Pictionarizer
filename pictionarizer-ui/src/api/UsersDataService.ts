@@ -20,6 +20,14 @@ class UsersDataService {
     return axios.get(`${API_URL}/user/name/${userId}`)
   }
 
+  getNoOfFollowings(userId: number){
+    return axios.get(`${API_URL}/no-of-followings/${userId}`);
+  }
+
+  getNoOfFollowers(userId: number){
+    return axios.get(`${API_URL}/no-of-followers/${userId}`);
+  }
+
   makeUserFormData(user: User){
     const formData = new FormData();
     formData.append('id', String(user.id));
