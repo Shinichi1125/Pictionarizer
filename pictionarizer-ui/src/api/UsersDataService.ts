@@ -32,6 +32,10 @@ class UsersDataService {
     return axios.get(`${API_URL}/followers/${userId}`);
   }
 
+  retrieveFollowings(userId: number){
+    return axios.get(`${API_URL}/followings/${userId}`);
+  }
+
   makeUserFormData(user: User){
     const formData = new FormData();
     formData.append('id', String(user.id));

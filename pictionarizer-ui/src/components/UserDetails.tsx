@@ -83,8 +83,10 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
           <div>Learning: <strong>{user.targetLanguage}</strong></div>
           <div>Speaks: <strong>{user.ownLanguage}</strong></div>
           <div>Country: <strong>{user.country}</strong></div>
-          <div>
-            {this.state.followings} Following, 
+          <div>     
+            <Link to={'/user/followings/' + String(user.id)}>
+              {this.state.followings} Following, 
+            </Link>
             {this.state.followers === 1? 
               <Link to={'/user/followers/' + String(user.id)}><span> {this.state.followers} Follower</span></Link>: 
               <Link to={'/user/followers/' + String(user.id)}><span> {this.state.followers} Followers</span></Link>
