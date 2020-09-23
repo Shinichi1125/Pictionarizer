@@ -74,6 +74,17 @@
   height: 18.75rem;
 }
 
+.follow-nav {
+  width: 50%;
+  margin: auto;
+}
+
+.follow-nav-selected {
+  font-weight: bold; 
+  color: white;
+  background-color: #007bff;
+}
+
 .word-row {
   width: 50%;
   margin: auto;
