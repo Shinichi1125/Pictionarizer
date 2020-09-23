@@ -28,6 +28,8 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
       },
       followings: 0,
       followers: 0,
+      isFollowing: false,
+      isFollowed: false,
       words: new Array<Word>()
     }
 

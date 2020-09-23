@@ -85,6 +85,10 @@
   background-color: #007bff;
 }
 
+.follow-button {
+  margin-bottom: 0.5rem;
+}
+
 .word-row {
   width: 50%;
   margin: auto;
@@ -141,6 +145,10 @@
 
 .white-text {
   color: white; 
+}
+
+.sky-background {
+  background-color: #ade0ff;
 }
 
 /* 吹き出し本体 */

@@ -6,5 +6,7 @@ export default interface IUserState {
   userData: User
   followings: number
   followers: number
+  isFollowing: boolean
+  isFollowed: boolean
   words:Array<Word>
 }

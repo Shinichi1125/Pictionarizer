@@ -3,7 +3,8 @@ import { API_URL, CONFIG, TOAST_MILISEC } from '../Constants'
 import User from '../interfaces/User.interface';
 import LoginInfo from '../interfaces/LoginInfo.interface';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
+import 'react-toastify/dist/ReactToastify.css';
+import FollowerRelation from '../interfaces/FollowerRelation.interface';
 
 toast.configure();
 
@@ -34,6 +35,26 @@ class UsersDataService {
 
   retrieveFollowings(userId: number){
     return axios.get(`${API_URL}/followings/${userId}`);
+  }
+
+  isFollowed(combination: FollowerRelation){
+    return axios.get(`${API_URL}/is-followed`, {
+      params: {
+        userId: combination.userId,
+        followerId: combination.followerId,
+        followeeId: combination.followeeId
+      }
+    });
+  }
+
+  isFollowing(combination: FollowerRelation){
+    return axios.get(`${API_URL}/is-following`, {
+      params: {
+        userId: combination.userId,
+        followerId: combination.followerId,
+        followeeId: combination.followeeId
+      }
+    });
   }
 
   makeUserFormData(user: User){

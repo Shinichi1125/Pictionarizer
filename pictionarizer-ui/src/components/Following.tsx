@@ -37,7 +37,7 @@ class Following extends React.Component<IFollowProps, IFollowState>{
   render(){
     return(
       <div>
-        <h3>{this.state.userName}</h3>
+        <h3><span className="yellow-highlight">&nbsp;{this.state.userName}&nbsp;</span></h3>
         <div className="follow-nav">
           <ul className="nav nav-pills nav-fill">
             <li className="nav-item">

@@ -15,4 +15,7 @@ public interface FollowerRelationRepository extends JpaRepository<FollowerRelati
 	
 	@Query("SELECT fr FROM FollowerRelation fr where fr.followerId = :followerId") 
     List<FollowerRelation> findAllByFollowerId(@Param("followerId") int followerId);
+	
+	@Query("SELECT fr FROM FollowerRelation fr where fr.followerId = :followerId AND fr.followeeId = :followeeId") 
+    FollowerRelation findByFollowerIdAndFolloweeId(@Param("followerId") int followerId, @Param("followeeId") int followeeId);
 }

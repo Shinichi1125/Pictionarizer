@@ -2,6 +2,7 @@ package com.pictionarizer.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.pictionarizer.model.FollowerRelation;
 import com.pictionarizer.model.User;
@@ -96,6 +98,48 @@ public class FollowerController {
 		List<FollowerRelation> followingIdList = repository.findAllByFollowerId(id);
 		noOfFollowings = followingIdList.size();
 		return noOfFollowings; 
+	}
+	
+	// check if you are followed by a particular user 
+	@RequestMapping(value = "/is-followed", method = RequestMethod.GET)
+	public boolean isFollowed(
+			@RequestParam("userId") int userId,
+			@RequestParam("followerId") int followerId,
+			@RequestParam("followeeId") int followeeId) {
+		
+		boolean result = false; 
+		FollowerRelation followerRelation = repository.findByFollowerIdAndFolloweeId(followerId, followeeId);
+		
+		Optional<FollowerRelation> frOpt = Optional.ofNullable(followerRelation);
+		
+		if(frOpt.isPresent()) {
+			if(followerRelation.getFolloweeId() == userId) {
+				result = true; 
+			}	
+		}
+		
+		return result; 
+	}
+	
+	// check if you are following a particular user 
+	@RequestMapping(value = "/is-following", method = RequestMethod.GET)
+	public boolean isFollowing(
+			@RequestParam("userId") int userId,
+			@RequestParam("followerId") int followerId,
+			@RequestParam("followeeId") int followeeId) {
+		
+		boolean result = false; 
+		FollowerRelation followerRelation = repository.findByFollowerIdAndFolloweeId(followerId, followeeId);
+		
+		Optional<FollowerRelation> frOpt = Optional.ofNullable(followerRelation);
+		
+		if(frOpt.isPresent()) {
+			if(followerRelation.getFollowerId() == userId) {
+				result = true; 
+			}	
+		}
+		
+		return result; 
 	}
 	
 	@RequestMapping(value = "/follower", method = RequestMethod.POST)

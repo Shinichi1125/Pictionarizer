@@ -32,6 +32,8 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
       },
       followings: 0,
       followers: 0,
+      isFollowing: false,
+      isFollowed: false,
       words: new Array<Word>()
     }
   }
@@ -39,6 +41,18 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
   componentDidMount(){
     let id = Number(this.props.match.params.id);
     let data: User;
+
+    const followerRelation = {
+      userId: loginState,
+      followerId: id,
+      followeeId: loginState
+    }
+
+    const followingRelation = {
+      userId: loginState,
+      followerId: loginState,
+      followeeId: id
+    }
 
     UsersDataService.retrieveUser(id)
     .then(res => {
@@ -58,10 +72,17 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
     .then(res => {
       this.setState({followings:res.data})
     })
-
     UsersDataService.getNoOfFollowers(id)
     .then(res => {
       this.setState({followers: res.data})
+    })
+    UsersDataService.isFollowed(followerRelation)
+    .then(res => {
+      this.setState({isFollowed: res.data})
+    })
+    UsersDataService.isFollowing(followingRelation)
+    .then(res => {
+      this.setState({isFollowing: res.data})
     })
   }
 
@@ -71,6 +92,11 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
 
     return(
       <div>
+        {
+          loginState === user.id? <span></span>:
+          this.state.isFollowing? <button className="btn btn-primary follow-button">Following</button>:
+          <button className="btn btn-outline-primary follow-button">Follow</button>
+        }  
         <div className="object-details">
           <img src={`${API_URL}/user/uploaded-image/${this.state.userId}`} 
               alt="fetched img" 
@@ -78,7 +104,11 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
           />
           <h3 className="no-margin-bottom">
             <span className="yellow-highlight">&nbsp;{user.name}&nbsp;</span>
-            <span className="small-font">&nbsp;(User ID: {user.id})&nbsp;</span>
+            <span className="small-font">&nbsp;(User ID: {user.id})&nbsp;&nbsp;</span>
+            {
+              this.state.isFollowed? <span className="small-font sky-background">&nbsp;Follows you&nbsp;</span>:
+              <span></span>
+            }
           </h3>
           <div>Learning: <strong>{user.targetLanguage}</strong></div>
           <div>Speaks: <strong>{user.ownLanguage}</strong></div>
