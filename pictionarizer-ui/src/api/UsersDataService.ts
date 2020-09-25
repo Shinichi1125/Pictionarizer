@@ -57,12 +57,21 @@ class UsersDataService {
     });
   }
 
+  makeFollowFormData(combination: FollowerRelation){
+    const formData = new FormData();
+
+    formData.append('userId', String(combination.userId));
+    formData.append('followerId', String(combination.followerId));
+    formData.append('followeeId', String(combination.followeeId));
+    
+    return formData; 
+  }
+
   followUser(combination: FollowerRelation){
-    return axios.post(`${API_URL}/follow`, {
-      params: {
-        userId: combination.userId,
-        followerId: combination.followerId,
-        followeeId: combination.followeeId
+    const formData = this.makeFollowFormData(combination);
+    return axios.post(`${API_URL}/follow`, formData, {
+      headers: {
+        'Content-Type': 'application/json'
       }
     });
   }

@@ -154,8 +154,10 @@ public class FollowerController {
 		Optional<FollowerRelation> frOpt = Optional.ofNullable(followerRelation);
 		
 		if(frOpt.isPresent()) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, 
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
 					"This followerRelation already exists") ;
+		} else {
+			followerRelation = new FollowerRelation();
 		}
 		
 		followerRelation.setFollowerId(followerId);
