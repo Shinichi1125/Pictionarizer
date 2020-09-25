@@ -57,6 +57,26 @@ class UsersDataService {
     });
   }
 
+  followUser(combination: FollowerRelation){
+    return axios.post(`${API_URL}/follow`, {
+      params: {
+        userId: combination.userId,
+        followerId: combination.followerId,
+        followeeId: combination.followeeId
+      }
+    });
+  }
+
+  unfollowUser(combination: FollowerRelation){
+    return axios.delete(`${API_URL}/unfollow`, {
+      params: {
+        userId: combination.userId,
+        followerId: combination.followerId,
+        followeeId: combination.followeeId
+      }
+    });
+  }
+
   makeUserFormData(user: User){
     const formData = new FormData();
     formData.append('id', String(user.id));

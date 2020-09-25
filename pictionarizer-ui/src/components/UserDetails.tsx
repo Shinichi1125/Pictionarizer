@@ -36,6 +36,8 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
       isFollowed: false,
       words: new Array<Word>()
     }
+    this.followUser = this.followUser.bind(this)
+    this.unfollowUser = this.unfollowUser.bind(this)
   }
 
   componentDidMount(){
@@ -86,6 +88,26 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
     })
   }
 
+  followUser(id: number){
+    const followingRelation = {
+      userId: loginState,
+      followerId: loginState,
+      followeeId: id
+    }
+    UsersDataService.followUser(followingRelation)
+    .then(() => window.location.reload(true)) 
+  }
+
+  unfollowUser(id: number){
+    const followingRelation = {
+      userId: loginState,
+      followerId: loginState,
+      followeeId: id
+    }
+    UsersDataService.unfollowUser(followingRelation)
+    .then(() => window.location.reload(true)) 
+  }
+
   render(){    
     let user: User;
     user = this.state.userData;
@@ -94,8 +116,8 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
       <div>
         {
           loginState === user.id? <span></span>:
-          this.state.isFollowing? <button className="btn btn-primary follow-button">Following</button>:
-          <button className="btn btn-outline-primary follow-button">Follow</button>
+          this.state.isFollowing? <button onClick={() => this.unfollowUser(user.id)} className="btn btn-primary follow-button">Following</button>:
+          <button onClick={() => this.followUser(user.id)} className="btn btn-outline-primary follow-button">Follow</button>
         }  
         <div className="object-details">
           <img src={`${API_URL}/user/uploaded-image/${this.state.userId}`} 

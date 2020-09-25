@@ -35,7 +35,7 @@ class Header extends React.Component{
               />
             </li>
             &nbsp;
-            <li className="nav-link">{loginState !== 0?<Link to={'user/details/' + loginState}>My page</Link>: <p> </p>}</li>
+            <li className="nav-link">{loginState !== 0?<Link to={'/user/details/' + loginState}>My page</Link>: <p> </p>}</li>
           </ul>
         </nav>
       </div>

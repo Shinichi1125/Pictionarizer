@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.pictionarizer.model.FollowerRelation;
 import com.pictionarizer.model.User;
@@ -142,22 +144,39 @@ public class FollowerController {
 		return result; 
 	}
 	
-	@RequestMapping(value = "/follower", method = RequestMethod.POST)
-	public FollowerRelation createFollowerRelation(
+	@RequestMapping(value = "/follow", method = RequestMethod.POST)
+	public FollowerRelation saveFollowRelation(
+			@RequestParam("userId") int userId,
 			@RequestParam("followerId") int followerId,
 			@RequestParam("followeeId") int followeeId) {
 		
-		FollowerRelation followerRelation = new FollowerRelation();
+		FollowerRelation followerRelation = repository.findByFollowerIdAndFolloweeId(followerId, followeeId);	
+		Optional<FollowerRelation> frOpt = Optional.ofNullable(followerRelation);
+		
+		if(frOpt.isPresent()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, 
+					"This followerRelation already exists") ;
+		}
 		
 		followerRelation.setFollowerId(followerId);
-		followerRelation.setFolloweeId(followeeId);
+		followerRelation.setFolloweeId(followeeId);		
 		
 		return repository.save(followerRelation);
 	}
 	
 	// helper method that is only to be used in Postman experiment 
-	@RequestMapping(value = "/follower/{id}", method = RequestMethod.DELETE)
-	public void deleteFollowerRelation(@PathVariable("id") int id) {
-		repository.deleteById(id);
+	@RequestMapping(value = "/unfollow", method = RequestMethod.DELETE)
+	public void deleteFollowerRelation(
+			@RequestParam("userId") int userId,
+			@RequestParam("followerId") int followerId,
+			@RequestParam("followeeId") int followeeId) {
+		
+		FollowerRelation followerRelation = repository.findByFollowerIdAndFolloweeId(followerId, followeeId);	
+		Optional<FollowerRelation> frOpt = Optional.ofNullable(followerRelation);
+		
+		if(!frOpt.isPresent()) {
+			return;
+		}
+		repository.deleteById(followerRelation.getPairId());
 	}
 }
