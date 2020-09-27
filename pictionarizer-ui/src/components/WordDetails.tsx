@@ -25,7 +25,9 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
         targetLangExSentence: '',
         createdDate: new Date(),
         image: new File(["foo"], "foo.txt")
-      }
+      },
+      noOfLikes: 0,
+      isLiked: false
     }
   }
 
@@ -38,6 +40,12 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
       data = res.data;
       this.setState({wordData:data});
     }) 
+
+    WordsDataService.getNoOfLikes(id)
+    .then(res => {
+      this.setState({noOfLikes:res.data})
+      console.log('Number of likes: ' + this.state.noOfLikes);
+    })
   }
 
   render(){
@@ -73,10 +81,17 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
           {truncatedDate}
         </div>
         <div>
-          <Link to={'/user/details/' + String(word.userId)}><span role="img" aria-label="info">ℹ️</span> User Info</Link>
+          <Link to={'/user/details/' + String(word.userId)}><span role="img" aria-label="info">ℹ️</span> User Info</Link>&nbsp;&nbsp;
+          <span>{loginState === word.userId? <Link to={'/word/' + String(word.id)}><span role="img" aria-label="edit">✏️</span>Edit</Link> : <span></span>}</span>&nbsp;&nbsp;  
+          <span>{loginState === word.userId? <Link className="text-danger" to={'/word/delete/' + String(word.id)}><span role="img" aria-label="delete">🗑️</span>Delete</Link>: <span></span>}</span>
+        </div>     
+        <br/>
+        <div>     
+          {this.state.noOfLikes === 1? 
+            <Link to={'/word/likes/' + String(word.id)}><span> {this.state.noOfLikes} like</span></Link>: 
+            <Link to={'/word/likes/' + String(word.id)}><span> {this.state.noOfLikes} likes</span></Link>
+          } 
         </div>
-        <div>{loginState === word.userId? <Link to={'/word/' + String(word.id)}><span role="img" aria-label="edit">✏️</span>Edit</Link> : <p> </p>}</div>  
-        <div>{loginState === word.userId? <Link className="text-danger" to={'/word/delete/' + String(word.id)}><span role="img" aria-label="delete">🗑️</span>Delete</Link>: <p> </p>}</div>
       </div>
     )
   }

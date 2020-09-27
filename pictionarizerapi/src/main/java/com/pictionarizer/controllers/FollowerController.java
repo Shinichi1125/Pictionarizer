@@ -166,7 +166,6 @@ public class FollowerController {
 		return repository.save(followerRelation);
 	}
 	
-	// helper method that is only to be used in Postman experiment 
 	@RequestMapping(value = "/unfollow", method = RequestMethod.DELETE)
 	public void deleteFollowerRelation(
 			@RequestParam("userId") int userId,

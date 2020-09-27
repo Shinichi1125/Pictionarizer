@@ -21,7 +21,9 @@ class DeleteWord extends React.Component<IWordProps, IWordState>{
         targetLangExSentence: '',
         createdDate: new Date(),
         image: new File(["foo"], "foo.txt")
-      }
+      },
+      noOfLikes: 0,
+      isLiked: false
     }
 
     this.confirmDelete = this.confirmDelete.bind(this)

@@ -26,7 +26,9 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
         targetLangExSentence: '',
         createdDate: new Date(),
         image: new File(["foo"], "foo.txt")
-      }
+      },
+      noOfLikes: 0,
+      isLiked: false
     }
 
     this.onSubmit = this.onSubmit.bind(this)

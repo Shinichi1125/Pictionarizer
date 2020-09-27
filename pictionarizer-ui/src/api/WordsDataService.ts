@@ -19,6 +19,10 @@ class WordsDataService {
     return axios.get(`${API_URL}/words/${userId}`);
   }
 
+  getNoOfLikes(wordId: number){
+    return axios.get(`${API_URL}/no-of-likes/${wordId}`);
+  }
+
   makeFormData(word: Word){
 
     const formData = new FormData();
