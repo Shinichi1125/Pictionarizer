@@ -29,7 +29,6 @@ class Words extends React.Component{
         <Link to={'/users'}>Users</Link>
         <br/><hr></hr><br/>
         {loginState > 0?<Link to={'word/create'}>+Word</Link>: <p> </p>}
-        <h2>Words:</h2>
         <div>
           {this.state.wordsData.map((word)=>
           <WordRowCreator 

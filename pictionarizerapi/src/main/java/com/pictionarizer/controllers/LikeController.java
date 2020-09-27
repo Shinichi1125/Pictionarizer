@@ -43,6 +43,22 @@ public class LikeController {
 		this.wordRepository = wordRepository; 
 	}
 	
+	public List<Word> reverseWordArrayList(List<Word> alist) { 
+        List<Word> revArrayList = new ArrayList<Word>(); 
+        for (int i = alist.size() - 1; i >= 0; i--) { 
+            revArrayList.add(alist.get(i)); 
+        } 
+        return revArrayList; 
+    } 	
+	
+	public List<User> reverseUserArrayList(List<User> alist) { 
+        List<User> revArrayList = new ArrayList<User>(); 
+        for (int i = alist.size() - 1; i >= 0; i--) { 
+            revArrayList.add(alist.get(i)); 
+        } 
+        return revArrayList; 
+    } 	
+	
 	// fetch the users who liked the word
 	@RequestMapping(value = "/likers/{id}", method = RequestMethod.GET)
 	public List<User> getLikers(@PathVariable("id") int id){
@@ -61,6 +77,7 @@ public class LikeController {
 			}
 		}	
 		
+		userList = reverseUserArrayList(userList);	
 		return userList;
 	}
 	
@@ -81,6 +98,7 @@ public class LikeController {
 			}
 		}
 		
+		wordList = reverseWordArrayList(wordList);		
 		return wordList;
 	}
 	

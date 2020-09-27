@@ -156,7 +156,16 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
         </div>
         <div>
           <br/>
-          <h3>【Words】</h3>
+          <div className="follow-nav">
+            <ul className="nav nav-pills nav-fill">
+              <li className="nav-item follow-nav-selected">
+                <Link className="white-text" to={'/user/details/' + String(this.state.userId)}>Words</Link>
+              </li>
+              <li className="nav-item">
+                <Link to={'/user/likes/' + String(this.state.userId)}>Likes</Link>
+              </li>
+            </ul>
+          </div>
           {this.state.words.map((word)=>
             <WordRowCreator 
               key = {word.id}

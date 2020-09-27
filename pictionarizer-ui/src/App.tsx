@@ -20,6 +20,7 @@ import Login from './components/Login';
 import Follower from './components/Follower';
 import Following from './components/Following';
 import Likes from './components/Likes';
+import WordsLiked from './components/WordsLiked';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route exact path="/user/details/:id" component={UserDetails}/>
         <Route exact path="/user/followers/:id" component={Follower}/>
         <Route exact path="/user/followings/:id" component={Following}/>
+        <Route exact path="/user/likes/:id" component={WordsLiked}/> 
         <Route exact path="/user/:id" component={UpdateUser}/>
         <Route exact path="/word/create" component={CreateWord}/>
         <Route exact path="/word/:id" component={UpdateWord}/>

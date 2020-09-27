@@ -4,6 +4,7 @@ import User from '../interfaces/User.interface';
 import { API_URL } from '../Constants';
 import { Link } from 'react-router-dom';
 import UsersDataService from '../api/UsersDataService'; 
+import WordsDataService from '../api/WordsDataService';
 import moment from 'moment';
 
 class WordRowCreator extends React.Component<Word>{
@@ -19,18 +20,25 @@ class WordRowCreator extends React.Component<Word>{
       password: '',
       image: new File(["foo"], "foo.txt"),
       description: '' 
-    }
+    },
+    noOfLikes: 0
   }
 
   componentDidMount(){
-    let id = Number(this.props.userId);
+    let id = this.props.userId;
     let data: User;
+    let wordId = this.props.id;
 
     UsersDataService.retrieveUser(id)
     .then(res => {
       data = res.data;
       this.setState({userData:data});
     }) 
+
+    WordsDataService.getNoOfLikes(wordId)
+    .then(res => {
+      this.setState({noOfLikes: res.data});
+    })
   }
 
   render(){
@@ -55,6 +63,11 @@ class WordRowCreator extends React.Component<Word>{
               </span>
               &nbsp;{moment(word.createdDate).fromNow()}
             </span>
+            {this.state.noOfLikes === 1? 
+              <span>,&nbsp;&nbsp; {this.state.noOfLikes} like</span>: 
+              this.state.noOfLikes === 0? <span></span>:
+              <span>,&nbsp;&nbsp; {this.state.noOfLikes} likes</span>
+            } 
           </p>           
         </div>
     )

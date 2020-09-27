@@ -20,6 +20,10 @@ class WordsDataService {
     return axios.get(`${API_URL}/words/${userId}`);
   }
 
+  retrieveWordsLiked(userId: number){
+    return axios.get(`${API_URL}/words-liked/${userId}`);
+  }
+
   getNoOfLikes(wordId: number){
     return axios.get(`${API_URL}/no-of-likes/${wordId}`);
   }
