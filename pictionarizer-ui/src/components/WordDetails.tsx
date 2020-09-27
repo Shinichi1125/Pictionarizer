@@ -35,6 +35,12 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
     let id = Number(this.props.match.params.id);
     let data: Word;
 
+    const likeRelation = {
+      userId: loginState,
+      likeUserId: loginState,
+      wordId: id
+    }
+
     WordsDataService.retrieveWord(id)
     .then(res => {
       data = res.data;
@@ -44,6 +50,11 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
     WordsDataService.getNoOfLikes(id)
     .then(res => {
       this.setState({noOfLikes:res.data})
+    })
+
+    WordsDataService.isLiked(likeRelation)
+    .then(res => {
+      this.setState({isLiked: res.data})
     })
   }
 
@@ -85,9 +96,14 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
           <span>{loginState === word.userId? <Link className="text-danger" to={'/word/delete/' + String(word.id)}><span role="img" aria-label="delete">🗑️</span>Delete</Link>: <span></span>}</span>
         </div>     
         <br/>
-        <div>     
+        <div>   
+          {
+            this.state.isLiked? <button  className="like-button primary"><span role="img" aria-label="like">👍</span>Like</button>:
+            <button  className="like-button outline-primary"><span role="img" aria-label="like">👍</span>Like</button>
+          }     
           {this.state.noOfLikes === 1? 
             <Link to={'/word/likes/' + String(word.id)}><span> {this.state.noOfLikes} like</span></Link>: 
+            this.state.noOfLikes === 0? <span></span>:
             <Link to={'/word/likes/' + String(word.id)}><span> {this.state.noOfLikes} likes</span></Link>
           } 
         </div>

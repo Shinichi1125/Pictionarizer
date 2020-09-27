@@ -1,8 +1,9 @@
-import axios from 'axios'
-import { API_URL, CONFIG, TOAST_MILISEC } from '../Constants'
+import axios from 'axios';
+import { API_URL, CONFIG, TOAST_MILISEC } from '../Constants';
 import Word from '../interfaces/Word.interface';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
+import 'react-toastify/dist/ReactToastify.css';
+import LikeRelation from '../interfaces/LikeRelation.interface';
 
 toast.configure();
 
@@ -26,6 +27,16 @@ class WordsDataService {
   retrieveLikers(wordId: number){
     return axios.get(`${API_URL}/likers/${wordId}`);
   }
+
+  isLiked(combination: LikeRelation){
+    return axios.get(`${API_URL}/is-liked`, {
+      params: {
+        userId: combination.userId,
+        likeUserId: combination.likeUserId,
+        wordId: combination.wordId
+      }
+    });
+  }  
 
   makeFormData(word: Word){
 
