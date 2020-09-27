@@ -23,6 +23,10 @@ class WordsDataService {
     return axios.get(`${API_URL}/no-of-likes/${wordId}`);
   }
 
+  retrieveLikers(wordId: number){
+    return axios.get(`${API_URL}/likers/${wordId}`);
+  }
+
   makeFormData(word: Word){
 
     const formData = new FormData();

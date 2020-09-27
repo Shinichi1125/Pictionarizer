@@ -19,6 +19,7 @@ import Footer from './components/Footer';
 import Login from './components/Login';
 import Follower from './components/Follower';
 import Following from './components/Following';
+import Likes from './components/Likes';
 
 function App() {
   return (
@@ -38,7 +39,8 @@ function App() {
         <Route exact path="/word/create" component={CreateWord}/>
         <Route exact path="/word/:id" component={UpdateWord}/>
         <Route exact path="/word/delete/:id" component={DeleteWord}/>
-        <Route exact path="/word/details/:id" component={WordDetails}/>   
+        <Route exact path="/word/details/:id" component={WordDetails}/>
+        <Route exact path="/word/likes/:id" component={Likes}/>    
         <Route exact path="/login" component={Login}/>          
       </Switch>
       <Footer/>

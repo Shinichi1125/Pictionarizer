@@ -44,7 +44,6 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
     WordsDataService.getNoOfLikes(id)
     .then(res => {
       this.setState({noOfLikes:res.data})
-      console.log('Number of likes: ' + this.state.noOfLikes);
     })
   }
 
