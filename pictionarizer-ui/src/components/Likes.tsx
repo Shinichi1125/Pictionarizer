@@ -44,7 +44,6 @@ class Likes extends React.Component<ILikeProps, ILikeState>{
             image={user.image}
             description={user.description}
           />)}
-
       </div>
     )
   }
