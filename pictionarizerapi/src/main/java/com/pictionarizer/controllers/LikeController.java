@@ -154,7 +154,7 @@ public class LikeController {
 		LikeRelation likeRelation = repository.findByUserIdAndWordId(likeUserId, wordId);
 		Optional<LikeRelation> lrOpt = Optional.ofNullable(likeRelation);
 		
-		if(lrOpt.isPresent()) {
+		if(!lrOpt.isPresent()) {
 			return;
 		}
 		repository.deleteById(likeRelation.getLikeId());

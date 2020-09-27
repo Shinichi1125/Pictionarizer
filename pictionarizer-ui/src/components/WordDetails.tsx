@@ -29,6 +29,8 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
       noOfLikes: 0,
       isLiked: false
     }
+    this.likeWord = this.likeWord.bind(this)
+    this.unlikeWord = this.unlikeWord.bind(this)
   }
 
   componentDidMount(){
@@ -56,6 +58,26 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
     .then(res => {
       this.setState({isLiked: res.data})
     })
+  }
+
+  likeWord(id: number){
+    const likeRelation = {
+      userId: loginState,
+      likeUserId: loginState,
+      wordId: id
+    }
+    WordsDataService.likeWord(likeRelation)
+    .then(() => window.location.reload(true)) 
+  }
+
+  unlikeWord(id: number){
+    const likeRelation = {
+      userId: loginState,
+      likeUserId: loginState,
+      wordId: id
+    }
+    WordsDataService.unlikeWord(likeRelation)
+    .then(() => window.location.reload(true)) 
   }
 
   render(){
@@ -98,8 +120,8 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
         <br/>
         <div>   
           {
-            this.state.isLiked? <button  className="like-button primary"><span role="img" aria-label="like">👍</span>Like</button>:
-            <button  className="like-button outline-primary"><span role="img" aria-label="like">👍</span>Like</button>
+            this.state.isLiked? <button onClick={() => this.unlikeWord(word.id)} className="like-button primary"><span role="img" aria-label="like">👍</span>Like</button>:
+            <button onClick={() => this.likeWord(word.id)} className="like-button outline-primary"><span role="img" aria-label="like">👍</span>Like</button>
           }     
           {this.state.noOfLikes === 1? 
             <Link to={'/word/likes/' + String(word.id)}><span> {this.state.noOfLikes} like</span></Link>: 

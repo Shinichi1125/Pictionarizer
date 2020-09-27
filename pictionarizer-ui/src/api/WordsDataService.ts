@@ -38,7 +38,36 @@ class WordsDataService {
     });
   }  
 
-  makeFormData(word: Word){
+  makeLikeFormData(combination: LikeRelation){
+    const formData = new FormData();
+
+    formData.append('userId', String(combination.userId));
+    formData.append('likeUserId', String(combination.likeUserId));
+    formData.append('wordId', String(combination.wordId));
+    
+    return formData; 
+  }
+
+  likeWord(combination: LikeRelation){
+    const formData = this.makeLikeFormData(combination);
+    return axios.post(`${API_URL}/like`, formData, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  }
+
+  unlikeWord(combination: LikeRelation){
+    return axios.delete(`${API_URL}/unlike`, {
+      params: {
+        userId: combination.userId,
+        likeUserId: combination.likeUserId,
+        wordId: combination.wordId
+      }
+    });
+  }
+
+  makeWordFormData(word: Word){
 
     const formData = new FormData();
     formData.append('id', String(word.id));
@@ -56,14 +85,14 @@ class WordsDataService {
   createWord(word: Word){
     console.log("The content of the word object: ");
     console.log(word);
-    const formData = this.makeFormData(word);
+    const formData = this.makeWordFormData(word);
     return axios.post(`${API_URL}/word`, formData, CONFIG);
   }
 
   updateWord(id: number, word: Word){
     console.log("The content of the word object: ");
     console.log(word);
-    const formData = this.makeFormData(word);
+    const formData = this.makeWordFormData(word);
     return axios.put(`${API_URL}/word/${id}`, formData, CONFIG);
   }
 
