@@ -144,7 +144,16 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
               <Link to={'/user/followers/' + String(user.id)}><span> {this.state.followers} Followers</span></Link>
             } 
           </div>
-          <br/>
+
+          <div>
+            {
+              this.state.words.length === 0? <span></span>:
+              this.state.words.length === 1? 
+              <span>{String(this.state.words.length)} word</span>:
+              <span>{String(this.state.words.length)} words</span>
+            }         
+          </div>
+
           <div className="speech-bubble">{user.description}</div>   
           <br/>    
           <div>{loginState === user.id? <Link to={'/user/' + String(user.id)}><span role="img" aria-label="edit">✏️</span>Edit profile</Link>: <p> </p>}</div>  
