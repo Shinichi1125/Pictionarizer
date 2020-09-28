@@ -31,6 +31,7 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
     }
     this.likeWord = this.likeWord.bind(this)
     this.unlikeWord = this.unlikeWord.bind(this)
+    this.redirectToLogin = this.redirectToLogin.bind(this)
   }
 
   componentDidMount(){
@@ -60,14 +61,22 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
     })
   }
 
+  redirectToLogin(){
+    this.props.history.push('/login')
+  }
+
   likeWord(id: number){
     const likeRelation = {
       userId: loginState,
       likeUserId: loginState,
       wordId: id
     }
-    WordsDataService.likeWord(likeRelation)
-    .then(() => window.location.reload(true)) 
+    if(loginState < 1){
+      this.redirectToLogin();
+    } else {
+      WordsDataService.likeWord(likeRelation)
+      .then(() => window.location.reload(true)) 
+    } 
   }
 
   unlikeWord(id: number){

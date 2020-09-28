@@ -38,6 +38,7 @@ class WordsLiked extends React.Component<IUserProps, IUserState>{
     }
     this.followUser = this.followUser.bind(this)
     this.unfollowUser = this.unfollowUser.bind(this)
+    this.redirectToLogin = this.redirectToLogin.bind(this)
   }
 
   componentDidMount(){
@@ -88,14 +89,22 @@ class WordsLiked extends React.Component<IUserProps, IUserState>{
     })
   }
 
+  redirectToLogin(){
+    this.props.history.push('/login')
+  }
+
   followUser(id: number){
     const followingRelation = {
       userId: loginState,
       followerId: loginState,
       followeeId: id
     }
-    UsersDataService.followUser(followingRelation)
-    .then(() => window.location.reload(true)) 
+    if(loginState < 1){
+      this.redirectToLogin();
+    } else {
+      UsersDataService.followUser(followingRelation)
+      .then(() => window.location.reload(true)) 
+    }
   }
 
   unfollowUser(id: number){

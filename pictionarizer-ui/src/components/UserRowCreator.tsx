@@ -92,14 +92,22 @@ class UserRowCreator extends React.Component<User>{
   }
 }
 
+const loginSuggest = () => {
+  alert("You first need to log in before you can follow someone");
+}
+
 const followUser = (id: number) => {
   const followingRelation = {
     userId: loginState,
     followerId: loginState,
     followeeId: id
   }
-  UsersDataService.followUser(followingRelation)
-  .then(() => window.location.reload(true)) 
+  if(loginState < 1){
+    loginSuggest();
+  } else {
+    UsersDataService.followUser(followingRelation)
+    .then(() => window.location.reload(true)) 
+  } 
 }
 
 const unfollowUser = (id: number) => {
