@@ -32,6 +32,14 @@ class WordsDataService {
     return axios.get(`${API_URL}/likers/${wordId}`);
   }
 
+  getNoOfComments(wordId: number){
+    return axios.get(`${API_URL}/no-of-comments/${wordId}`);
+  }
+
+  retrieveComments(wordId: number){
+    return axios.get(`${API_URL}/comments/${wordId}`);
+  }
+
   isLiked(combination: LikeRelation){
     return axios.get(`${API_URL}/is-liked`, {
       params: {

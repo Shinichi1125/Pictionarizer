@@ -1,5 +1,6 @@
 import React from 'react';
 import Word from '../interfaces/Word.interface';
+import Comment from '../interfaces/Comment.interface';
 import WordsDataService from '../api/WordsDataService'; 
 import IWordProps from '../interfaces/IWordProps.interface';
 import IWordState from '../interfaces/IWordState.interface';
@@ -27,7 +28,9 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
         image: new File(["foo"], "foo.txt")
       },
       noOfLikes: 0,
-      isLiked: false
+      isLiked: false,
+      noOfComments: 0,
+      comments: new Array<Comment>()
     }
     this.likeWord = this.likeWord.bind(this)
     this.unlikeWord = this.unlikeWord.bind(this)
@@ -58,6 +61,22 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
     WordsDataService.isLiked(likeRelation)
     .then(res => {
       this.setState({isLiked: res.data})
+    })
+
+    WordsDataService.retrieveComments(id)
+    .then(res => {
+      this.setState({
+        comments:[...this.state.comments, ...res.data]
+      });
+      console.log('The fetched comments: ');
+      console.log(this.state.comments);
+    }) 
+
+    WordsDataService.getNoOfComments(id)
+    .then(res => {
+      this.setState({noOfComments:res.data});
+      console.log('The number of comments: ');
+      console.log(this.state.noOfComments);
     })
   }
 
@@ -137,6 +156,10 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
             this.state.noOfLikes === 0? <span></span>:
             <Link to={'/word/likes/' + String(word.id)}><span> {this.state.noOfLikes} likes</span></Link>
           } 
+        </div>
+        <br/>
+        <div>
+
         </div>
       </div>
     )

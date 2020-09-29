@@ -1,5 +1,6 @@
 import React from 'react';
 import Word from '../interfaces/Word.interface';
+import Comment from '../interfaces/Comment.interface';
 import WordsDataService from '../api/WordsDataService';
 import IWordProps from '../interfaces/IWordProps.interface';
 import IWordState from '../interfaces/IWordState.interface';
@@ -23,7 +24,9 @@ class DeleteWord extends React.Component<IWordProps, IWordState>{
         image: new File(["foo"], "foo.txt")
       },
       noOfLikes: 0,
-      isLiked: false
+      isLiked: false,
+      noOfComments: 0,
+      comments: new Array<Comment>()
     }
 
     this.confirmDelete = this.confirmDelete.bind(this)
