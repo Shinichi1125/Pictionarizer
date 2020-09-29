@@ -1,6 +1,7 @@
 import React from 'react';
 import Word from '../interfaces/Word.interface';
 import Comment from '../interfaces/Comment.interface';
+import CommentRowCreator from './CommentRowCreator'
 import WordsDataService from '../api/WordsDataService'; 
 import IWordProps from '../interfaces/IWordProps.interface';
 import IWordState from '../interfaces/IWordState.interface';
@@ -68,15 +69,11 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
       this.setState({
         comments:[...this.state.comments, ...res.data]
       });
-      console.log('The fetched comments: ');
-      console.log(this.state.comments);
     }) 
 
     WordsDataService.getNoOfComments(id)
     .then(res => {
       this.setState({noOfComments:res.data});
-      console.log('The number of comments: ');
-      console.log(this.state.noOfComments);
     })
   }
 
@@ -159,7 +156,16 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
         </div>
         <br/>
         <div>
-
+          {this.state.comments.map((comment)=>
+            <CommentRowCreator 
+              key = {comment.id}
+              id={comment.id}
+              wordId={comment.wordId}
+              userId={comment.userId}
+              text={comment.text}
+              date={comment.date}
+            />)
+          }
         </div>
       </div>
     )

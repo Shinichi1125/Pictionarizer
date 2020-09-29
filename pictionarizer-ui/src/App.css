@@ -141,6 +141,14 @@
   background-color: #f6f6f4;
 }
 
+.comment-row {
+  width: 95%;
+  margin: auto;
+  text-align: left;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
 .username-follow {
   position: relative;
   display: -ms-flexbox;
@@ -170,6 +178,27 @@
   border-radius: 50%;
   margin-right: 1rem;
   margin-left: 0.25rem;
+}
+
+.comment-row-image {
+  width: 1.75rem;
+  height: 1.75rem;
+  float: left; 
+  border-radius: 50%;
+  margin-right: 0.25rem;
+  margin-left: 0px;
+}
+
+.comment-text {
+  width: 90%;
+  margin: 0 0 0 2rem;
+  padding: 0.5rem;
+  background-color: #ade0ff;
+  border-radius: 20px;
+}
+
+.indentation {
+  margin-left:2.5rem;
 }
 
 .object-details {
