@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { API_URL, CONFIG, TOAST_MILISEC } from '../Constants';
 import Word from '../interfaces/Word.interface';
+import Comment from '../interfaces/Comment.interface';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LikeRelation from '../interfaces/LikeRelation.interface';
@@ -79,6 +80,26 @@ class WordsDataService {
     });
   }
 
+  makeCommentFormData(combination: Comment){
+    const formData = new FormData();
+
+    formData.append('wordId', String(combination.wordId));
+    formData.append('userId', String(combination.userId));
+    formData.append('text', String(combination.text));
+    formData.append('date', combination.date.toISOString());
+    
+    return formData; 
+  }
+
+  postComment(combination: Comment){
+    const formData = this.makeCommentFormData(combination);
+    return axios.post(`${API_URL}/comment`, formData, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  }
+
   makeWordFormData(word: Word){
 
     const formData = new FormData();
@@ -95,15 +116,11 @@ class WordsDataService {
   }
 
   createWord(word: Word){
-    console.log("The content of the word object: ");
-    console.log(word);
     const formData = this.makeWordFormData(word);
     return axios.post(`${API_URL}/word`, formData, CONFIG);
   }
 
   updateWord(id: number, word: Word){
-    console.log("The content of the word object: ");
-    console.log(word);
     const formData = this.makeWordFormData(word);
     return axios.put(`${API_URL}/word/${id}`, formData, CONFIG);
   }

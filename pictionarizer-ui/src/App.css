@@ -201,6 +201,13 @@
   margin-left:2.5rem;
 }
 
+.comment-input {
+  display: inline-block;
+  width: 95%;
+  margin: auto; 
+  background-color: #f6f6f4;
+}
+
 .object-details {
   width: 50%;
   margin: auto; 

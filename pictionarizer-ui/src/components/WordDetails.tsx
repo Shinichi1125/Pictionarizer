@@ -8,6 +8,7 @@ import IWordState from '../interfaces/IWordState.interface';
 import { API_URL, TEST_USER_ID } from '../Constants';
 import { Link } from 'react-router-dom';
 import { getLoginId } from '../LoginLocalStorage';
+import { Formik, Form, Field, ErrorMessage } from 'formik'; 
 
 const loginState = Number(getLoginId());
 
@@ -36,6 +37,8 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
     this.likeWord = this.likeWord.bind(this)
     this.unlikeWord = this.unlikeWord.bind(this)
     this.redirectToLogin = this.redirectToLogin.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
+    this.validate = this.validate.bind(this)
   }
 
   componentDidMount(){
@@ -105,11 +108,30 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
     .then(() => window.location.reload(true)) 
   }
 
+  async onSubmit(values: Comment){
+    let comment = {
+      ...values, 
+      date: new Date()
+    };
+
+    await WordsDataService.postComment(comment)
+    .then(() => this.props.history.push('/word/details/' + comment.wordId)) 
+    .then(() => window.location.reload(true)) 
+  }
+
+  validate(){
+
+  }
+
   render(){
     let word: Word;
     word= this.state.wordData;
     let date = String(word.createdDate);
     let truncatedDate = date.slice(0, 10);
+
+    let init: Comment = {
+      id: null, wordId: word.id, userId: loginState, text: '', date: null
+    }
 
     return(
       <div className="object-details">
@@ -166,6 +188,32 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
               date={comment.date}
             />)
           }
+        </div>
+        <div className="comment-input">
+          <Formik
+            initialValues={init}
+            onSubmit={this.onSubmit}
+            validate={this.validate}
+            enableReinitialize={true}
+          >
+            {
+              (props) => (
+                <Form>
+                  <img src={`${API_URL}/user/uploaded-image/${loginState}`} 
+                    alt="fetched img" 
+                    className="small round-border"
+                  />
+                  &nbsp;&nbsp;
+                  <Field as="textarea" name="text"
+                    placeholder="Write a comment" 
+                    cols="45" rows="2"
+                  />     
+                  &nbsp;&nbsp;
+                  <button type="submit" className="btn btn-primary">Send</button>              
+                </Form>
+              )
+            }      
+          </Formik>
         </div>
       </div>
     )
