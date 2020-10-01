@@ -119,8 +119,12 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
     .then(() => window.location.reload(true)) 
   }
 
-  validate(){
-
+  validate(values: Comment){
+    let errors: Partial<Comment> = {};
+    if(values.text === ''){
+      errors.text = "Write something before hitting the send button."
+    }
+    return errors; 
   }
 
   render(){
@@ -189,27 +193,31 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
             />)
           }
         </div>
-        <div className="comment-input">
+        <div>
           <Formik
             initialValues={init}
             onSubmit={this.onSubmit}
             validate={this.validate}
+            validateOnChange = {false}
             enableReinitialize={true}
           >
             {
               (props) => (
                 <Form>
-                  <img src={`${API_URL}/user/uploaded-image/${loginState}`} 
-                    alt="fetched img" 
-                    className="small round-border"
-                  />
-                  &nbsp;&nbsp;
-                  <Field as="textarea" name="text"
-                    placeholder="Write a comment" 
-                    cols="45" rows="2"
-                  />     
-                  &nbsp;&nbsp;
-                  <button type="submit" className="btn btn-primary">Send</button>              
+                  <ErrorMessage name="text" component="div" className="text-danger"/>
+                  <div className="form-group row">
+                    <img src={`${API_URL}/user/uploaded-image/${loginState}`} 
+                      alt="fetched img" 
+                      className="small round-border indentation"
+                    />
+                    &nbsp;&nbsp;
+                    <Field as="textarea" name="text"
+                      placeholder="Write a comment..." 
+                      cols="45" rows="1"
+                    />     
+                    &nbsp;&nbsp;
+                    <button type="submit" className="btn btn-primary">Send</button>  
+                  </div>                 
                 </Form>
               )
             }      
