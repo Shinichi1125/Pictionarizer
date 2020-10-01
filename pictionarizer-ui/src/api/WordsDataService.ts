@@ -100,6 +100,10 @@ class WordsDataService {
     });
   }
 
+  deleteComment(id: number){
+    return axios.delete(`${API_URL}/comment/${id}`);
+  }
+
   makeWordFormData(word: Word){
 
     const formData = new FormData();

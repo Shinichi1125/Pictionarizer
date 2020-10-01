@@ -140,7 +140,7 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
     let truncatedDate = date.slice(0, 10);
 
     let init: Comment = {
-      id: null, wordId: word.id, userId: loginState, text: '', date: null
+      commentId: null, wordId: word.id, userId: loginState, text: '', date: null
     }
 
     return(
@@ -184,9 +184,10 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
             this.state.noOfComments === 0? <span></span>:
             <span> {this.state.noOfLikes} comments&nbsp;&nbsp;</span>
           } 
+          &nbsp;
           {
-            this.state.isLiked? <button onClick={() => this.unlikeWord(word.id)} className="like-button primary"><span role="img" aria-label="like">👍</span>Like</button>:
-            <button onClick={() => this.likeWord(word.id)} className="like-button outline-primary"><span role="img" aria-label="like">👍</span>Like</button>
+            this.state.isLiked? <button onClick={() => this.unlikeWord(word.id)} className="action-button primary"><span role="img" aria-label="like">👍</span>Like</button>:
+            <button onClick={() => this.likeWord(word.id)} className="action-button outline-primary"><span role="img" aria-label="like">👍</span>Like</button>
           }     
           {this.state.noOfLikes === 1? 
             <Link to={'/word/likes/' + String(word.id)}><span> {this.state.noOfLikes} like</span></Link>: 
@@ -198,8 +199,8 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
         <div>
           {this.state.comments.map((comment)=>
             <CommentRowCreator 
-              key = {comment.id}
-              id={comment.id}
+              key = {comment.commentId}
+              commentId={comment.commentId}
               wordId={comment.wordId}
               userId={comment.userId}
               text={comment.text}

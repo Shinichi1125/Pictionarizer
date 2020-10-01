@@ -21,7 +21,8 @@ class WordRowCreator extends React.Component<Word>{
       image: new File(["foo"], "foo.txt"),
       description: '' 
     },
-    noOfLikes: 0
+    noOfLikes: 0,
+    noOfComments: 0
   }
 
   componentDidMount(){
@@ -38,6 +39,11 @@ class WordRowCreator extends React.Component<Word>{
     WordsDataService.getNoOfLikes(wordId)
     .then(res => {
       this.setState({noOfLikes: res.data});
+    })
+
+    WordsDataService.getNoOfComments(wordId)
+    .then(res => {
+      this.setState({noOfComments: res.data});
     })
   }
 
@@ -63,6 +69,11 @@ class WordRowCreator extends React.Component<Word>{
               </span>
               &nbsp;{moment(word.createdDate).fromNow()}
             </span>
+            {this.state.noOfComments === 1? 
+              <span>,&nbsp;&nbsp; {this.state.noOfComments} comment</span>: 
+              this.state.noOfComments === 0? <span></span>:
+              <span>,&nbsp;&nbsp; {this.state.noOfComments} comments</span>
+            } 
             {this.state.noOfLikes === 1? 
               <span>,&nbsp;&nbsp; {this.state.noOfLikes} like</span>: 
               this.state.noOfLikes === 0? <span></span>:

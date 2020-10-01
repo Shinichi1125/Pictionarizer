@@ -81,7 +81,7 @@ public class CommentController {
 	}
 	
 	@RequestMapping(value = "/comment", method = RequestMethod.POST)
-	public ResponseEntity<?> saveWord(
+	public ResponseEntity<?> saveComment(
 			@RequestParam("wordId") int wordId,
 			@RequestParam("userId") int userId,
 			@RequestParam("text") String text,
@@ -109,4 +109,9 @@ public class CommentController {
 		
 		return new ResponseEntity<>(comment, HttpStatus.OK);
 	}	
+	
+	@RequestMapping(value = "/comment/{id}", method = RequestMethod.DELETE)
+	public void deleteComment(@PathVariable("id") int id) {
+		repository.deleteById(id);
+	}
 }

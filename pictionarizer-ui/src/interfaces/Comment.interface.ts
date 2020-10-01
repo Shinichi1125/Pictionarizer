@@ -1,5 +1,5 @@
 export default interface Comment {
-  id: number;
+  commentId: number;
   wordId: number;
   userId: number;
   text: string;
