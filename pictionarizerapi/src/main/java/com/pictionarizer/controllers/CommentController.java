@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
+import com.pictionarizer.controllers.UserController.Error;
 import com.pictionarizer.model.Comment;
 import com.pictionarizer.model.LikeRelation;
 import com.pictionarizer.model.User;
@@ -31,6 +35,8 @@ public class CommentController {
 	private CommentRepository repository;
 	private UserRepository userRepository;
 	private WordRepository wordRepository;
+	
+	private int commentMaxLength = 255;
 	
 	@Autowired
 	CommentController(CommentRepository repository, UserRepository userRepository, WordRepository wordRepository){
@@ -64,12 +70,30 @@ public class CommentController {
 		return localDateTime; 
 	}	
 	
+	public class Error {
+		String message; 	
+		public Error(String message) {
+			this.message = message; 
+		}
+		public String getMessage() {
+			return message; 
+		}
+	}
+	
 	@RequestMapping(value = "/comment", method = RequestMethod.POST)
-	public Comment saveWord(
+	public ResponseEntity<?> saveWord(
 			@RequestParam("wordId") int wordId,
 			@RequestParam("userId") int userId,
 			@RequestParam("text") String text,
 			@RequestParam("date") String date) {	
+		
+		if(text.length() > commentMaxLength) {
+			return new ResponseEntity<>(
+					new Error("Your comment must not be longer than " + String.valueOf(commentMaxLength) + " characters"),  
+					HttpStatus.BAD_REQUEST
+			);
+		}
+		
 		Comment comment = new Comment(); 
 		
 		// the date is LocalDateTime type, 
@@ -81,6 +105,8 @@ public class CommentController {
 		comment.setText(text);
 		comment.setDate(convertedDate);
 		
-		return repository.save(comment);
+		comment = repository.save(comment);
+		
+		return new ResponseEntity<>(comment, HttpStatus.OK);
 	}	
 }

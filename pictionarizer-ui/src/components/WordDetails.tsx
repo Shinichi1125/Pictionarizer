@@ -8,7 +8,7 @@ import IWordState from '../interfaces/IWordState.interface';
 import { API_URL, TEST_USER_ID } from '../Constants';
 import { Link } from 'react-router-dom';
 import { getLoginId } from '../LoginLocalStorage';
-import { Formik, Form, Field, ErrorMessage } from 'formik'; 
+import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik'; 
 
 const loginState = Number(getLoginId());
 
@@ -108,7 +108,7 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
     .then(() => window.location.reload(true)) 
   }
 
-  async onSubmit(values: Comment){
+  async onSubmit(values: Comment, formikBag: FormikHelpers<Comment>){
     let comment = {
       ...values, 
       date: new Date()
@@ -117,6 +117,12 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
     await WordsDataService.postComment(comment)
     .then(() => this.props.history.push('/word/details/' + comment.wordId)) 
     .then(() => window.location.reload(true)) 
+    .catch((error) => {
+      console.log(error.response.data.message);
+      formikBag.setErrors({
+        text: error.response.data.message
+      })  
+    })
   }
 
   validate(values: Comment){
@@ -170,6 +176,14 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
         </div>     
         <br/>
         <div>   
+          <a href="#comment-field">
+            <span role="img" aria-label="comment">🗨️</span>
+          </a>
+          {this.state.noOfComments === 1? 
+            <span> {this.state.noOfComments} comment&nbsp;&nbsp;</span>: 
+            this.state.noOfComments === 0? <span></span>:
+            <span> {this.state.noOfLikes} comments&nbsp;&nbsp;</span>
+          } 
           {
             this.state.isLiked? <button onClick={() => this.unlikeWord(word.id)} className="like-button primary"><span role="img" aria-label="like">👍</span>Like</button>:
             <button onClick={() => this.likeWord(word.id)} className="like-button outline-primary"><span role="img" aria-label="like">👍</span>Like</button>
@@ -199,6 +213,7 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
             onSubmit={this.onSubmit}
             validate={this.validate}
             validateOnChange = {false}
+            validateOnBlur = {false}
             enableReinitialize={true}
           >
             {
@@ -211,7 +226,7 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
                       className="small round-border indentation"
                     />
                     &nbsp;&nbsp;
-                    <Field as="textarea" name="text"
+                    <Field as="textarea" name="text" id="comment-field"
                       placeholder="Write a comment..." 
                       cols="45" rows="1"
                     />     
