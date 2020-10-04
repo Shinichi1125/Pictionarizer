@@ -48,7 +48,7 @@ class CommentRowCreator extends React.Component<Comment>{
           <div>
             {
               loginState === userId? 
-                <button onClick={() => deleteComment(id)} className="action-button outline-danger">Delete</button>:
+                <button onClick={() => deleteComment(id)} className="action-button danger">Delete</button>:
                 <span></span>
             }  
           </div>
@@ -62,9 +62,11 @@ class CommentRowCreator extends React.Component<Comment>{
 }
 
 const deleteComment = (id:number) => {
-  console.log('The passed comment id: ' + id);
-  WordsDataService.deleteComment(id);
-  window.location.reload(true);
+  let deleteConfirmed = window.confirm("Are you sure you want to delete this?");
+  if(deleteConfirmed){
+    WordsDataService.deleteComment(id);
+    window.location.reload(true);
+  }
 }
 
 export default CommentRowCreator; 

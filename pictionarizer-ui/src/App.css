@@ -119,8 +119,9 @@
   border-color: #007bff;
 }
 
-.outline-danger {
-  color: #dc3545;
+.danger {
+  color: #fff;
+  background-color: #dc3545;
   border-color: #dc3545;
   position: relative; 
   right: 3.5rem; 
