@@ -182,7 +182,7 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
           {this.state.noOfComments === 1? 
             <span> {this.state.noOfComments} comment&nbsp;&nbsp;</span>: 
             this.state.noOfComments === 0? <span></span>:
-            <span> {this.state.noOfLikes} comments&nbsp;&nbsp;</span>
+            <span> {this.state.noOfComments} comments&nbsp;&nbsp;</span>
           } 
           &nbsp;
           {

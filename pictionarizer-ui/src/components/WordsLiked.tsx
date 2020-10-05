@@ -180,7 +180,10 @@ class WordsLiked extends React.Component<IUserProps, IUserState>{
                 <Link to={'/user/details/' + String(this.state.userId)}>Words</Link>
               </li>
               <li className="nav-item follow-nav-selected">
-                <Link  className="white-text" to={'/user/likes/' + String(this.state.userId)}>Likes</Link>
+                <Link className="white-text" to={'/user/likes/' + String(this.state.userId)}>Likes</Link>
+              </li>
+              <li className="nav-item">
+                <Link to={'/user/comments/' + String(this.state.userId)}>Comments</Link>
               </li>
             </ul>
           </div>

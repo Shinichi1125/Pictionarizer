@@ -12,7 +12,7 @@ import WordRowCreator from './WordRowCreator'
 
 const loginState = Number(getLoginId());
 
-class UserDetails extends React.Component<IUserProps, IUserState>{
+class WordsCommented extends React.Component<IUserProps, IUserState>{
   
   constructor(props: IUserProps){
     super(props)
@@ -63,7 +63,7 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
       this.setState({userData:data});
     }) 
 
-    WordsDataService.retrieveWordsByUser(id)
+    WordsDataService.retrieveWordsCommented(id)
     .then(response => {
       const info = response.data;
       this.setState({
@@ -158,8 +158,8 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
             {
               this.state.words.length === 0? <span></span>:
               this.state.words.length === 1? 
-              <span>{String(this.state.words.length)} word</span>:
-              <span>{String(this.state.words.length)} words</span>
+              <span>commented on {String(this.state.words.length)} word</span>:
+              <span>commented on {String(this.state.words.length)} words</span>
             }         
           </div>
 
@@ -174,17 +174,16 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
         </div>
         <div>
           <br/>
-          {loginState === user.id? <Link to={'/word/create'}><button className="create-button">+New Word</button></Link>: <span></span>}
           <div className="follow-nav">
             <ul className="nav nav-pills nav-fill">
-              <li className="nav-item follow-nav-selected">
-                <Link className="white-text" to={'/user/details/' + String(this.state.userId)}>Words</Link>
+              <li className="nav-item">
+                <Link to={'/user/details/' + String(this.state.userId)}>Words</Link>
               </li>
               <li className="nav-item">
                 <Link to={'/user/likes/' + String(this.state.userId)}>Likes</Link>
               </li>
-              <li className="nav-item">
-                <Link to={'/user/comments/' + String(this.state.userId)}>Comments</Link>
+              <li className="nav-item follow-nav-selected">
+                <Link  className="white-text" to={'/user/comments/' + String(this.state.userId)}>Comments</Link>
               </li>
             </ul>
           </div>
@@ -206,4 +205,4 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
   }
 }
 
-export default UserDetails; 
+export default WordsCommented; 

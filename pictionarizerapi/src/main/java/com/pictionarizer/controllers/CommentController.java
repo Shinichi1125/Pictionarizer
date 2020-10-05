@@ -1,10 +1,12 @@
 package com.pictionarizer.controllers;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -58,6 +60,34 @@ public class CommentController {
 		List<Comment> commentList = repository.findAllByWordId(id);
 		noOfComments = commentList.size();
 		return noOfComments;
+	}
+	
+	// fetch the words for the user commented
+	@RequestMapping(value = "/commented-words/{id}", method = RequestMethod.GET)
+	public List<Word> getCommentedWords(@PathVariable("id") int id){	
+		
+		List<Comment> commentList = repository.findAllByUserId(id);
+		List<Word> wordList = new ArrayList<Word>(); 
+		ArrayList<Integer> wordIdList = new ArrayList<Integer>();
+		boolean contains = false; 
+		Word word = new Word();
+		Optional<Word> wordOpt = Optional.ofNullable(word);
+		
+		if(commentList.size() > 0) {
+			for(Comment comment: commentList) {
+				contains = wordIdList.contains(comment.getWordId());
+				if(!contains) {
+					wordOpt = wordRepository.findById(comment.getWordId());
+					if(wordOpt.isPresent()) {
+						word = wordOpt.get();
+						wordList.add(word);
+						wordIdList.add(word.getId());
+					}
+				}
+			}
+		}
+		
+		return wordList;
 	}	
 	
 	// converts Date's data type so that it will be compatible on back-end side

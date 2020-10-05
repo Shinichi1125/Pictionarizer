@@ -12,6 +12,14 @@
   height: 2rem;
 }
 
+.create-button {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  margin-bottom: 0.5rem;
+  border-radius: 35px;
+}
+
 .small-font {
   font-size: 0.75rem;
 }

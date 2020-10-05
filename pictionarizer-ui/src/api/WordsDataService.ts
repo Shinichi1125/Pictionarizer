@@ -41,6 +41,10 @@ class WordsDataService {
     return axios.get(`${API_URL}/comments/${wordId}`);
   }
 
+  retrieveWordsCommented(userId: number){
+    return axios.get(`${API_URL}/commented-words/${userId}`);
+  }
+
   isLiked(combination: LikeRelation){
     return axios.get(`${API_URL}/is-liked`, {
       params: {

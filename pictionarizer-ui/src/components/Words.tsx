@@ -28,7 +28,7 @@ class Words extends React.Component{
       <div>
         <Link to={'/users'}>Users</Link>
         <br/><hr></hr><br/>
-        {loginState > 0?<Link to={'word/create'}>+Word</Link>: <p> </p>}
+        {loginState > 0?<Link to={'/word/create'}><button className="create-button">+New Word</button></Link>: <p> </p>}
         <div>
           {this.state.wordsData.map((word)=>
           <WordRowCreator 
