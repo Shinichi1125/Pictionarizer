@@ -114,15 +114,19 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
       date: new Date()
     };
 
-    await WordsDataService.postComment(comment)
-    .then(() => this.props.history.push('/word/details/' + comment.wordId)) 
-    .then(() => window.location.reload(true)) 
-    .catch((error) => {
-      console.log(error.response.data.message);
-      formikBag.setErrors({
-        text: error.response.data.message
-      })  
-    })
+    if(loginState < 1){
+      this.redirectToLogin();
+    } else {
+      await WordsDataService.postComment(comment)
+      .then(() => this.props.history.push('/word/details/' + comment.wordId)) 
+      .then(() => window.location.reload(true)) 
+      .catch((error) => {
+        console.log(error.response.data.message);
+        formikBag.setErrors({
+          text: error.response.data.message
+        })  
+      })
+    }
   }
 
   validate(values: Comment){
@@ -222,10 +226,16 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
                 <Form>
                   <ErrorMessage name="text" component="div" className="text-danger"/>
                   <div className="form-group row">
-                    <img src={`${API_URL}/user/uploaded-image/${loginState}`} 
-                      alt="fetched img" 
-                      className="small round-border indentation"
-                    />
+                    {loginState > 0? 
+                      <img src={`${API_URL}/user/uploaded-image/${loginState}`} 
+                        alt="fetched img" 
+                        className="small round-border indentation"
+                      />:
+                      <img src={`${API_URL}/user/uploaded-image/${TEST_USER_ID}`} 
+                        alt="fetched img" 
+                        className="small round-border indentation"
+                      />
+                    }
                     &nbsp;&nbsp;
                     <Field as="textarea" name="text" id="comment-field"
                       placeholder="Write a comment..." 

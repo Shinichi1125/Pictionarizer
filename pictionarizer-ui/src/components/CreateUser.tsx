@@ -6,7 +6,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import IUserProps from '../interfaces/IUserProps.interface';
 import IUserState from '../interfaces/IUserState.interface';
 import { SMALL_INPUT_FIELD } from '../Constants';
-import { setLoginId } from '../LoginLocalStorage';
+import { setLoginId, getLoginId } from '../LoginLocalStorage';
 
 class CreateUser extends React.Component<IUserProps, IUserState>{
 
@@ -79,7 +79,8 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
     await UsersDataService.createUser(user)
     .then(() => UsersDataService.userLogin(loginInput))
     .then(res => {
-      setLoginId(String(res.data));
+      setLoginId(String(res.data.userId));
+      alert("LoginId: " + getLoginId());
     }) 
     .then(() => this.props.history.push('/'))   
     .then(() => window.location.reload(true))    

@@ -5,7 +5,10 @@ import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
 import ILoginInfoProps from '../interfaces/ILoginInfoProps.interface';
 import ILoginInfoState from '../interfaces/ILoginInfoState.interface';
 import { setLoginId } from '../LoginLocalStorage';
-import { EASY_EMAIL_ADDRESS, EASY_PASSWORD } from '../Constants';
+import { EASY_EMAIL_ADDRESS, 
+         EASY_EMAIL_ADDRESS2, 
+         EASY_EMAIL_ADDRESS3, 
+         EASY_PASSWORD } from '../Constants';
 
 class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
 
@@ -32,10 +35,19 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
     this.easyLogin = this.easyLogin.bind(this)
   }
 
-  easyLogin(){
+  easyLogin(type: number){
+    let emailAddress: string;
+    if(type === 1){
+      emailAddress = EASY_EMAIL_ADDRESS;
+    } else if(type === 2){
+      emailAddress = EASY_EMAIL_ADDRESS2;
+    } else {
+      emailAddress = EASY_EMAIL_ADDRESS3;
+    }
+
     let values: LoginInfo;
     values = {
-      email: EASY_EMAIL_ADDRESS,
+      email: emailAddress,
       password: EASY_PASSWORD
     }
     UsersDataService.userLogin(values)
@@ -111,11 +123,27 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
           <small id="easyLoginHelpBlock" className="form-text text-muted">
             You can log in as Test User just by clicking the "Easy Log in" button below.
           </small>
-          <div><strong>↓</strong></div>
+          <small id="easyLoginHelpBlock" className="form-text text-muted">
+            (Test User's target language... 1: Japanese, 2: Swedish, 3: Finnish)
+          </small>
+          <br/>
           <button type="button" 
                   className="btn btn-success" 
-                  onClick={() => this.easyLogin()}
-          ><span role="img" aria-label="light bulb">💡</span>Easy Log in</button>
+                  onClick={() => this.easyLogin(1)}
+          ><span role="img" aria-label="light bulb">💡</span>Easy Log in (1)
+          </button>
+          &nbsp;&nbsp;
+          <button type="button" 
+                  className="btn btn-success" 
+                  onClick={() => this.easyLogin(2)}
+          ><span role="img" aria-label="light bulb">💡</span>Easy Log in (2)
+          </button>
+          &nbsp;&nbsp;
+          <button type="button" 
+                  className="btn btn-success" 
+                  onClick={() => this.easyLogin(3)}
+          ><span role="img" aria-label="light bulb">💡</span>Easy Log in (3)
+          </button>
         </div>
       </div>
     )

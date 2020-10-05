@@ -43,6 +43,14 @@ public class FollowerController {
 		return repository.findAll();
 	}
 	
+	public List<User> reverseUserArrayList(List<User> alist) { 
+        List<User> revArrayList = new ArrayList<User>(); 
+        for (int i = alist.size() - 1; i >= 0; i--) { 
+            revArrayList.add(alist.get(i)); 
+        } 
+        return revArrayList; 
+    } 	
+	
 	// fetch the followers (people who are following the user)
 	@RequestMapping(value = "/followers/{id}", method = RequestMethod.GET)
 	public List<User> getFollowers(@PathVariable("id") int id){
@@ -60,6 +68,8 @@ public class FollowerController {
 				userList.add(fetchedUser);
 			}
 		}	
+		
+		userList = reverseUserArrayList(userList);
 		
 		return userList;
 	}
@@ -80,6 +90,8 @@ public class FollowerController {
 				userList.add(fetchedUser);
 			}
 		}
+		
+		userList = reverseUserArrayList(userList);
 		
 		return userList;
 	}

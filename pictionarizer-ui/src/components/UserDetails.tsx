@@ -5,7 +5,7 @@ import UsersDataService from '../api/UsersDataService';
 import WordsDataService from '../api/WordsDataService';
 import IUserProps from '../interfaces/IUserProps.interface';
 import IUserState from '../interfaces/IUserState.interface';
-import { API_URL, TEST_USER_ID } from '../Constants';
+import { API_URL, TEST_USER_ID, TEST_USER2_ID, TEST_USER3_ID } from '../Constants';
 import { Link } from 'react-router-dom';
 import { getLoginId } from '../LoginLocalStorage';
 import WordRowCreator from './WordRowCreator'
@@ -167,7 +167,7 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
           <br/>    
           <div>{loginState === user.id? <Link to={'/user/' + String(user.id)}><span role="img" aria-label="edit">✏️</span>Edit profile</Link>: <p> </p>}</div>  
           <div>
-            {loginState === user.id && loginState !== TEST_USER_ID?
+            {loginState === user.id && loginState !== TEST_USER_ID && loginState !== TEST_USER2_ID && loginState !== TEST_USER3_ID?
             <Link className="text-danger" to={'/user/delete/' + String(user.id)}><span role="img" aria-label="delete">🗑️</span>Delete account</Link>:
             <p> </p>}
           </div>
