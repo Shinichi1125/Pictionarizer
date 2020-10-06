@@ -21,6 +21,10 @@ class UsersDataService {
     return axios.get(`${API_URL}/random-users`);
   }
 
+  retrieveRecommendation(id: number){
+    return axios.get(`${API_URL}/recommendation/${id}`);
+  }
+
   getUserName(userId: number){
     return axios.get(`${API_URL}/user/name/${userId}`)
   }

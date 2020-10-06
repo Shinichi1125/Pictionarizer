@@ -28,10 +28,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.pictionarizer.model.FollowerRelation;
 import com.pictionarizer.model.LoginValue;
 //import com.pictionarizer.model.Login;
 import com.pictionarizer.model.User;
 import com.pictionarizer.model.Word;
+import com.pictionarizer.repos.FollowerRelationRepository;
 import com.pictionarizer.repos.UserRepository;
 
 @RestController
@@ -40,15 +42,18 @@ import com.pictionarizer.repos.UserRepository;
 public class UserController {
 	
 	private int passwordMinLength = 8;
+	private int noOfRecommendedUsers = 5;
 	
 	private UserRepository repository;
+	private FollowerRelationRepository followerRelationRepository;
 	
 	// logger for a debugging purpose
-	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+	//private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired
-	UserController(UserRepository repository){
+	UserController(UserRepository repository, FollowerRelationRepository followerRelationRepository){
 		this.repository = repository;
+		this.followerRelationRepository = followerRelationRepository;
 	}
 	
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
@@ -79,8 +84,8 @@ public class UserController {
 		List<Integer> chosenIds = new ArrayList<Integer>();
 		Optional<User> userOpt = Optional.ofNullable(user);
 		
-		if(noOfUsers >= 5) {
-			iterations = 5;
+		if(noOfUsers >= noOfRecommendedUsers) {
+			iterations = noOfRecommendedUsers;
 		} else {
 			iterations = noOfUsers;
 		}
@@ -98,14 +103,79 @@ public class UserController {
 					i++;
 				}
 			}
+		}	
+		return userList; 
+	}
+	
+	public boolean isFollowing(int userId, int followerId, int followeeId) {	
+		boolean result = false; 
+		FollowerRelation followerRelation = followerRelationRepository.findByFollowerIdAndFolloweeId(followerId, followeeId);	
+		Optional<FollowerRelation> frOpt = Optional.ofNullable(followerRelation);
+		
+		if(frOpt.isPresent()) {
+			if(followerRelation.getFollowerId() == userId) {
+				result = true; 
+			}	
+		}	
+		return result; 
+	}
+	
+	@RequestMapping(value = "/recommendation/{id}", method = RequestMethod.GET)
+	public List<User> getRecommendation(@PathVariable("id") int id) {
+		List<User> userList = new ArrayList<User>();
+		List<User> fetchedUserList = new ArrayList<User>();
+		User user = new User();
+		boolean isFollowing = false; 
+		
+		List<FollowerRelation> frList = followerRelationRepository.findAllByFolloweeId(id);
+		Optional<User> userOpt = Optional.ofNullable(user);
+		
+		if(frList.size() > 0) {
+			for(FollowerRelation fr: frList) {
+				isFollowing = isFollowing(id, fr.getFolloweeId(), fr.getFollowerId());
+				if(!isFollowing) {
+					userOpt = repository.findById(fr.getFollowerId());
+					user = userOpt.get();
+					userList.add(user);
+				}
+			}
 		}
 		
+		userOpt = repository.findById(id);
+		user = userOpt.get();
+		
+		if(userList.size() < noOfRecommendedUsers) {
+			// find users who are learning the same language
+			fetchedUserList = repository.findAllByTargetLanguage(user.getTargetLanguage());
+			
+			if(fetchedUserList.size() > 0) {
+				for(User u: fetchedUserList) {
+					isFollowing = isFollowing(id, id, u.getId());
+					if(!isFollowing && (u.getId() != id) && userList.size() < noOfRecommendedUsers && !userList.contains(u)) {
+						userList.add(u);
+					}
+				}
+			}
+		} 	
+		
+		if(userList.size() < noOfRecommendedUsers) {
+			// find users who are learning your native language
+			fetchedUserList = repository.findAllByTargetLanguage(user.getOwnLanguage());
+			
+			if(fetchedUserList.size() > 0) {
+				for(User u: fetchedUserList) {
+					isFollowing = isFollowing(id, id, u.getId());
+					if(!isFollowing && (u.getId() != id) && userList.size() < noOfRecommendedUsers && !userList.contains(u)) {
+						userList.add(u);
+					}
+				}
+			}
+		} 		
 		return userList; 
 	}
 	
 	public class Error {
-		String message; 
-		
+		String message; 	
 		public Error(String message) {
 			this.message = message; 
 		}
@@ -183,8 +253,7 @@ public class UserController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
-		
+		}		
 		return user;
 	}
 	
@@ -219,8 +288,7 @@ public class UserController {
 			optUser = repository.findById(2);  // Test User's id number is 2
 			byte[] userImage = optUser.get().getImage();
 			user.setImage(userImage);
-		}
-		
+		}	
 		return repository.save(user);
 	}
 	
@@ -275,8 +343,6 @@ public class UserController {
 			
 		return repository.save(user);
 	}
-	
-	
 	
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
 	public void deleteUser(@PathVariable("id") int id) {

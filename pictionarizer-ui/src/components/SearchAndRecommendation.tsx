@@ -16,7 +16,7 @@ class SearchAndRecommendation extends React.Component{
     let id = loginState;
 
     if(id > 0){
-      UsersDataService.retrieveFollowers(id)
+      UsersDataService.retrieveRecommendation(id)
       .then(res => {
         this.setState({
           users:[...this.state.users, ...res.data]
