@@ -1,5 +1,6 @@
 import React from 'react';
 import LoginInfo from '../interfaces/LoginInfo.interface';
+import Footer from './Footer';
 import UsersDataService from '../api/UsersDataService'; 
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik'; 
 import ILoginInfoProps from '../interfaces/ILoginInfoProps.interface';
@@ -91,6 +92,7 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
     let {email, password} = this.state.loginData;
 
     return(
+      <div>
       <div className="object-details">
         <h2>Enter Login Info</h2>
         <div>
@@ -145,6 +147,8 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
           ><span role="img" aria-label="light bulb">💡</span>Easy Log in (3)
           </button>
         </div>
+      </div>
+      <Footer/>
       </div>
     )
   }

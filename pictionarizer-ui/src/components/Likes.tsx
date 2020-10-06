@@ -4,6 +4,7 @@ import User from '../interfaces/User.interface';
 import ILikeProps from '../interfaces/ILikeProps.interface';
 import ILikeState from '../interfaces/ILikeState.interface';
 import UserRowCreator from './UserRowCreator';
+import Footer from './Footer';
 
 class Likes extends React.Component<ILikeProps, ILikeState>{
   constructor(props: ILikeProps){
@@ -44,6 +45,7 @@ class Likes extends React.Component<ILikeProps, ILikeState>{
             image={user.image}
             description={user.description}
           />)}
+        <Footer/>
       </div>
     )
   }

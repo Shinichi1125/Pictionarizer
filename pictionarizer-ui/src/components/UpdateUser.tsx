@@ -1,6 +1,7 @@
 import React from 'react';
 import User from '../interfaces/User.interface';
 import Word from '../interfaces/Word.interface';
+import Footer from './Footer';
 import UsersDataService from '../api/UsersDataService';
 import { Formik, Form, Field, ErrorMessage } from 'formik'; 
 import IUserProps from '../interfaces/IUserProps.interface';
@@ -94,6 +95,7 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
       = this.state.userData; 
 
     return(
+      <div>
       <div className="object-details">
         <h2>Update User</h2>
         <img src={`${API_URL}/user/uploaded-image/${this.state.userId}`} 
@@ -168,6 +170,8 @@ class UpdateUser extends React.Component<IUserProps, IUserState>{
             }      
           </Formik>
         </div>
+      </div>
+      <Footer/>
       </div>
     )
   }

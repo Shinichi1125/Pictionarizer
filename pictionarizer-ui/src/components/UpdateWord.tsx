@@ -1,13 +1,14 @@
 import React from 'react';
 import Word from '../interfaces/Word.interface';
 import Comment from '../interfaces/Comment.interface';
+import Footer from './Footer';
 import WordsDataService from '../api/WordsDataService';
 import { Formik, Form, Field, ErrorMessage } from 'formik'; 
 import IWordProps from '../interfaces/IWordProps.interface';
 import IWordState from '../interfaces/IWordState.interface';
 import { API_URL, SMALL_INPUT_FIELD, TEXTAREA_COLS, TEXTAREA_ROWS } from '../Constants';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
+import 'react-toastify/dist/ReactToastify.css';
 
 toast.configure();
 
@@ -110,6 +111,7 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
       = this.state.wordData; 
 
     return(
+      <div>
       <div className="object-details">
         <h2>Update Word</h2>
         <img src={`${API_URL}/word/uploaded-image/${this.state.wordId}`} 
@@ -172,6 +174,8 @@ class UpdateWord extends React.Component<IWordProps, IWordState>{
             }      
           </Formik>
         </div>
+      </div>
+      <Footer/>
       </div>
     )
   }

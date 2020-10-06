@@ -35,15 +35,13 @@ import com.pictionarizer.repos.WordRepository;
 public class CommentController {
 	
 	private CommentRepository repository;
-	private UserRepository userRepository;
 	private WordRepository wordRepository;
 	
 	private int commentMaxLength = 255;
 	
 	@Autowired
-	CommentController(CommentRepository repository, UserRepository userRepository, WordRepository wordRepository){
+	CommentController(CommentRepository repository, WordRepository wordRepository){
 		this.repository = repository; 
-		this.userRepository = userRepository;
 		this.wordRepository = wordRepository; 	
 	}
 	
@@ -61,6 +59,14 @@ public class CommentController {
 		noOfComments = commentList.size();
 		return noOfComments;
 	}
+	
+	public List<Word> reverseWordArrayList(List<Word> alist) { 
+        List<Word> revArrayList = new ArrayList<Word>(); 
+        for (int i = alist.size() - 1; i >= 0; i--) { 
+            revArrayList.add(alist.get(i)); 
+        } 
+        return revArrayList; 
+    } 	
 	
 	// fetch the words for the user commented
 	@RequestMapping(value = "/commented-words/{id}", method = RequestMethod.GET)
@@ -86,6 +92,8 @@ public class CommentController {
 				}
 			}
 		}
+		
+		wordList = reverseWordArrayList(wordList);
 		
 		return wordList;
 	}	

@@ -177,7 +177,7 @@
   border-bottom: gray 1.5px solid;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  background-color: #f6f6f4;
+  background-color: /*#f6f6f4*/#F0FFF0;
 }
 
 .comment-row {

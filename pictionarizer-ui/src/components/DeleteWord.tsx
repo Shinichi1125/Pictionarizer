@@ -1,6 +1,7 @@
 import React from 'react';
 import Word from '../interfaces/Word.interface';
 import Comment from '../interfaces/Comment.interface';
+import Footer from './Footer';
 import WordsDataService from '../api/WordsDataService';
 import IWordProps from '../interfaces/IWordProps.interface';
 import IWordState from '../interfaces/IWordState.interface';
@@ -58,6 +59,7 @@ class DeleteWord extends React.Component<IWordProps, IWordState>{
     let wordName = this.state.wordData.targetLangWordName;
 
     return(
+      <div>
       <div className="object-details">
         <h3>Are you sure you want to delete <span className="yellow-highlight">"{wordName}"</span>?</h3>
         <img src={`${API_URL}/word/uploaded-image/${id}`} 
@@ -68,6 +70,8 @@ class DeleteWord extends React.Component<IWordProps, IWordState>{
         <br></br>
         <button className="btn btn-secondary" onClick={() => this.cancelDelete(id)}>Cancel</button>&nbsp;&nbsp;
         <button className="btn btn-danger" onClick={() => this.confirmDelete(id)}>Delete</button>        
+      </div>
+      <Footer/>
       </div>
     )
   }

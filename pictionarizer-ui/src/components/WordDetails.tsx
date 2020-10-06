@@ -2,6 +2,7 @@ import React from 'react';
 import Word from '../interfaces/Word.interface';
 import Comment from '../interfaces/Comment.interface';
 import CommentRowCreator from './CommentRowCreator'
+import Footer from './Footer';
 import WordsDataService from '../api/WordsDataService'; 
 import IWordProps from '../interfaces/IWordProps.interface';
 import IWordState from '../interfaces/IWordState.interface';
@@ -148,6 +149,7 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
     }
 
     return(
+      <div>
       <div className="object-details">
         <h3 className="no-margin-bottom">
           <span className="yellow-highlight">&nbsp;<strong>"{word.targetLangWordName}"</strong>&nbsp;</span> 
@@ -248,7 +250,9 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
               )
             }      
           </Formik>
-        </div>
+        </div>   
+      </div>
+      <Footer/>
       </div>
     )
   }

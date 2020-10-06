@@ -1,6 +1,7 @@
 import React from 'react';
 import User from '../interfaces/User.interface';
 import Word from '../interfaces/Word.interface';
+import Footer from './Footer';
 import UsersDataService from '../api/UsersDataService'; 
 import WordsDataService from '../api/WordsDataService';
 import IUserProps from '../interfaces/IUserProps.interface';
@@ -201,6 +202,7 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
               image={word.image}
             />)}
         </div>
+        <Footer/>
       </div>
     )
   }

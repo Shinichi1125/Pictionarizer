@@ -5,6 +5,7 @@ import IFollowProps from '../interfaces/IFollowProps.interface';
 import IFollowState from '../interfaces/IFollowState.interface';
 import UserRowCreator from './UserRowCreator';
 import { Link } from 'react-router-dom';
+import Footer from './Footer';
 
 class Follower extends React.Component<IFollowProps, IFollowState>{
   constructor(props: IFollowProps){
@@ -61,6 +62,7 @@ class Follower extends React.Component<IFollowProps, IFollowState>{
               image={user.image}
               description={user.description}
             />)}
+          <Footer/>
       </div>
     )
   }

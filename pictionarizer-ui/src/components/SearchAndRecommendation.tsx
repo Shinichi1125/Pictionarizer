@@ -36,7 +36,7 @@ class SearchAndRecommendation extends React.Component{
     return(
       <div>
         <div className="active-cyan-3 active-cyan-4 mb-4 flex">
-          <input className="form-control" type="text" placeholder="🔍Keywords" aria-label="Search"/>
+          <input className="form-control" type="text" placeholder="🔍Keyword" aria-label="Search"/>
           <button className="action-button primary" type="submit">Search</button>
         </div>
         <h5>Account recommendation</h5>

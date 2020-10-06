@@ -1,6 +1,7 @@
 import React from 'react';
 import Word from '../interfaces/Word.interface';
 import Comment from '../interfaces/Comment.interface';
+import Footer from './Footer';
 import WordsDataService from '../api/WordsDataService';
 import { Formik, Form, Field, ErrorMessage } from 'formik'; 
 import IWordProps from '../interfaces/IWordProps.interface';
@@ -91,6 +92,7 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
       = this.state.wordData; 
 
     return(
+      <div>
       <div className="object-details">
         <h2>Create Word</h2>
         <div>
@@ -149,6 +151,8 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
             }      
           </Formik>
         </div>
+      </div>
+      <Footer/>
       </div>
     )
   }

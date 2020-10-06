@@ -1,6 +1,7 @@
 import React from 'react';
 import User from '../interfaces/User.interface';
 import Word from '../interfaces/Word.interface';
+import Footer from './Footer';
 import LoginInfo from '../interfaces/LoginInfo.interface';
 import UsersDataService from '../api/UsersDataService';
 import IUserProps from '../interfaces/IUserProps.interface';
@@ -88,6 +89,7 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
     let password = '';
 
     return(
+      <div>
       <div className="object-details">
         <h3>Are you sure you want to delete <span className="yellow-highlight">"{userName}"</span>?</h3>
         <img src={`${API_URL}/user/uploaded-image/${id}`} 
@@ -123,6 +125,8 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
             }      
           </Formik>
         </div> 
+      </div>
+      <Footer/>
       </div>
     )
   }

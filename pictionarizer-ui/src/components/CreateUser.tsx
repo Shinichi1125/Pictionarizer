@@ -1,6 +1,7 @@
 import React from 'react';
 import User from '../interfaces/User.interface';
 import Word from '../interfaces/Word.interface';
+import Footer from './Footer';
 import UsersDataService from '../api/UsersDataService';
 import { Formik, Form, Field, ErrorMessage } from 'formik'; 
 import IUserProps from '../interfaces/IUserProps.interface';
@@ -92,6 +93,7 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
       password: '', image: null, description: ''} 
 
     return(
+      <div>
       <div className="object-details">
         <h2>Create an account</h2>
         <div>
@@ -160,6 +162,8 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
             }      
           </Formik>
         </div>
+      </div>
+      <Footer/>
       </div>
     )
   }

@@ -15,7 +15,6 @@ import DeleteWord from './components/DeleteWord';
 import WordDetails from './components/WordDetails';
 import UserDetails from './components/UserDetails';
 import Header from './components/Header';
-import Footer from './components/Footer';
 import Login from './components/Login';
 import Follower from './components/Follower';
 import Following from './components/Following';
@@ -47,7 +46,7 @@ function App() {
         <Route exact path="/word/likes/:id" component={Likes}/>    
         <Route exact path="/login" component={Login}/>          
       </Switch>
-      <Footer/>
+      <br/>
     </div>
   );
 }

@@ -8,7 +8,8 @@ import IUserState from '../interfaces/IUserState.interface';
 import { API_URL, TEST_USER_ID } from '../Constants';
 import { Link } from 'react-router-dom';
 import { getLoginId } from '../LoginLocalStorage';
-import WordRowCreator from './WordRowCreator'
+import WordRowCreator from './WordRowCreator';
+import Footer from './Footer';
 
 const loginState = Number(getLoginId());
 
@@ -200,6 +201,7 @@ class WordsLiked extends React.Component<IUserProps, IUserState>{
               image={word.image}
             />)}
         </div>
+        <Footer/>
       </div>
     )
   }
