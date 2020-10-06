@@ -2,8 +2,10 @@ package com.pictionarizer.controllers;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,6 +64,43 @@ public class UserController {
 	@RequestMapping(value = "/user/name/{id}", method = RequestMethod.GET)
 	public String getUserName(@PathVariable("id") int id) {
 		return repository.findById(id).get().getName();
+	}
+	
+	@RequestMapping(value = "/random-users", method = RequestMethod.GET)
+	public List<User> getRandomUsers() {
+		List<User> userList = new ArrayList<User>();
+		User user = new User();
+		int largestId = repository.getLargestId();
+		int noOfUsers = repository.getNoOfUsers();
+		Random rand = new Random(); 
+		int randomId = 0;
+		int iterations = 0; 
+		
+		List<Integer> chosenIds = new ArrayList<Integer>();
+		Optional<User> userOpt = Optional.ofNullable(user);
+		
+		if(noOfUsers >= 5) {
+			iterations = 5;
+		} else {
+			iterations = noOfUsers;
+		}
+		
+		for(int i = 0; i < iterations; ) {
+			randomId = rand.nextInt(largestId); 
+			userOpt = repository.findById(randomId);
+			if(userOpt.isPresent()) {
+				if(chosenIds.contains(randomId)) {
+					
+				} else {
+					user = userOpt.get();
+					userList.add(user);
+					chosenIds.add(user.getId());
+					i++;
+				}
+			}
+		}
+		
+		return userList; 
 	}
 	
 	public class Error {

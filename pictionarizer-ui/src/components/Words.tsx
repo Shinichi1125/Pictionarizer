@@ -3,7 +3,7 @@ import Word from '../interfaces/Word.interface';
 import WordsDataService from '../api/WordsDataService';
 import { Link } from 'react-router-dom';
 import { getLoginId } from '../LoginLocalStorage';
-import WordRowCreator from './WordRowCreator';
+import HomeWordRow from './HomeWordRow';
 
 const loginState = Number(getLoginId());
 
@@ -26,12 +26,10 @@ class Words extends React.Component{
   render(){
     return(
       <div>
-        <Link to={'/users'}>Users</Link>
-        <br/><hr></hr><br/>
         {loginState > 0?<Link to={'/word/create'}><button className="create-button">+New Word</button></Link>: <p> </p>}
         <div>
           {this.state.wordsData.map((word)=>
-          <WordRowCreator 
+          <HomeWordRow 
             key = {word.id}
             id={word.id}
             userId={word.userId}

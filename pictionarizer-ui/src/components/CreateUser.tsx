@@ -127,6 +127,7 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
                       placeholder="Your country" size={SMALL_INPUT_FIELD}
                     />
                   </fieldset>
+                
                   <ErrorMessage name="email" component="div" className="text-danger"/>
                   <fieldset className="form-group">
                     <Field type="text" name="email"
