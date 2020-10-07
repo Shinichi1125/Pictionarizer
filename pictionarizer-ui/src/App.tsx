@@ -21,6 +21,7 @@ import Following from './components/Following';
 import Likes from './components/Likes';
 import WordsLiked from './components/WordsLiked';
 import WordsCommented from './components/WordsCommented';
+import Searched from './components/Searched';
 
 function App() {
   return (
@@ -44,7 +45,8 @@ function App() {
         <Route exact path="/word/delete/:id" component={DeleteWord}/>
         <Route exact path="/word/details/:id" component={WordDetails}/>
         <Route exact path="/word/likes/:id" component={Likes}/>    
-        <Route exact path="/login" component={Login}/>          
+        <Route exact path="/login" component={Login}/>   
+        <Route exact path="/searched/:name" component={Searched}/>         
       </Switch>
       <br/>
     </div>

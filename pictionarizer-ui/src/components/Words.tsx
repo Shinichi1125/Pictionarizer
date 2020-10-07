@@ -26,7 +26,7 @@ class Words extends React.Component{
   render(){
     return(
       <div>
-        {loginState > 0?<Link to={'/word/create'}><button className="create-button">+New Word</button></Link>: <p> </p>}
+        {loginState > 0?<Link to={'/word/create'}><button className="create-button">+New Word</button></Link>: <span></span>}
         <div>
           {this.state.wordsData.map((word)=>
           <HomeWordRow 

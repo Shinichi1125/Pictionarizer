@@ -26,7 +26,11 @@ class UsersDataService {
   }
 
   getUserName(userId: number){
-    return axios.get(`${API_URL}/user/name/${userId}`)
+    return axios.get(`${API_URL}/user/name/${userId}`);
+  }
+
+  retrieveUsersByName(userName: string){
+    return axios.get(`${API_URL}/search-users/${userName}`);
   }
 
   getNoOfFollowings(userId: number){

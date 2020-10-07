@@ -3,12 +3,14 @@ import User from '../interfaces/User.interface';
 import UsersDataService from '../api/UsersDataService'; 
 import { getLoginId } from '../LoginLocalStorage';
 import AsideUserRow from './AsideUserRow';
+import { Link } from 'react-router-dom';
 
 const loginState = Number(getLoginId());
 
 class SearchAndRecommendation extends React.Component{
 
   state = {
+    searchField: '',
     users: new Array<User>()
   }
 
@@ -32,12 +34,27 @@ class SearchAndRecommendation extends React.Component{
     }
   }
 
+  onHandleChange(event: { currentTarget: HTMLInputElement; }){
+    this.setState({
+      searchField: event.currentTarget.value
+    });
+    //console.log('The value of searchField: ' + this.state.searchField);
+  }
+
   render(){
     return(
       <div>
         <div className="active-cyan-3 active-cyan-4 mb-4 flex">
-          <input className="form-control" type="text" placeholder="🔍Keyword" aria-label="Search"/>
-          <button className="action-button primary" type="submit">Search</button>
+          <input className="form-control" 
+                type="text" 
+                placeholder="🔍Keyword" 
+                aria-label="Search"
+                value={this.state.searchField}
+                onChange={(event) => this.onHandleChange(event)}
+          />
+          <Link to={'/searched/' + this.state.searchField}>
+            <button className="action-button primary" type="submit">Search</button>
+          </Link>    
         </div>
         <h5>Account recommendation</h5>
           {this.state.users.map((user)=>

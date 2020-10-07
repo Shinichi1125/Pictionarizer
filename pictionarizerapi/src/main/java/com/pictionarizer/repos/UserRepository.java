@@ -20,4 +20,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	@Query("SELECT u FROM User u where u.ownLanguage = :ownLanguage") 
     List<User> findAllByOwnLanguage(@Param("ownLanguage") String ownLanguage);
+	
+	@Query("SELECT u FROM User u where u.name LIKE %:name%") 
+    List<User> findAllByUserName(@Param("name") String name);
 }

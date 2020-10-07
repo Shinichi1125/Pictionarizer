@@ -174,6 +174,11 @@ public class UserController {
 		return userList; 
 	}
 	
+	@RequestMapping(value = "/search-users/{name}", method = RequestMethod.GET)
+	public List<User> searchUser(@PathVariable("name") String name) {
+		return repository.findAllByUserName(name); 
+	}
+	
 	public class Error {
 		String message; 	
 		public Error(String message) {
