@@ -13,4 +13,7 @@ public interface WordRepository extends JpaRepository<Word, Integer> {
 	@Query("SELECT w FROM Word w where w.userId = :userId") 
     List<Word> findAllByUserId(@Param("userId") int userId);
 	
+	@Query("SELECT w FROM Word w where w.targetLangWordName LIKE %:wordName% OR w.targetLangExSentence LIKE %:wordName%") 
+    List<Word> findAllByWordName(@Param("wordName") String wordName);
+	
 }

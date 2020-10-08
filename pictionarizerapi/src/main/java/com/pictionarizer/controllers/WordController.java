@@ -72,15 +72,7 @@ public class WordController {
 	
 	@RequestMapping(value = "/words/{userId}", method = RequestMethod.GET)
 	public List<Word> getWordsByUser(@PathVariable("userId") int userId){
-		//List<Word> allWords = repository.findAll();
-		
 		List<Word> filteredWords = repository.findAllByUserId(userId);
-		
-//		for(Word word: allWords) {
-//			if(word.getUserId() == userId) {
-//				filteredWords.add(word);
-//			}
-//		}	
 		
 		// reverse the list so that the newer elements will be displayed on top, older ones bottom
 		filteredWords = reverseArrayList(filteredWords);		
@@ -90,6 +82,11 @@ public class WordController {
 	@RequestMapping(value = "/word/{id}", method = RequestMethod.GET)
 	public Word getWord(@PathVariable("id") int id) {
 		return repository.findById(id).get();
+	}
+	
+	@RequestMapping(value = "/search-words/{name}", method = RequestMethod.GET)
+	public List<Word> searchWords(@PathVariable("name") String name) {
+		return repository.findAllByWordName(name); 
 	}
 	
 	// converts Date's data type so that it will be compatible on back-end side

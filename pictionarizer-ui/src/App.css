@@ -97,6 +97,19 @@
   margin-bottom: 0.5rem;
 }
 
+.push-down {
+  position: relative;
+  top: 0.5rem;
+}
+
+.search-filter-button {
+  position: relative; 
+  left: 3.25rem;
+  width: 20%;
+  margin: auto; 
+  margin-bottom: 0.5rem;
+}
+
 .action-button {
   display: inline-block;
   font-weight: 100;

@@ -21,6 +21,10 @@ class WordsDataService {
     return axios.get(`${API_URL}/words/${userId}`);
   }
 
+  retrieveWordsByName(wordName: string){
+    return axios.get(`${API_URL}/search-words/${wordName}`);
+  }
+
   retrieveWordsLiked(userId: number){
     return axios.get(`${API_URL}/words-liked/${userId}`);
   }

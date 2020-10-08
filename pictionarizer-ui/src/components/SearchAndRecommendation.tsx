@@ -47,13 +47,13 @@ class SearchAndRecommendation extends React.Component{
         <div className="active-cyan-3 active-cyan-4 mb-4 flex">
           <input className="form-control" 
                 type="text" 
-                placeholder="🔍Keyword" 
+                placeholder="🔍Word or User Name" 
                 aria-label="Search"
                 value={this.state.searchField}
                 onChange={(event) => this.onHandleChange(event)}
           />
-          <Link to={'/searched/' + this.state.searchField}>
-            <button className="action-button primary" type="submit">Search</button>
+          <Link className="action-button primary" to={'/searched/' + this.state.searchField}>
+            <span className="push-down">Search</span>
           </Link>    
         </div>
         <h5>Account recommendation</h5>
