@@ -115,6 +115,11 @@
   margin-bottom: 0.5rem;
 }
 
+.search-filter-bar {
+  width: 25%;
+  margin: 0px auto 0.5rem; 
+}
+
 .action-button {
   display: inline-block;
   font-weight: 100;

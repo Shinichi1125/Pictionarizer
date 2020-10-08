@@ -86,7 +86,9 @@ public class WordController {
 	
 	@RequestMapping(value = "/search-words/{name}", method = RequestMethod.GET)
 	public List<Word> searchWords(@PathVariable("name") String name) {
-		return repository.findAllByWordName(name); 
+		List<Word> filteredWords =  repository.findAllByWordName(name); 
+		filteredWords = reverseArrayList(filteredWords);	
+		return filteredWords;
 	}
 	
 	// converts Date's data type so that it will be compatible on back-end side

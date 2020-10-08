@@ -174,9 +174,19 @@ public class UserController {
 		return userList; 
 	}
 	
+	public List<User> reverseUserArrayList(List<User> alist) { 
+        List<User> revArrayList = new ArrayList<User>(); 
+        for (int i = alist.size() - 1; i >= 0; i--) { 
+            revArrayList.add(alist.get(i)); 
+        } 
+        return revArrayList; 
+    } 	
+	
 	@RequestMapping(value = "/search-users/{name}", method = RequestMethod.GET)
 	public List<User> searchUser(@PathVariable("name") String name) {
-		return repository.findAllByUserName(name); 
+		List<User> filteredUsers = repository.findAllByUserName(name); 
+		filteredUsers = reverseUserArrayList(filteredUsers);
+		return filteredUsers; 
 	}
 	
 	public class Error {
