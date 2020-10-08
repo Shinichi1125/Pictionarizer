@@ -44,21 +44,11 @@ class Searched extends React.Component<ISearchProps>{
   filterByUser(){
     this.setState({userFilterSelected:true})
     this.setState({wordFilterSelected:false})
-    console.log('areUsersFound:' + this.state.areUsersFound)
-    console.log('areWordsFound:' + this.state.areWordsFound)
-    console.log('userFilterSelected:' + this.state.userFilterSelected)
-    console.log('wordFilterSelected:' + this.state.wordFilterSelected)
-   //window.location.reload(true)
   }
 
   filterByWord(){
     this.setState({userFilterSelected:false})
     this.setState({wordFilterSelected:true})
-    console.log('areUsersFound:' + this.state.areUsersFound)
-    console.log('areWordsFound:' + this.state.areWordsFound)
-    console.log('userFilterSelected:' + this.state.userFilterSelected)
-    console.log('wordFilterSelected:' + this.state.wordFilterSelected)
-    //window.location.reload(true)
   }
 
   render(){
@@ -73,8 +63,12 @@ class Searched extends React.Component<ISearchProps>{
           </div>
         </div>
         {
-          this.state.areUsersFound && this.state.areWordsFound && 
-          !this.state.userFilterSelected && !this.state.wordFilterSelected?
+          (this.state.areUsersFound && this.state.areWordsFound && 
+          !this.state.userFilterSelected && !this.state.wordFilterSelected) ||
+          (this.state.areUsersFound && !this.state.areWordsFound && 
+          !this.state.userFilterSelected && !this.state.wordFilterSelected) ||
+          (this.state.areUsersFound && this.state.areWordsFound && this.state.userFilterSelected) || 
+          this.state.areUsersFound && !this.state.areWordsFound && this.state.userFilterSelected?
           <div>
             <h3><span className="yellow-highlight">&nbsp;Users whose names contain "{this.state.keyword}"&nbsp;</span></h3>      
             {this.state.searchedUsers.map((user)=>
@@ -91,7 +85,10 @@ class Searched extends React.Component<ISearchProps>{
                 description={user.description}
               />)}
           </div>:
-          !this.state.areUsersFound && this.state.areWordsFound?
+          (!this.state.areUsersFound && this.state.areWordsFound && 
+           !this.state.userFilterSelected && !this.state.wordFilterSelected) ||
+          this.state.areUsersFound && this.state.areWordsFound && this.state.wordFilterSelected ||
+          !this.state.areUsersFound && this.state.areWordsFound && this.state.wordFilterSelected?
           <div>
             <h3><span className="yellow-highlight">&nbsp;Words that contain "{this.state.keyword}" &nbsp;</span></h3>      
             {this.state.searchedWords.map((word)=>
@@ -106,8 +103,23 @@ class Searched extends React.Component<ISearchProps>{
                 createdDate={word.createdDate}
                 image={word.image}
               />)}
-          </div>:
-          this.state.areUsersFound && this.state.areWordsFound && this.state.userFilterSelected?
+          </div>:     
+          !this.state.areUsersFound && this.state.userFilterSelected?
+          <h3>No user found with the keyword "{this.state.keyword}"</h3>:
+          !this.state.areWordsFound && this.state.wordFilterSelected?
+          <h3>No word found with the keyword "{this.state.keyword}"</h3>:
+          <h3>Nothing found with the keyword "{this.state.keyword}"</h3>
+        }
+        
+      </div>
+    )
+  }
+}
+
+export default Searched; 
+
+/*
+this.state.areUsersFound && this.state.areWordsFound && this.state.userFilterSelected?
           <div>
             <h3><span className="yellow-highlight">&nbsp;Filtered by Users&nbsp;</span></h3>      
             {this.state.searchedUsers.map((user)=>
@@ -124,7 +136,8 @@ class Searched extends React.Component<ISearchProps>{
                 description={user.description}
               />)}
           </div>:
-          this.state.areUsersFound && this.state.areWordsFound && this.state.wordFilterSelected?
+
+this.state.areUsersFound && this.state.areWordsFound && this.state.wordFilterSelected?
           <div>
             <h3><span className="yellow-highlight">&nbsp;Filtered by Words&nbsp;</span></h3>      
             {this.state.searchedWords.map((word)=>
@@ -140,12 +153,4 @@ class Searched extends React.Component<ISearchProps>{
                 image={word.image}
               />)}
           </div>:
-          <h3>Nothing found with the keyword "{this.state.keyword}"</h3>
-        }
-        
-      </div>
-    )
-  }
-}
-
-export default Searched; 
+*/

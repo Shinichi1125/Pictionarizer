@@ -102,6 +102,11 @@
   top: 0.5rem;
 }
 
+.push-right {
+  position: relative;
+  left: 0.125rem;
+}
+
 .search-filter-button {
   position: relative; 
   left: 3.25rem;

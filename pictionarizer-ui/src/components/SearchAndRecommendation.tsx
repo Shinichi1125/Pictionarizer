@@ -52,9 +52,13 @@ class SearchAndRecommendation extends React.Component{
                 value={this.state.searchField}
                 onChange={(event) => this.onHandleChange(event)}
           />
-          <Link className="action-button primary" to={'/searched/' + this.state.searchField}>
-            <span className="push-down">Search</span>
-          </Link>    
+          {
+            this.state.searchField === ''?
+            <button className="action-button outline-primary push-right">Search</button>:
+            <Link className="action-button primary push-right" to={'/searched/' + this.state.searchField}>
+              <span className="push-down">Search</span>
+            </Link>
+          }         
         </div>
         <h5>Account recommendation</h5>
           {this.state.users.map((user)=>
