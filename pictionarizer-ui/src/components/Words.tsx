@@ -4,6 +4,7 @@ import WordsDataService from '../api/WordsDataService';
 import { Link } from 'react-router-dom';
 import { getLoginId } from '../LoginLocalStorage';
 import HomeWordRow from './HomeWordRow';
+import { Dropdown } from 'react-bootstrap';
 
 const loginState = Number(getLoginId());
 
@@ -27,6 +28,7 @@ class Words extends React.Component{
     return(
       <div>
         {loginState > 0?<Link to={'/word/create'}><button className="create-button">+New Word</button></Link>: <span></span>}
+        
         <div>
           {this.state.wordsData.map((word)=>
           <HomeWordRow 
@@ -47,3 +49,18 @@ class Words extends React.Component{
 }
 
 export default Words; 
+
+
+/*
+<Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Dropdown Button
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+*/ 

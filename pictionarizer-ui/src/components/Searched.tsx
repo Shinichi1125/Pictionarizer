@@ -99,7 +99,7 @@ class Searched extends React.Component<ISearchProps>{
             (this.state.areUsersFound && !this.state.areWordsFound && 
             !this.state.userFilterSelected && !this.state.wordFilterSelected) ||
             (this.state.areUsersFound && this.state.areWordsFound && this.state.userFilterSelected) || 
-            this.state.areUsersFound && !this.state.areWordsFound && this.state.userFilterSelected?
+            (this.state.areUsersFound && !this.state.areWordsFound && this.state.userFilterSelected)?
             <div>
               <h3><span className="yellow-highlight">&nbsp;Users whose names contain "{this.state.keyword}"&nbsp;</span></h3>      
               {this.state.searchedUsers.map((user)=>
@@ -118,8 +118,8 @@ class Searched extends React.Component<ISearchProps>{
             </div>:
             (!this.state.areUsersFound && this.state.areWordsFound && 
             !this.state.userFilterSelected && !this.state.wordFilterSelected) ||
-            this.state.areUsersFound && this.state.areWordsFound && this.state.wordFilterSelected ||
-            !this.state.areUsersFound && this.state.areWordsFound && this.state.wordFilterSelected?
+            (this.state.areUsersFound && this.state.areWordsFound && this.state.wordFilterSelected) ||
+            (!this.state.areUsersFound && this.state.areWordsFound && this.state.wordFilterSelected)?
             <div>
               <h3><span className="yellow-highlight">&nbsp;Words that contain "{this.state.keyword}" &nbsp;</span></h3>      
               {this.state.searchedWords.map((word)=>
