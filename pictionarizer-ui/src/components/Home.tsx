@@ -10,7 +10,7 @@ class Home extends React.Component{
         <main>
           <Words/>
         </main>
-        <aside>
+        <aside className="sidebar">
           <SearchAndRecommendation/>
           <Footer/>
         </aside>

@@ -97,6 +97,11 @@
   margin-bottom: 0.5rem;
 }
 
+.sidebar {
+  position: sticky;
+  top: 0;
+}
+
 .push-down {
   position: relative;
   top: 0.5rem;

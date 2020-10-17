@@ -114,7 +114,7 @@ class Login extends React.Component<ILoginInfoProps, ILoginInfoState>{
                   <ErrorMessage name="password" component="div" className="text-danger"/>
                   <div className="form-group">
                   <fieldset>
-                    <Field type="text" name="password" placeholder="🔑Password" size="35"/>
+                    <Field type="password" name="password" placeholder="🔑Password" size="35"/>
                   </fieldset>
                   </div>
                   <button type="submit" className="btn btn-primary">Log in</button>

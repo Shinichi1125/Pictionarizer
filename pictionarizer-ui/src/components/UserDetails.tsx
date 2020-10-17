@@ -166,11 +166,15 @@ class UserDetails extends React.Component<IUserProps, IUserState>{
 
           <div className="speech-bubble">{user.description}</div>   
           <br/>    
-          <div>{loginState === user.id? <Link to={'/user/' + String(user.id)}><span role="img" aria-label="edit">✏️</span>Edit profile</Link>: <p> </p>}</div>  
+          <div>
+            {loginState === user.id && loginState !== TEST_USER_ID && loginState !== TEST_USER2_ID && loginState !== TEST_USER3_ID? 
+            <Link to={'/user/' + String(user.id)}><span role="img" aria-label="edit">✏️</span>Edit profile</Link>: 
+            <p></p>}
+          </div>  
           <div>
             {loginState === user.id && loginState !== TEST_USER_ID && loginState !== TEST_USER2_ID && loginState !== TEST_USER3_ID?
             <Link className="text-danger" to={'/user/delete/' + String(user.id)}><span role="img" aria-label="delete">🗑️</span>Delete account</Link>:
-            <p> </p>}
+            <p></p>}
           </div>
         </div>
         <div>
