@@ -34,6 +34,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pictionarizer.model.User;
 import com.pictionarizer.model.Word;
+import com.pictionarizer.repos.CommentRepository;
+import com.pictionarizer.repos.LikeRelationRepository;
 import com.pictionarizer.repos.WordRepository;
 
 @RestController
@@ -48,10 +50,14 @@ public class WordController {
 	//private static final Logger LOGGER = LoggerFactory.getLogger(WordController.class);
 	
 	private WordRepository repository; 
+	private CommentRepository commentRepository; 
+	private LikeRelationRepository likeRelationRepository; 
 	
 	@Autowired
-	WordController(WordRepository repository){
+	WordController(WordRepository repository, CommentRepository commentRepository, LikeRelationRepository likeRelationRepository){
 		this.repository = repository; 
+		this.commentRepository = commentRepository;
+		this.likeRelationRepository = likeRelationRepository; 
 	}
 	
 	public List<Word> reverseArrayList(List<Word> alist) { 
@@ -207,6 +213,8 @@ public class WordController {
 	
 	@RequestMapping(value = "/word/{id}", method = RequestMethod.DELETE)
 	public void deleteWord(@PathVariable("id") int id) {
+		commentRepository.deleteAllByWordId(id);
+		likeRelationRepository.deleteAllByWordId(id);
 		repository.deleteById(id);
 	}
 	

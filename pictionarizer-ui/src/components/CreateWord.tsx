@@ -81,7 +81,7 @@ class CreateWord extends React.Component<IWordProps, IWordState>{
     };
 
     await WordsDataService.createWord(word)
-    .then(() => this.props.history.push('/words'))       
+    .then(() => this.props.history.push('/'))       
   }
   
   render(){
