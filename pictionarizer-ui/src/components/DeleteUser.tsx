@@ -71,7 +71,7 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
   onSubmit(values: LoginInfo){
     UsersDataService.userLogin(values)
     .then(res =>{
-      UsersDataService.deleteUser(res.data)
+      UsersDataService.deleteUser(res.data.userId)
     })
     .then(() => this.props.history.push('/'))  
     .then(() => setLoginId(String(0)))  

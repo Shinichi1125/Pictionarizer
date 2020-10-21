@@ -81,7 +81,7 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
     .then(() => UsersDataService.userLogin(loginInput))
     .then(res => {
       setLoginId(String(res.data.userId));
-      alert("LoginId: " + getLoginId());
+      //alert("LoginId: " + getLoginId());
     }) 
     .then(() => this.props.history.push('/'))   
     .then(() => window.location.reload(true))    

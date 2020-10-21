@@ -83,10 +83,7 @@ class UserRowCreator extends React.Component<User>{
               </li>
             </ul>    
           </nav>
-                
-          <p>
-            {user.description}
-          </p>           
+          <p>{user.description}<br/></p>:  
         </div>
     )
   }

@@ -26,5 +26,8 @@ public interface LikeRelationRepository extends JpaRepository<LikeRelation, Inte
 	@Query("DELETE FROM LikeRelation lr where lr.wordId = :wordId") 
     void deleteAllByWordId(@Param("wordId") int wordId);	
 	
-	
+	@Transactional
+	@Modifying
+	@Query("DELETE FROM LikeRelation lr where lr.userId = :userId") 
+    void deleteAllByUserId(@Param("userId") int userId);	
 }

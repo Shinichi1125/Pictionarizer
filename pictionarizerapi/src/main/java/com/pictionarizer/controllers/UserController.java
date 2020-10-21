@@ -28,13 +28,18 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.pictionarizer.model.Comment;
 import com.pictionarizer.model.FollowerRelation;
+import com.pictionarizer.model.LikeRelation;
 import com.pictionarizer.model.LoginValue;
 //import com.pictionarizer.model.Login;
 import com.pictionarizer.model.User;
 import com.pictionarizer.model.Word;
+import com.pictionarizer.repos.CommentRepository;
 import com.pictionarizer.repos.FollowerRelationRepository;
 import com.pictionarizer.repos.UserRepository;
+import com.pictionarizer.repos.WordRepository;
+import com.pictionarizer.repos.LikeRelationRepository;
 
 @RestController
 @RequestMapping("/api")
@@ -46,14 +51,25 @@ public class UserController {
 	
 	private UserRepository repository;
 	private FollowerRelationRepository followerRelationRepository;
+	private WordRepository wordRepository; 
+	private LikeRelationRepository likeRelationRepository;
+	private CommentRepository commentRepository; 
 	
 	// logger for a debugging purpose
 	//private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired
-	UserController(UserRepository repository, FollowerRelationRepository followerRelationRepository){
+	UserController(
+			UserRepository repository, 
+			FollowerRelationRepository followerRelationRepository, 
+			WordRepository wordRepository, 
+			LikeRelationRepository likeRelationRepository, 
+			CommentRepository commentRepository){
 		this.repository = repository;
 		this.followerRelationRepository = followerRelationRepository;
+		this.wordRepository = wordRepository;
+		this.likeRelationRepository = likeRelationRepository; 
+		this.commentRepository = commentRepository; 
 	}
 	
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
@@ -359,8 +375,82 @@ public class UserController {
 		return repository.save(user);
 	}
 	
+	int getNoOfWords(int userId) {
+		int noOfWords = 0; 
+		List<Word> fetchedWordsList = wordRepository.findAllByUserId(userId);
+		noOfWords = fetchedWordsList.size();
+		return noOfWords;
+	}
+	
+	int getNoOfFollowers(int id){
+		int noOfFollowers;
+		List<FollowerRelation> followerIdList = followerRelationRepository.findAllByFolloweeId(id);
+		noOfFollowers = followerIdList.size();
+		return noOfFollowers;
+	}
+	
+	int getNoOfFollowings(int id){
+		int noOfFollowings;
+		List<FollowerRelation> followingIdList = followerRelationRepository.findAllByFollowerId(id);
+		noOfFollowings = followingIdList.size();
+		return noOfFollowings; 
+	}
+	
+	int getNoOfLikesOnOwnWords(int id){
+		int noOfLikes;
+		List<LikeRelation> wordIdList = likeRelationRepository.findAllByWordId(id);
+		noOfLikes = wordIdList.size();
+		return noOfLikes;
+	}
+	
+	int getNoOfLikesByUserId(int id){
+		int noOfLikes;
+		List<LikeRelation> wordIdList = likeRelationRepository.findAllByUserId(id);
+		noOfLikes = wordIdList.size();
+		return noOfLikes;
+	}
+	
+	int getNoOfCommentsOnOwnWords(int id){
+		int noOfComments;
+		List<Comment> commentList = commentRepository.findAllByWordId(id);
+		noOfComments = commentList.size();
+		return noOfComments;
+	}
+	
+	int getNoOfCommentsByUserId(int id){
+		int noOfComments;
+		List<Comment> commentList = commentRepository.findAllByUserId(id);
+		noOfComments = commentList.size();
+		return noOfComments;
+	}
+	
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
 	public void deleteUser(@PathVariable("id") int id) {
+		if(getNoOfWords(id) > 0) {
+			List<Word> wordList = wordRepository.findAllByUserId(id);
+			for(Word word: wordList) {
+				int wordId = word.getId();
+				if(getNoOfLikesOnOwnWords(wordId) > 0) {
+					likeRelationRepository.deleteAllByWordId(wordId);
+				}
+				if(getNoOfCommentsOnOwnWords(wordId) > 0) {
+					commentRepository.deleteAllByWordId(wordId);
+				}
+			}
+			if(getNoOfLikesByUserId(id) > 0) {
+				likeRelationRepository.deleteAllByUserId(id);
+			}
+			if(getNoOfCommentsByUserId(id) > 0) {
+				commentRepository.deleteAllByUserId(id);
+			}
+			wordRepository.deleteAllByUserId(id);
+		}
+		if(getNoOfFollowings(id) > 0) {
+			followerRelationRepository.deleteAllByFollowerId(id);
+		}
+		if(getNoOfFollowers(id) > 0) {
+			followerRelationRepository.deleteAllByFolloweeId(id);
+		}
 		repository.deleteById(id);
 	}
 	

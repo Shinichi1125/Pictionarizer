@@ -32,6 +32,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.pictionarizer.model.Comment;
+import com.pictionarizer.model.LikeRelation;
 import com.pictionarizer.model.User;
 import com.pictionarizer.model.Word;
 import com.pictionarizer.repos.CommentRepository;
@@ -211,10 +213,28 @@ public class WordController {
 		return repository.save(word);
 	}
 	
+	int getNoOfLikes(int id){
+		int noOfLikes;
+		List<LikeRelation> wordIdList = likeRelationRepository.findAllByWordId(id);
+		noOfLikes = wordIdList.size();
+		return noOfLikes;
+	}
+	
+	int getNoOfComments(int id){
+		int noOfComments;
+		List<Comment> commentList = commentRepository.findAllByWordId(id);
+		noOfComments = commentList.size();
+		return noOfComments;
+	}
+	
 	@RequestMapping(value = "/word/{id}", method = RequestMethod.DELETE)
 	public void deleteWord(@PathVariable("id") int id) {
-		commentRepository.deleteAllByWordId(id);
-		likeRelationRepository.deleteAllByWordId(id);
+		if(getNoOfComments(id) > 0) {
+			commentRepository.deleteAllByWordId(id);
+		}	
+		if(getNoOfLikes(id) > 0) {
+			likeRelationRepository.deleteAllByWordId(id);
+		}
 		repository.deleteById(id);
 	}
 	
