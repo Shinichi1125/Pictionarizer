@@ -49,19 +49,18 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
   }
 
   componentDidMount(){
-
     if(loginState === 0){
       this.props.history.push('/')
-    }
+    } else {
+      let id = Number(this.props.match.params.id);
+      let data: User;
 
-    let id = Number(this.props.match.params.id);
-    let data: User;
-
-    UsersDataService.retrieveUser(id)
-    .then(res => {
-      data = res.data;
-      this.setState({userData:data});
-    }) 
+      UsersDataService.retrieveUser(id)
+      .then(res => {
+        data = res.data;
+        this.setState({userData:data});
+      }) 
+    }  
   }
 
   validate(values: LoginInfo){
@@ -110,6 +109,8 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
             initialValues={{ email, password }}
             onSubmit={this.onSubmit}
             validate={this.validate}
+            validateOnChange = {false}
+            validateOnBlur = {false}
             enableReinitialize={true}
           >
             {

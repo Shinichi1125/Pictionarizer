@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.pictionarizer.controllers.CommentController.Error;
 import com.pictionarizer.model.Comment;
 import com.pictionarizer.model.FollowerRelation;
 import com.pictionarizer.model.LikeRelation;
@@ -48,6 +49,7 @@ public class UserController {
 	
 	private int passwordMinLength = 8;
 	private int noOfRecommendedUsers = 5;
+	private int testUserId = 2; 
 	
 	private UserRepository repository;
 	private FollowerRelationRepository followerRelationRepository;
@@ -289,7 +291,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
-	public User saveUser(
+	public ResponseEntity<?> saveUser(
 			@RequestParam("name") String name,
 			@RequestParam("ownLanguage") String ownLanguage,
 			@RequestParam("targetLanguage") String targetLanguage,
@@ -298,29 +300,43 @@ public class UserController {
 			@RequestParam("password") String password,
 			@RequestParam(value = "image", required = false) MultipartFile image,
 			@RequestParam("description") String description) {
-				
-		User user = new User();
 		
-		user = convertUser(
-					name,
-					ownLanguage,
-					targetLanguage,
-					country,
-					email,
-					password,
-					image,
-					description);
+		boolean emailAlreadyExists = false; 
+		List<User> fetchedUserList = repository.findByEmail(email);
 		
-		// if the user doesn't provide a profile image, 
-		//assign the default-avatar used for the test user whose id number is 2
-		Optional<MultipartFile> imageOpt = Optional.ofNullable(image);		
-		if(!imageOpt.isPresent()) {
-			Optional<User> optUser = Optional.ofNullable(user);
-			optUser = repository.findById(2);  // Test User's id number is 2
-			byte[] userImage = optUser.get().getImage();
-			user.setImage(userImage);
-		}	
-		return repository.save(user);
+		if(fetchedUserList.size() > 0) {
+			emailAlreadyExists = true;
+		}
+		
+		if(emailAlreadyExists) {
+			return new ResponseEntity<>(
+					new Error("The email address already exists."),  
+					HttpStatus.BAD_REQUEST
+			);
+		} else {
+			User user = new User();
+			
+			user = convertUser(
+						name,
+						ownLanguage,
+						targetLanguage,
+						country,
+						email,
+						password,
+						image,
+						description);
+			
+			// if the user doesn't provide a profile image, 
+			//assign the default-avatar used for the test user whose id number is 2
+			Optional<MultipartFile> imageOpt = Optional.ofNullable(image);		
+			if(!imageOpt.isPresent()) {
+				Optional<User> optUser = Optional.ofNullable(user);
+				optUser = repository.findById(testUserId);  // Test User's id number is 2
+				byte[] userImage = optUser.get().getImage();
+				user.setImage(userImage);
+			}	
+			return new ResponseEntity<>(repository.save(user), HttpStatus.OK);
+		}				
 	}
 	
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)

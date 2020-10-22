@@ -3,7 +3,7 @@ import User from '../interfaces/User.interface';
 import Word from '../interfaces/Word.interface';
 import Footer from './Footer';
 import UsersDataService from '../api/UsersDataService';
-import { Formik, Form, Field, ErrorMessage } from 'formik'; 
+import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik'; 
 import IUserProps from '../interfaces/IUserProps.interface';
 import IUserState from '../interfaces/IUserState.interface';
 import { SMALL_INPUT_FIELD } from '../Constants';
@@ -58,7 +58,7 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
     this.setState({userData:tempUserData});
   }  
 
-  async onSubmit(values: User){
+  async onSubmit(values: User, formikBag: FormikHelpers<User>){
     let user = {
       ...values, 
       image: this.state.userData.image, 
@@ -84,7 +84,13 @@ class CreateUser extends React.Component<IUserProps, IUserState>{
       //alert("LoginId: " + getLoginId());
     }) 
     .then(() => this.props.history.push('/'))   
-    .then(() => window.location.reload(true))    
+    .then(() => window.location.reload(true))  
+    .catch((error) => {
+      console.log(error.response.data.message);
+      formikBag.setErrors({
+        email: error.response.data.message,
+      })  
+   })  
   }
   
   render(){
