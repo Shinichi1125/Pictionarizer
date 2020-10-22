@@ -8,7 +8,9 @@ import IUserProps from '../interfaces/IUserProps.interface';
 import IUserState from '../interfaces/IUserState.interface';
 import { API_URL, SMALL_INPUT_FIELD } from '../Constants';
 import { Formik, Form, Field, ErrorMessage } from 'formik'; 
-import { setLoginId } from '../LoginLocalStorage';
+import { setLoginId, getLoginId } from '../LoginLocalStorage';
+
+const loginState = Number(getLoginId());
 
 class DeleteUser extends React.Component<IUserProps, IUserState>{
 
@@ -47,6 +49,11 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
   }
 
   componentDidMount(){
+
+    if(loginState === 0){
+      this.props.history.push('/')
+    }
+
     let id = Number(this.props.match.params.id);
     let data: User;
 
@@ -73,9 +80,9 @@ class DeleteUser extends React.Component<IUserProps, IUserState>{
     .then(res =>{
       UsersDataService.deleteUser(res.data.userId)
     })
-    .then(() => this.props.history.push('/'))  
     .then(() => setLoginId(String(0)))  
     .then(() => window.location.reload(true))   
+    .then(() => this.props.history.push('/')) 
   }
 
   cancelDelete(id: number){

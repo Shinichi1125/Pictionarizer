@@ -436,15 +436,15 @@ public class UserController {
 				if(getNoOfCommentsOnOwnWords(wordId) > 0) {
 					commentRepository.deleteAllByWordId(wordId);
 				}
-			}
-			if(getNoOfLikesByUserId(id) > 0) {
-				likeRelationRepository.deleteAllByUserId(id);
-			}
-			if(getNoOfCommentsByUserId(id) > 0) {
-				commentRepository.deleteAllByUserId(id);
-			}
-			wordRepository.deleteAllByUserId(id);
+			}	
 		}
+		if(getNoOfLikesByUserId(id) > 0) {
+			likeRelationRepository.deleteAllByUserId(id);
+		}
+		if(getNoOfCommentsByUserId(id) > 0) {
+			commentRepository.deleteAllByUserId(id);
+		}
+		wordRepository.deleteAllByUserId(id);
 		if(getNoOfFollowings(id) > 0) {
 			followerRelationRepository.deleteAllByFollowerId(id);
 		}
