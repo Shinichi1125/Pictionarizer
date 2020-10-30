@@ -310,7 +310,7 @@ public class UserController {
 		
 		if(emailAlreadyExists) {
 			return new ResponseEntity<>(
-					new Error("The email address already exists."),  
+					new Error("Another user is already using the email address."),  
 					HttpStatus.BAD_REQUEST
 			);
 		} else {
