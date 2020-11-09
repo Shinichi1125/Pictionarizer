@@ -38,7 +38,6 @@ class SearchAndRecommendation extends React.Component{
     this.setState({
       searchField: event.currentTarget.value
     });
-    //console.log('The value of searchField: ' + this.state.searchField);
   }
 
   render(){

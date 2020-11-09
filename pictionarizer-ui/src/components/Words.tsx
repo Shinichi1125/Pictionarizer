@@ -4,7 +4,7 @@ import WordsDataService from '../api/WordsDataService';
 import { Link } from 'react-router-dom';
 import { getLoginId } from '../LoginLocalStorage';
 import HomeWordRow from './HomeWordRow';
-import { Dropdown } from 'react-bootstrap';
+//mport { Dropdown } from 'react-bootstrap';
 
 const loginState = Number(getLoginId());
 
