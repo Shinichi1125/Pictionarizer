@@ -69,7 +69,7 @@ jobs:
           command: |
             echo ${DOCKER_PASS} | docker login -u ${DOCKER_USER} --password-stdin
             docker images --format '{{.Repository}}' | while read imagename; do
-              docker push $imagename
+              docker push ${imagename}:latest
             done
 workflows:
   version: 2.1
