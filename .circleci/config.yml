@@ -79,6 +79,9 @@ jobs:
           name: Push images
           command: |
             echo ${DOCKER_PASS} | docker login -u ${DOCKER_USER} --password-stdin
+            git clone https://github.com/Shinichi1125/pictionary_v2.1.git
+            cd pictionary_v2.1
+            set -x
             docker-compose push
             #docker images --format '{{.Repository}}' | while read imagename; do
             #  docker push ${imagename}:latest
