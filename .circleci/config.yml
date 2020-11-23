@@ -9,10 +9,13 @@ jobs:
           key: docker-{{ checksum ".circleci/config.yml" }}
           paths: ~/caches/images.tar
       - run:
-          name: Build images
+          name: Install docker compose
           command: |
             sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
             sudo chmod +x /usr/local/bin/docker-compose
+      - run:
+          name: Build images
+          command: |
             git clone https://github.com/Shinichi1125/pictionary_v2.1.git
             cd pictionary_v2.1
             set -x
@@ -35,10 +38,13 @@ jobs:
           name: Load images
           command: docker load -i ~/caches/images.tar
       - run:
-          name: Start containers
+          name: Install docker compose
           command: |
             sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
             sudo chmod +x /usr/local/bin/docker-compose
+      - run:
+          name: Start containers
+          command: |
             git clone https://github.com/Shinichi1125/pictionary_v2.1.git
             cd pictionary_v2.1
             set -x
@@ -65,12 +71,18 @@ jobs:
           name: Load images
           command: docker load -i ~/caches/images.tar
       - run:
+          name: Install docker compose
+          command: |
+            sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+            sudo chmod +x /usr/local/bin/docker-compose
+      - run:
           name: Push images
           command: |
             echo ${DOCKER_PASS} | docker login -u ${DOCKER_USER} --password-stdin
-            docker images --format '{{.Repository}}' | while read imagename; do
-              docker push $imagename
-            done
+            git clone https://github.com/Shinichi1125/pictionary_v2.1.git
+            cd pictionary_v2.1
+            set -x
+            docker-compose push
 workflows:
   version: 2.1
   build-test-push-deploy:
