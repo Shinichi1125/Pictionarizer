@@ -10,7 +10,7 @@ class Header extends React.Component{
   render(){
     return(
       <div className="Header">
-        <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-md navbar-dark bg-light">
           <ul className="navbar-nav navbar-collapse">
             <li>
               <img src={`${API_URL}/user/uploaded-image/${LOGO_ID}`}
