@@ -1,6 +1,10 @@
 # Pictionarizer
 An app that helps users strengthen their vocabulary with images and contexts in learning a foreign language
 
+"Picture" + "Dictionary" + "-er" -> Pictionarizer
+
+Create your own dictionary by images and stories!
+
 # URL
 [http://pictionarizer.work](http://pictionarizer.work)
 
