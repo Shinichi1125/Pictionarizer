@@ -15,6 +15,9 @@ An app that helps users strengthen their vocabulary with images and contexts in 
 * If you find a grammatical mistake in someone's example sentence, kindly correct it :) 
 * The interactions mentioned above can also strengthen the learner's memory, because the memory is personalized. 
 
+# Top page screenshot
+![Top page](https://user-images.githubusercontent.com/37083992/100702340-30bbc100-33aa-11eb-8671-510df7685c01.png)
+
 # Tools that I used for building this app
 ## Database
 * MySQL
