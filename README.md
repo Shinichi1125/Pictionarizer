@@ -45,6 +45,29 @@ An app that helps users strengthen their vocabulary with images and contexts in 
 * Docker, docker-compose
 * CircleCI
   
+# Functionality
+## User
+* "Create User" with name, email address, password, profile image, user description etc
+* Login, Logout
+* "Update User" (user profile's information can be updated)
+* "Delete User" (All the information related to this particular user will also be deleted)
+
+## Word Object (Post something)
+* "Create Word" (post a new word you want to remember in your target language)
+* "Update Word" 
+* "Delete Word" 
+
+## SNS-like functions
+* Follow
+* Like
+* Comment 
+
+## Searching
+* Search by keyword
+* Filter the search result by username / word
+
+## Others
+* User recommendation ("Users that you may want to follow")
 
 
 
