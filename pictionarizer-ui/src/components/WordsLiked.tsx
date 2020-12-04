@@ -40,9 +40,11 @@ class WordsLiked extends React.Component<IUserProps, IUserState>{
     this.followUser = this.followUser.bind(this)
     this.unfollowUser = this.unfollowUser.bind(this)
     this.redirectToLogin = this.redirectToLogin.bind(this)
+    this.updatePage = this.updatePage.bind(this)
   }
 
-  componentDidMount(){
+  updatePage(lifeCycle: String){
+    console.log("updatePage got called with the lifeCycle type " + lifeCycle)
     let id = Number(this.props.match.params.id);
     let data: User;
 
@@ -64,13 +66,15 @@ class WordsLiked extends React.Component<IUserProps, IUserState>{
       this.setState({userData:data});
     }) 
 
-    WordsDataService.retrieveWordsLiked(id)
-    .then(response => {
-      const info = response.data;
-      this.setState({
-        words:[...this.state.words, ...info]
+    if(lifeCycle === "componentDidMount"){
+      WordsDataService.retrieveWordsByUser(id)
+      .then(response => {
+        const info = response.data;
+        this.setState({
+          words:[...this.state.words, ...info]
+        })
       })
-    })
+    } 
 
     UsersDataService.getNoOfFollowings(id)
     .then(res => {
@@ -90,6 +94,18 @@ class WordsLiked extends React.Component<IUserProps, IUserState>{
     })
   }
 
+  componentDidMount(){
+    console.log("componentDidMount invoked")
+    this.updatePage("componentDidMount")
+  }
+
+  componentDidUpdate(prevProps: any, prevState: any){
+    console.log("componentDidUpdate invoked")
+    if(this.state.isFollowing !== prevState.isFollowing){
+      this.updatePage("componentDidUpdate")
+    }
+  } 
+
   redirectToLogin(){
     this.props.history.push('/login')
   }
@@ -104,7 +120,10 @@ class WordsLiked extends React.Component<IUserProps, IUserState>{
       this.redirectToLogin();
     } else {
       UsersDataService.followUser(followingRelation)
-      .then(() => window.location.reload(true)) 
+      .then(() => {
+        this.setState({isFollowing:true});
+      })
+      //.then(() => window.location.reload(true)) 
     }
   }
 
@@ -115,7 +134,10 @@ class WordsLiked extends React.Component<IUserProps, IUserState>{
       followeeId: id
     }
     UsersDataService.unfollowUser(followingRelation)
-    .then(() => window.location.reload(true)) 
+    .then(() => {
+      this.setState({isFollowing:false});
+    })
+    //.then(() => window.location.reload(true)) 
   }
 
   render(){    

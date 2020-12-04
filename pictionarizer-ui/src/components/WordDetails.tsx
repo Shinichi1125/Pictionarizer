@@ -40,9 +40,11 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
     this.redirectToLogin = this.redirectToLogin.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
     this.validate = this.validate.bind(this)
+    this.updatePage = this.updatePage.bind(this)
   }
 
-  componentDidMount(){
+  updatePage(lifeCycle: String){
+    console.log("updatePage got called with the lifeCycle type " + lifeCycle)
     let id = Number(this.props.match.params.id);
     let data: Word;
 
@@ -68,25 +70,39 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
       this.setState({isLiked: res.data})
     })
 
-    WordsDataService.retrieveComments(id)
-    .then(res => {
-      this.setState({
-        comments:[...this.state.comments, ...res.data]
-      });
-    }) 
-
+    if(lifeCycle === "componentDidMount"){
+      WordsDataService.retrieveComments(id)
+      .then(res => {
+        this.setState({
+          comments:[...this.state.comments, ...res.data]
+        });
+      }) 
+    }
+    
     WordsDataService.getNoOfComments(id)
     .then(res => {
       this.setState({noOfComments:res.data});
     })
   }
 
+  componentDidMount(){
+    console.log("componentDidMount invoked")
+    this.updatePage("componentDidMount")
+  }
+
+  componentDidUpdate(prevProps: any, prepState: any){
+    console.log("componentDidUpdate invoked")
+    if(this.state.isLiked !== prepState.isLiked){
+      this.updatePage("componentDidUpdate")
+    }
+  } 
+
   redirectToLogin(){
     this.props.history.push('/login')
   }
 
   likeWord(id: number){
-    const likeRelation = {
+    let likeRelation = {
       userId: loginState,
       likeUserId: loginState,
       wordId: id
@@ -95,7 +111,10 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
       this.redirectToLogin();
     } else {
       WordsDataService.likeWord(likeRelation)
-      .then(() => window.location.reload(true)) 
+      .then(() => {
+        this.setState({isLiked:true});
+      })
+      //.then(() => window.location.reload(true)) 
     } 
   }
 
@@ -106,7 +125,10 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
       wordId: id
     }
     WordsDataService.unlikeWord(likeRelation)
-    .then(() => window.location.reload(true)) 
+    .then(() => {
+      this.setState({isLiked:false});
+    })
+    //.then(() => window.location.reload(true)) 
   }
 
   async onSubmit(values: Comment, formikBag: FormikHelpers<Comment>){

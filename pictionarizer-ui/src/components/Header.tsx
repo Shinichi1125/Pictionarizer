@@ -22,7 +22,7 @@ class Header extends React.Component{
             <li title="Jump to the top page"><Link className="website-title" to={'/'}>Pictionarizer</Link></li>
           </ul>
           <ul className="navbar-nav navbar-collapse justify-content-end">
-            <li className="nav-link">{loginState === 0?<Link to={'user/create'}><span role="img" aria-label="sign up">📑</span>Sign up</Link>: <span></span>}</li>
+            <li className="nav-link">{loginState === 0?<Link to={'/user/create'}><span role="img" aria-label="sign up">📑</span>Sign up</Link>: <span></span>}</li>
             <li className="nav-link">{loginState === 0?<Link to={'/login'}><span role="img" aria-label="log in">📥</span>Log in</Link>: <span></span>}</li>
             <li>{loginState !== 0? <button onClick={() => logoutAndRefresh()}><span role="img" aria-label="log out">📤</span>Log out</button>: <span></span>}</li>
             &nbsp;

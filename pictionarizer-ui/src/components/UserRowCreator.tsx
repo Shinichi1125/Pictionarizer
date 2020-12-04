@@ -6,15 +6,17 @@ import { getLoginId } from '../LoginLocalStorage';
 import UsersDataService from '../api/UsersDataService'; 
 
 const loginState = Number(getLoginId());
+const textLimit = 120;
 
 class UserRowCreator extends React.Component<User>{
 
   state = {
     isFollowing: false,
-    isFollowed: false
+    isFollowed: false,
+    truncatedDescription: String
   }
 
-  componentDidMount(){
+  updatePage(){
     let id = this.props.id;
 
     const followerRelation = {
@@ -37,6 +39,60 @@ class UserRowCreator extends React.Component<User>{
     .then(res => {
       this.setState({isFollowing: res.data})
     })
+  }
+
+  truncateDescription(originalString: String){
+    let truncatedString: String = originalString;
+    if(originalString.length > textLimit){
+      truncatedString = originalString.substring(0, textLimit) + '......'
+    }
+    return truncatedString;
+  }
+
+  componentDidMount(){
+    console.log("componentDidMount invoked")
+    this.updatePage()
+  }
+
+  componentDidUpdate(prevProps: any, prevState: any){
+    console.log("componentDidUpdate invoked")
+    if(this.state.isFollowing !== prevState.isFollowing){
+      this.updatePage()
+    }
+  } 
+
+  loginSuggest(){
+    alert("You first need to log in before you can follow someone");
+  }
+  
+  followUser(id: number){
+    const followingRelation = {
+      userId: loginState,
+      followerId: loginState,
+      followeeId: id
+    }
+    if(loginState < 1){
+      this.loginSuggest();
+    } else {
+      UsersDataService.followUser(followingRelation)
+      .then(() => {
+        this.setState({isFollowing:true});
+      })
+      //.then(() => window.location.reload(true)) 
+    } 
+  }
+  
+  unfollowUser(id: number){
+    const followingRelation = {
+      userId: loginState,
+      followerId: loginState,
+      followeeId: id
+    }
+    UsersDataService.unfollowUser(followingRelation)
+    .then(() => {
+      this.setState({isFollowing:false});
+    })
+    //.then(() => window.location.reload(true))
   }
 
   render(){
@@ -70,12 +126,12 @@ class UserRowCreator extends React.Component<User>{
                   loginState === user.id? <span></span>:
                   this.state.isFollowing? 
                     <button 
-                      onClick={() => unfollowUser(user.id)} 
+                      onClick={() => this.unfollowUser(user.id)} 
                       className="btn btn-primary follow-button no-space-top-bottom">
                         Following
                     </button>:
                   <button 
-                    onClick={() => followUser(user.id)} 
+                    onClick={() => this.followUser(user.id)} 
                     className="btn btn-outline-primary follow-button no-space-top-bottom">
                       Follow
                   </button>
@@ -83,38 +139,10 @@ class UserRowCreator extends React.Component<User>{
               </li>
             </ul>    
           </nav>
-          <p>{user.description}<br/></p>:  
+          <p>{this.truncateDescription(user.description)}<br/></p>:  
         </div>
     )
   }
-}
-
-const loginSuggest = () => {
-  alert("You first need to log in before you can follow someone");
-}
-
-const followUser = (id: number) => {
-  const followingRelation = {
-    userId: loginState,
-    followerId: loginState,
-    followeeId: id
-  }
-  if(loginState < 1){
-    loginSuggest();
-  } else {
-    UsersDataService.followUser(followingRelation)
-    .then(() => window.location.reload(true)) 
-  } 
-}
-
-const unfollowUser = (id: number) => {
-  const followingRelation = {
-    userId: loginState,
-    followerId: loginState,
-    followeeId: id
-  }
-  UsersDataService.unfollowUser(followingRelation)
-  .then(() => window.location.reload(true))
 }
 
 // nav-bar is sticking out to the right, so it should be fixed later
