@@ -4,8 +4,8 @@ services:
     restart: always
     image: mysql:8.0
     ports: 
-      - 13306:3306    # for the local environment
-     # - 3306:3306    # for deployment
+     # - 13306:3306    # for the local environment
+      - 3306:3306    # for deployment
     volumes:
       - ./data/pictionary:/var/lib/mysql
     environment:
