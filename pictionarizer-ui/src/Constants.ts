@@ -1,6 +1,6 @@
-//export const API_URL = 'http://localhost:8080/pictionarizerservices/api';
+export const API_URL = 'http://localhost:8080/pictionarizerservices/api';
 //export const API_URL = 'http://pictionarizer/pictionarizerservices/api';
-export const API_URL = 'http://pictionarizer.work/pictionarizerservices/api';
+//export const API_URL = 'http://pictionarizer.work/pictionarizerservices/api';
 
 export const CONFIG = {
   headers: {

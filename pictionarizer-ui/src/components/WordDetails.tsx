@@ -253,17 +253,17 @@ class WordDetails extends React.Component<IWordProps, IWordState>{
                     {loginState > 0? 
                       <img src={`${API_URL}/user/uploaded-image/${loginState}`} 
                         alt="fetched img" 
-                        className="small round-border indentation"
+                        className="very-small round-border indentation"
                       />:
                       <img src={`${API_URL}/user/uploaded-image/${TEST_USER_ID}`} 
                         alt="fetched img" 
-                        className="small round-border indentation"
+                        className="very-small round-border indentation"
                       />
                     }
                     &nbsp;&nbsp;
                     <Field as="textarea" name="text" id="comment-field"
                       placeholder="Write a comment..." 
-                      cols="45" rows="1"
+                      className="col-lg-6 col-md-6 col-sm-4" rows="1"
                     />     
                     &nbsp;&nbsp;
                     <button type="submit" className="btn btn-primary">Send</button>  
