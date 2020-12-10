@@ -76,8 +76,12 @@ Create your own dictionary by images and stories!
 ## Others
 * User recommendation ("Users that you may want to follow")
 
+# AWS Architecture Diagram
+![Pictionarizer_infrastructure_v3](https://user-images.githubusercontent.com/37083992/101722594-39e81480-3ab3-11eb-8598-ee4a4b9e4396.png)
 
-
-
-
+# Further work I'm hoping to do to brush up this project
+* Replace the MySQL container with RDS
+* Include the React container in the nginx container
+* Infrastructure as Code using Cloudformation 
+* etc
 
