@@ -67,7 +67,7 @@ class WordsCommented extends React.Component<IUserProps, IUserState>{
     }) 
 
     if(lifeCycle === "componentDidMount"){
-      WordsDataService.retrieveWordsByUser(id)
+      WordsDataService.retrieveWordsCommented(id)
       .then(response => {
         const info = response.data;
         this.setState({
