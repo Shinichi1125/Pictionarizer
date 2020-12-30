@@ -1,4 +1,6 @@
 # Pictionarizer
+[![CircleCI](https://circleci.com/gh/Shinichi1125/Pictionarizer.svg?style=shield)](https://circleci.com/gh/Shinichi1125/Pictionarizer)
+
 An app that helps users strengthen their vocabulary with images and contexts in learning a foreign language
 
 "Picture" + "Dictionary" + "-er" -> Pictionarizer
