@@ -12,6 +12,9 @@ Create your own dictionary by images and stories!
 
 "Easy Login" button available. You can log in as a "Test User" by just clicking the button. 
 
+# Degree Thesis
+[https://www.theseus.fi/handle/10024/355850](https://www.theseus.fi/handle/10024/355850)
+
 # Description (How to use the App)
 * Post a new word that you want to remember in your target language.
 * When posting the word, add an example sentence to provide a context.
