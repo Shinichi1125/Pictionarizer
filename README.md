@@ -14,6 +14,7 @@ Create your own dictionary by images and stories!
 
 # Degree Thesis
 The brief description and key points are explained in this README, but the further details are written in my Deggree Thesis, which is published on the link below. 
+
 [https://www.theseus.fi/handle/10024/355850](https://www.theseus.fi/handle/10024/355850)
 
 # Description (How to use the App)
