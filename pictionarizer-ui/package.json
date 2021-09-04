@@ -12,7 +12,7 @@
     "axios": "^0.21.1",
     "formik": "^2.1.5",
     "immer": "^9.0.6",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "lodash.update": "^4.10.2",
     "moment": "^2.27.0",
     "node-forge": "^0.10.0",
