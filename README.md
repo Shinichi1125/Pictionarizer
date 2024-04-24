@@ -7,11 +7,6 @@ An app that helps users strengthen their vocabulary with images and contexts in 
 
 Create your own dictionary by images and stories!
 
-# URL
-[http://pictionarizer.work](http://pictionarizer.work)
-
-"Easy Login" button available. You can log in as a "Test User" by just clicking the button. 
-
 # Degree Thesis
 A brief description and explanations about some key points are given in this README, but the further details are written in my Deggree Thesis, which is published on the link below. 
 
